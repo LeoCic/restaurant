@@ -118,7 +118,7 @@ CREATE TABLE `Prodotto`
     `Integrale` bit(1),
     `GradoAlcolico` float,
     `Gassato` bit(1),
-    `Disponibilità` bit(1)
+    `Disponibilita` bit(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
