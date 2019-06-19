@@ -24,8 +24,8 @@ class EOrdine
     public function __construct(int $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
     {
         $this->ID = $ID;
-        $this->DataOrdinazione = DateTime::createFromFormat('d-m-Y',"$DataOrdinazione");
-        $this->DataConsegna = DateTime::createFromFormat('d-m-Y',"$DataConsegna");
+        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d',"$DataOrdinazione");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d',"$DataConsegna");
         $this->Nota = $Nota;
         $this->PrezzoTotale = $PrezzoTotale;
         $this->TipoPagamento = $TipoPagamento;
@@ -44,7 +44,7 @@ class EOrdine
 
     public function getDataOrdinazione() : DateTime
     {
-        try { return new DateTime ( $this->DataOrdinazione->format('d-m-Y')); }
+        try { return new DateTime ( $this->DataOrdinazione->format('Y-m-d')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -54,12 +54,12 @@ class EOrdine
 
     public function setDataOrdinazione(String $DataOrdinazione) : void
     {
-        $this->DataOrdinazione = DateTime::createFromFormat('d-m-Y',"$DataOrdinazione");
+        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d',"$DataOrdinazione");
     }
 
     public function getDataConsegna() : DateTime
     {
-        try { return new DateTime ( $this->DataConsegna->format('d-m-Y')); }
+        try { return new DateTime ( $this->DataConsegna->format('Y-m-d')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -69,7 +69,7 @@ class EOrdine
 
     public function setDataConsegna(String $DataConsegna) : void
     {
-        $this->DataConsegna = DateTime::createFromFormat('d-m-Y',"$DataConsegna");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d',"$DataConsegna");
     }
 
     public function getNota() : String {return $this->Nota;}
@@ -122,7 +122,7 @@ class EOrdine
 
     public function toString() : String {
 
-        return $this->getID()."\n".$this->getDataOrdinazione()->format("d-m-Y")."\n".$this->getDataConsegna()->format("d-m-Y")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getGiudizio()->getCommento()."\n".$this->getGiudizio()->getPunteggio()."\n".$this->getGiudizio()->getData()."\n".$this->getGiudizio()->getNomeUtente();
+        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d")."\n".$this->getDataConsegna()->format("Y-m-d")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getGiudizio()->getCommento()."\n".$this->getGiudizio()->getPunteggio()."\n".$this->getGiudizio()->getData()."\n".$this->getGiudizio()->getNomeUtente();
     }
 
 }
