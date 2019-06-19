@@ -67,3 +67,13 @@ ALTER TABLE `Ristorante`
   ADD CONSTRAINT `ha_sede_in` FOREIGN KEY (`IDLuogo`) REFERENCES `Luogo` (`IDLuogo`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
+CREATE TABLE 'Utente' (
+    `Nome` varchar(40) NOT NULL,
+    `Cognome` varchar(40) NOT NULL,
+    `NomeUtente` varchar(20) NOT NULL,
+    `Email` varchar(255) UNIQUE NOT NULL,
+    `Telefono` varchar(13) NOT NULL,
+    `Password` varchar(40) NOT NULL,
+    `Punti` smallint(5),
+    `OrdiniCumulati` smallint(5),
+    `DataUltimoOrdine` text,

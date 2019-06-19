@@ -10,13 +10,12 @@ class EUtente
     private $Email;
     private $Telefono;
     private $LuogoNascita;
-    private $DataNascita;
     private $Password;
     private $Punti;
     private $OrdiniCumulati;
     private $DataUltimoOrdine;
 
-    public function __construct(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, ELuogo $LuogoNascita, String $DataNascita, String $Password)
+    public function __construct(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, ELuogo $LuogoNascita, String $Password)
     {
         $this->Nome = $Nome;
         $this->Cognome = $Cognome;
@@ -24,7 +23,6 @@ class EUtente
         $this->Email = $Email;
         $this->Telefono = $Telefono;
         $this->LuogoNascita = new ELuogo ($LuogoNascita->getComune(), $LuogoNascita->getProvincia(), $LuogoNascita->getVia(), $LuogoNascita->getN_Civico());
-        $this->DataNascita = DateTime::createFromformat('Y-m-d', $DataNascita);
         $this->Password = password_hash("$Password", PASSWORD_DEFAULT);
         $this->Punti = 0;
         $this->OrdiniCumulati = 0;
@@ -61,21 +59,6 @@ class EUtente
         $this->LuogoNascita = new ELuogo ($LuogoNascita->getComune(), $LuogoNascita->getProvincia(), $LuogoNascita->getVia(), $LuogoNascita->getN_Civico());
     }
 
-    public function getDataNascita(): DateTime
-    {
-        try {
-            return new DateTime ($this->DataNascita->format('Y-m-d'));
-        } catch (Exception $e) {
-            echo $e->getMessage();
-            return null;
-        }
-    }
-
-    public function setDataNascita(String $DataNascita): void
-    {
-        $this->DataNascita = DateTime::createFromformat('Y-m-d', "$DataNascita");
-    }
-
     public function getPasswordHash(): String { return $this->Password; } //non deve mai essere possibile estrarre delle password in chiaro
 
     public function setPassword(String $Password): void
@@ -109,7 +92,7 @@ class EUtente
     public function toString(): String
     {
         if (empty($this->DataUltimoOrdine)) {
-            return $this->getNome() . "\n" . $this->getCognome() . "\n" . $this->getNomeUtente() . "\n" . $this->getEmail() . "\n" . $this->getTelefono() . "\n" . $this->getLuogoNascita()->getComune() . "\n" . $this->getLuogoNascita()->getProvincia() . "\n" . $this->getLuogoNascita()->getVia() . "\n" . $this->getLuogoNascita()->getN_Civico() . "\n" . $this->getDataNascita()->format('Y-m-d') . "\n" . $this->getPasswordHash() . "\n" . $this->getPunti() . "\n" . $this->getOrdiniCumulati() . "\n" . "L'utente non ha mai effettuato un ordine";
-        } else return $this->getNome() . "\n" . $this->getCognome() . "\n" . $this->getNomeUtente() . "\n" . $this->getEmail() . "\n" . $this->getTelefono() . "\n" . $this->getLuogoNascita()->getComune() . "\n" . $this->getLuogoNascita()->getProvincia() . "\n" . $this->getLuogoNascita()->getVia() . "\n" . $this->getLuogoNascita()->getN_Civico() . "\n" . $this->getDataNascita()->format('Y-m-d') . "\n" . $this->getPasswordHash() . "\n" . $this->getPunti() . "\n" . $this->getOrdiniCumulati() . "\n" . $this->getDataUltimoOrdine()->format('Y-m-d');
+            return $this->getNome() . "\n" . $this->getCognome() . "\n" . $this->getNomeUtente() . "\n" . $this->getEmail() . "\n" . $this->getTelefono() . "\n" . $this->getLuogoNascita()->getComune() . "\n" . $this->getLuogoNascita()->getProvincia() . "\n" . $this->getLuogoNascita()->getVia() . "\n" . $this->getLuogoNascita()->getN_Civico() . "\n" . $this->getPasswordHash() . "\n" . $this->getPunti() . "\n" . $this->getOrdiniCumulati() . "\n" . "L'utente non ha mai effettuato un ordine";
+        } else return $this->getNome() . "\n" . $this->getCognome() . "\n" . $this->getNomeUtente() . "\n" . $this->getEmail() . "\n" . $this->getTelefono() . "\n" . $this->getLuogoNascita()->getComune() . "\n" . $this->getLuogoNascita()->getProvincia() . "\n" . $this->getLuogoNascita()->getVia() . "\n" . $this->getLuogoNascita()->getN_Civico() . "\n" . $this->getPasswordHash() . "\n" . $this->getPunti() . "\n" . $this->getOrdiniCumulati() . "\n" . $this->getDataUltimoOrdine()->format('Y-m-d');
     }
 }
