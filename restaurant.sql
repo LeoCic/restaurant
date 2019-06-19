@@ -12,7 +12,7 @@ USE restaurant;
 
 CREATE TABLE `Luogo`
 (
-  `IDLuogo` bigint(9) PRIMARY KEY AUTO_INCREMENT,
+  `IDLuogo` bigint PRIMARY KEY AUTO_INCREMENT,
   `Comune` varchar(40) NOT NULL,
   `Provincia` char(2) NOT NULL,
   `Via` varchar(40) NOT NULL,
@@ -25,7 +25,8 @@ CREATE TABLE `Luogo`
 
 INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES
 ('L\'Aquila', 'AQ', 'Germania', '4'),
-('Pescara', 'PE', 'Rome', '14/a');
+('Pescara', 'PE', 'Rome', '14/a'),
+('Matera', 'MA', 'Potenza', '15');
 
 -- --------------------------------------------------------
 
@@ -48,7 +49,7 @@ CREATE TABLE `Ristorante`
     `PromozioniAttive` text NOT NULL,
     `EntitaScontoBase` float NOT NULL,
     `EntitaScontoAPunti` float NOT NULL,
-    `IDLuogo` bigint(9) NOT NULL
+    `IDLuogo` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -63,8 +64,8 @@ CREATE TABLE `Utente`
     `Email` varchar(255) UNIQUE NOT NULL,
     `Telefono` varchar(13) NOT NULL,
     `Password` varchar(40) NOT NULL,
-    `Punti` smallint(5),
-    `OrdiniCumulati` smallint(5),
+    `Punti` smallint,
+    `OrdiniCumulati` smallint,
     `DataUltimoOrdine` date
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -74,17 +75,17 @@ CREATE TABLE `Utente`
 
 CREATE TABLE `Ordine`
 (
-    `IDOrdine`         bigint(9) PRIMARY KEY AUTO_INCREMENT,
+    `IDOrdine`         bigint PRIMARY KEY AUTO_INCREMENT,
     `DataOrdinazione`  datetime    NOT NULL,
     `DataConsegna`     datetime    NOT NULL,
     `Nota`             varchar(600),
     `PrezzoTotale`     float       NOT NULL,
     `TipoPagamento`    varchar(8)  NOT NULL,
     `StatoOrdine`      varchar(10) NOT NULL,
-    `PuntiUsati`       smallint(6) NOT NULL,
+    `PuntiUsati`       smallint NOT NULL,
     `TelefonoConsegna` varchar(13),
     `NomeUtente`       varchar(20) NOT NULL,
-    `IDLuogo`          bigint(9)   NOT NULL
+    `IDLuogo`          bigint   NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -94,10 +95,10 @@ CREATE TABLE `Ordine`
 CREATE TABLE `Giudizio`
 (
     `Commento` text NOT NULL,
-    `Punteggio` tinyint(1) NOT NULL,
+    `Punteggio` tinyint NOT NULL,
     `Data` datetime NOT NULL,
-    `IDGiudizio` bigint(9) PRIMARY KEY AUTO_INCREMENT,
-    `IDOrdine` bigint(9) NOT NULL
+    `IDGiudizio` bigint PRIMARY KEY AUTO_INCREMENT,
+    `IDOrdine` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -107,7 +108,7 @@ CREATE TABLE `Giudizio`
 CREATE TABLE `Prodotto`
 (
     `Nome` varchar(50) NOT NULL UNIQUE,
-    `IDProdotto` smallint(5) PRIMARY KEY AUTO_INCREMENT,
+    `IDProdotto` smallint PRIMARY KEY AUTO_INCREMENT,
     `Prezzo` float NOT NULL,
     `Descrizione` varchar(250),
     `Ingredienti` varchar(500) NOT NULL,
@@ -128,8 +129,9 @@ CREATE TABLE `Prodotto`
 
 CREATE TABLE `E_composto_da`
 (
-    `IDOrdine` bigint(9),
-    `IDProdotto` smallint(4)
+    `IDOrdine` bigint,
+    `IDProdotto` smallint,
+    `Quantita` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
