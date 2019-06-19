@@ -85,4 +85,4 @@ CREATE TABLE 'Utente' (
     `Password` varchar(40) NOT NULL,
     `Punti` smallint(5),
     `OrdiniCumulati` smallint(5),
-    `DataUltimoOrdine` text,
+    `DataUltimoOrdine` text)
