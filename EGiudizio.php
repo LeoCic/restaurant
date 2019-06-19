@@ -20,7 +20,7 @@ class EGiudizio
 
     public function getData(): DateTime
     {
-        try { return new DateTime ($this->Data->format('d-m-Y, H:i:s')); }
+        try { return new DateTime ($this->Data->format('Y-m-d, H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -45,6 +45,6 @@ class EGiudizio
 
     public function toString() : String
     {
-        return $this->getNomeUtente()."\n".$this->getPunteggio()."\n".$this->getCommento()."\n".$this->getData()->format('d-m-Y, H:i:s');
+        return $this->getNomeUtente()."\n".$this->getPunteggio()."\n".$this->getCommento()."\n".$this->getData()->format('Y-m-d, H:i:s');
     }
 }
