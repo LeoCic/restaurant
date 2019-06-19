@@ -8,6 +8,7 @@ class ELuogo {
     private $N_Civico;
     private $IDLuogo;
 
+
     public function __construct() {
         $num_args = func_num_args();
         $args = func_get_args();
@@ -20,8 +21,9 @@ class ELuogo {
       $this->Provincia = $Provincia;
       $this->Via = $Via;
       $this->N_Civico = $N_Civico;
+      $this->IDLuogo = 0;
     }
-    public function __construct_5( String $Comune , String $Provincia , String $Via , String $N_Civico , int $IDLuogo) {
+    public function __construct_5( int $IDLuogo, String $Comune , String $Provincia , String $Via , String $N_Civico ) {
 
         $this->Comune = $Comune;
         $this->Provincia = $Provincia;
@@ -91,8 +93,9 @@ class ELuogo {
 }
 /*prova get e set */
 
-//$test=new ELuogo("Roma","RM","Germania","4", "3");
-
+$test=new ELuogo("Roma","RM","Germania","4");
+$test1= new ELuogo("2","Roma","RM","Germania","4");
+//print $test->getIDLuogo();
 //test se getIDLuogo ritorna null, NON FUNZIONANTE
 /*$test=new ELuogo("Roma","RM","Germania","4");
 try{
