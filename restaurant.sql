@@ -49,6 +49,15 @@ CREATE TABLE `Ristorante` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
+
+CREATE TABLE `Ordine` (
+    `IDOrdine` bigint(9) PRIMARY KEY AUTO_INCREMENT,
+    `DataOrdinazione` DATETIME,
+    `DataConsegna` DATETIME,
+
+)
+
+
 --
 -- Indici per le tabelle `Ristorante`
 --
