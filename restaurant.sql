@@ -126,10 +126,10 @@ CREATE TABLE `Prodotto`
 -- Struttura della tabella `É composto da`
 --
 
-CREATE TABLE `E composto da`
+CREATE TABLE `E_composto_da`
 (
-    `IDOrdine` bigint(9) PRIMARY KEY,
-    `IDProdotto` smallint(4) PRIMARY KEY
+    `IDOrdine` bigint(9),
+    `IDProdotto` smallint(4)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -182,17 +182,18 @@ ALTER TABLE `Giudizio`
     ADD CONSTRAINT `ha associato` FOREIGN KEY (`IDOrdine`) REFERENCES `Ordine` (`IDOrdine`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Indici per la tabella `É composto da`
+-- Indici per la tabella `É_composto_da`
 --
 
-ALTER TABLE `E composto da`
+ALTER TABLE `E_composto_da`
+    ADD PRIMARY KEY (`IDOrdine`, `IDProdotto`),
     ADD KEY `relativo a` (`IDProdotto`),
     ADD KEY `composto da` (IDOrdine);
 
 --
--- Limiti per la tabella `E composto da`
+-- Limiti per la tabella `E_composto_da`
 --
 
-ALTER TABLE `E composto da`
+ALTER TABLE `E_composto_da`
     ADD CONSTRAINT `relativo a` FOREIGN KEY (`IDProdotto`) REFERENCES `Prodotto` (`IDProdotto`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `composto da` FOREIGN KEY (`IDOrdine`) REFERENCES `Ordine` (`IDOrdine`) ON DELETE CASCADE ON UPDATE CASCADE;
