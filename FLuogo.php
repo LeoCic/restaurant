@@ -9,19 +9,17 @@ require_once 'FDatabase.php';
 abstract class FLuogo
 {
 
-    public static function load(int $id): ELuogo
+    public static function load(int $id) : ELuogo
     {
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM luogo WHERE (IDLuogo='$id') ";
         $riss = $conn->query($sql);
         if ($riss->rowCount() == 1) {
             $ris = $riss->fetchAll();
-            $r = new ELuogo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3]);
+            //print_r($ris);
+            $r = new ELuogo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4]);
             return $r;
         }
-
-
-
     }
 
     public static function exist(int $id): bool
@@ -36,7 +34,6 @@ abstract class FLuogo
             return 0;
 
     }
-
 
     public static function store(ELuogo $luogo) : bool
     {
@@ -54,25 +51,45 @@ abstract class FLuogo
             return 1;
     }
 
-   /* public static function update (ELuogo $luogo) : bool
+    public static function update (ELuogo $luogo) : bool
     {
-        $Comune = $luogo->getComune();
-        $Provincia = $luogo->getProvincia();
+
+        $IDLuogo = $luogo->getIDLuogo();
         $Via = $luogo->getVia();
         $N_Civico = $luogo->getN_Civico();
-
         $conn = FDataBase::Connect();
-        $sql =" UPDATE luogo SET Via = '$Via' " ;
+        $sql =" UPDATE luogo SET Via = '" . addslashes($Via) . "' , N_Civico = '" . addslashes($N_Civico) . "' WHERE IDLuogo = '$IDLuogo' " ;
+        $riss = $conn->query($sql);
+        if (is_bool($riss) )
+            return 0;
+        else if(is_object($riss))
+            return 1;
 
-    } */
+    }
+
+    public static function delete (int $id) : bool
+    {
+        $conn = FDataBase::Connect();
+        $sql ="DELETE FROM luogo WHERE IDLuogo = '$id'";
+        $riss = $conn->query($sql);
+        if (is_bool($riss) )
+            return 0;
+        else if(is_object($riss))
+            return 1;
+
+
+
+    }
 
 
 
 
 
 }
+
 //test dei metodi
-$test=new ELuogo("L'Aquila","AQ","Germania",'4\n',7);
+
+$test=new ELuogo("L'Aquila","AQ","Germania",'4\n');
 //test della store
 $id = $test->getIDLuogo();
 if ($id != 0){ //se zero(parametro di default assegnato nell'entity) il luogo non è sul db e deve essere storato
@@ -84,18 +101,46 @@ $a = FLuogo::store($test);
  if($a === true){
     print "inserita con successo"."\n";}
 else print "errore inserimento"."\n"; } }
-else if($id===0)
+else if($id===0) {
     $a = FLuogo::store($test);
+if($a === true){
+    print "inserita con successo"."\n";}
+else print "errore inserimento"."\n";}
 
-//test della load
-$control = FLuogo::exist($id);
+//test della load e update
+
+/*$control = FLuogo::exist(5);
 if ($control=== TRUE) {//sono presenti sul db
-    $luogo = FLuogo::load($id);
-print $luogo->toString(); }
+    $luogo = FLuogo::load(5);
+print $luogo->toString();
+    $luogo->setN_Civico("2/af");}
+*/
+/*
+$mazinga = FLuogo::update($luogo);
+if ($mazinga == TRUE)
+   print"modificato con successo";
+else
+    print"NON MODIFICATO";
+}
 else {
     print "NOT TROVATO"."\n";
+}
+*/
+//test delete
+/*
+$control = FLuogo::exist(4);
+if ($control == TRUE) {
+    $a = FLuogo::delete(4);
+    if ($a == TRUE)
+        print"eliminato con successo";
+    else
+        print"NON ELIMINATO
+    ";
 
 }
+else
+    print"non trovato";
+*/
 
 
 
@@ -118,6 +163,39 @@ else {
 
 
 
+
+
+
+/* $conn = FDataBase::Connect();
+$sql = " SELECT * FROM adfca";
+$riss = $conn->query($sql);
+if ($riss->rowCount() == 1) {
+    $ris = $riss->fetchAll();
+print gettype($ris[0][0]);
+print($ris[0][0]);
+print "\n";
+$data = (String) $ris[0][0];
+    $a = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+    print gettype($a);
+    echo $a->format('Y-m-d H:i:s');
+        print $a->format('Y-m-d');}
+*/
+
+/*       Prova DateTime su db
+        $prova = new DateTime();
+        $data = $prova->format('Y-m-d');
+            $conn = FDataBase::Connect();
+        $sql = "INSERT INTO adfca (jh) VALUES('$data')";
+    $riss = $conn->query($sql);
+    if (is_bool($riss) )
+        print "NO";
+    else if(is_object($riss))
+        print"SI" ;
+*/
+
+
+
+//print_r($ris);
 
 
 
