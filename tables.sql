@@ -2,10 +2,6 @@ DROP DATABASE IF EXISTS restaurant;
 CREATE DATABASE restaurant;
 USE restaurant;
 
-/*Creazione tabella luogo e ristorante, da completare per le altre tabella*/
-
-
-
 --
 -- Struttura della tabella `Luogo`
 --
@@ -24,7 +20,7 @@ CREATE TABLE `Luogo`
 --
 
 INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES
-('L\'Aquila', 'AQ', 'Germania', '4'),
+("L'Aquila", 'AQ', 'Germania', '4'),
 ('Pescara', 'PE', 'Rome', '14/a'),
 ('Matera', 'MA', 'Potenza', '15');
 
@@ -63,7 +59,7 @@ CREATE TABLE `Utente`
     `NomeUtente` varchar(20) NOT NULL,
     `Email` varchar(255) UNIQUE NOT NULL,
     `Telefono` varchar(13) NOT NULL,
-    `Password` varchar(40) NOT NULL,
+    `Password` varchar(200) NOT NULL,
     `Punti` smallint,
     `OrdiniCumulati` smallint,
     `DataUltimoOrdine` date
@@ -112,7 +108,7 @@ CREATE TABLE `Prodotto`
     `Prezzo` float NOT NULL,
     `Descrizione` varchar(250),
     `Ingredienti` varchar(500) NOT NULL,
-    `Biologico` bit(1) NOT NULL,
+    `Biologico` bit(1),
     `Categoria` varchar(10) NOT NULL,
     `Congelato` bit(1),
     `Vegano` bit(1),
