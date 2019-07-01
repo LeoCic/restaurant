@@ -2,7 +2,7 @@
 
 require 'EProdotto.php';
 require 'ELuogo.php';
-require 'EGiudizio';
+require 'EGiudizio.php';
 
 class EOrdine
 {
@@ -11,7 +11,7 @@ class EOrdine
     private $DataConsegna;
     private $Nota;
     private $PrezzoTotale;
-    private $ProdottiOrdinati;
+    /*private $ProdottiOrdinati;*/
     private $TipoPagamento;
     private $StatoOrdine;
     private $NomeUtente;
@@ -24,8 +24,8 @@ class EOrdine
     public function __construct(int $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
     {
         $this->ID = $ID;
-        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d',"$DataOrdinazione");
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d',"$DataConsegna");
+        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d, H:i:s',"$DataOrdinazione");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d, H:i:s',"$DataConsegna");
         $this->Nota = $Nota;
         $this->PrezzoTotale = $PrezzoTotale;
         $this->TipoPagamento = $TipoPagamento;
@@ -34,7 +34,7 @@ class EOrdine
         $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
         $this->PuntiUsati = $PuntiUsati;
         $this->TelefonoConsegna = $TelefonoConsegna;
-        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getData(), $Giudizio->getNomeUtente());
+        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getNomeUtente());
 
     }
 
@@ -44,7 +44,7 @@ class EOrdine
 
     public function getDataOrdinazione() : DateTime
     {
-        try { return new DateTime ( $this->DataOrdinazione->format('Y-m-d')); }
+        try { return new DateTime ( $this->DataOrdinazione->format('Y-m-d, H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -54,12 +54,12 @@ class EOrdine
 
     public function setDataOrdinazione(String $DataOrdinazione) : void
     {
-        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d',"$DataOrdinazione");
+        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d, H:i:s',"$DataOrdinazione");
     }
 
     public function getDataConsegna() : DateTime
     {
-        try { return new DateTime ( $this->DataConsegna->format('Y-m-d')); }
+        try { return new DateTime ( $this->DataConsegna->format('Y-m-d, H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -69,7 +69,7 @@ class EOrdine
 
     public function setDataConsegna(String $DataConsegna) : void
     {
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d',"$DataConsegna");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d, H:i:s',"$DataConsegna");
     }
 
     public function getNota() : String {return $this->Nota;}
@@ -110,19 +110,23 @@ class EOrdine
 
     public function setTelefonoConsegna(String $TelefonoConsegna) : void {$this->TelefonoConsegna = $TelefonoConsegna;}
 
-    /*public function getGiudizio() : EGiudizio
+    public function getGiudizio() : EGiudizio
     {
-        return new EGiudizio ($this->Giudizio->getCommento(), $this->Giudizio->getPunteggio(), $this->Giudizio->getData(), $this->Giudizio->getNomeUtente());
+        return new EGiudizio ($this->Giudizio->getCommento(), $this->Giudizio->getPunteggio(), $this->Giudizio->getNomeUtente());
     }
 
     public function setGiudizio(EGiudizio $Giudizio) : void
     {
-        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getData(), $Giudizio->getNomeUtente());
-    }*/
+        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getNomeUtente());
+    }
 
     public function toString() : String {
 
-        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d")."\n".$this->getDataConsegna()->format("Y-m-d")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getGiudizio()->getCommento()."\n".$this->getGiudizio()->getPunteggio()."\n".$this->getGiudizio()->getData()."\n".$this->getGiudizio()->getNomeUtente();
+        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d, H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d, H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getGiudizio()->getCommento()."\n".$this->getGiudizio()->getPunteggio()."\n".$this->getGiudizio()->getNomeUtente();
     }
 
+
+
 }
+
+/**/
