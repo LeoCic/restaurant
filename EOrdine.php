@@ -18,7 +18,7 @@ class EOrdine
     private $LuogoConsegna;
     private $PuntiUsati;
     private $TelefonoConsegna;
-    Private $Giudizio;
+    private $Giudizio;
 
 
     public function __construct(int $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
