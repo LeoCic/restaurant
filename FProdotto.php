@@ -35,7 +35,7 @@ abstract class FProdotto
         else return 0;
     }
 
-    public static function store(EBevanda $prodotto) : bool
+    public static function storeBevanda(EBevanda $prodotto) : bool
     {
         $Nome = $prodotto->getNome();
         $Prezzo = $prodotto->getPrezzo();
@@ -57,7 +57,7 @@ abstract class FProdotto
 
     }
 
-    public static function store1(ECibo $prodotto) : bool
+    public static function storeCibo(ECibo $prodotto) : bool
     {
         $Nome = $prodotto->getNome();
         $Prezzo = $prodotto->getPrezzo();
@@ -80,7 +80,7 @@ abstract class FProdotto
 
     }
 
-    public static function update(EBevanda $prodotto) : bool
+    public static function updateBevanda(EBevanda $prodotto) : bool
     {
 
         $Nome = $prodotto->getNome();
@@ -104,7 +104,7 @@ abstract class FProdotto
 
     }
 
-    public static function update1(ECibo $prodotto) : bool
+    public static function updateCibo(ECibo $prodotto) : bool
     {
 
         $Nome = $prodotto->getNome();
@@ -129,7 +129,7 @@ abstract class FProdotto
 
     }
 
-    public static function delete(String $id) : bool
+    public static function delete(int $id) : bool
     {
         $conn = FDataBase::Connect();
         $sql ="DELETE FROM Prodotto WHERE IDProdotto = '$id'";
