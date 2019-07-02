@@ -77,3 +77,7 @@ class ECibo extends EProdotto {
 
 
 }
+
+$test = new ECibo("pasta", 456, 6.5, "deliziosa", "farina, acqua...",1,"Primi",0,0,1,0);
+$test->setVegano(1);
+echo $test->toString();

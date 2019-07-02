@@ -65,3 +65,8 @@ class EProdotto
         return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria();
     }
 }
+
+
+$test = new EProdotto("pizza margherita",23,4.5,"eccezionale","acqua,farina,sale,pomodoro",1,"pizze");
+$test->setDescrizione("fantastica");
+echo $test->toString();

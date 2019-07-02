@@ -59,3 +59,7 @@ class EBevanda extends EProdotto {
         return $this->getGradoAlcolico()."\n".$this->getGassato()."\n".$this->getDisponibilita();
     }
 }
+
+$test = new EBevanda("fanta",34,3,"dissetante","acqua,zucchero",0,"Bevande",0,1,1);
+$test->setDisponibilita(0);
+print $test->toString();
