@@ -69,8 +69,7 @@ class ECibo extends EProdotto {
 
     public function toString() : String {
 
-        parent::toString();
-        return $this->getCongelato()."\n".$this->getVegano()."\n".$this->getGlutine()."\n".$this->getIntegrale();
+        return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria()."\n".$this->getCongelato()."\n".$this->getVegano()."\n".$this->getGlutine()."\n".$this->getIntegrale();
     }
 
 

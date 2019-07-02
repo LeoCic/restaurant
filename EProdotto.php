@@ -67,6 +67,6 @@ class EProdotto
 }
 
 
-$test = new EProdotto("pizza margherita",23,4.5,"eccezionale","acqua,farina,sale,pomodoro",1,"pizze");
-$test->setDescrizione("fantastica");
-echo $test->toString();
+/*$test1 = new EProdotto("pizza margherita",23,4.5,"eccezionale","acqua,farina,sale,pomodoro",1,"pizze");
+$test1->setDescrizione("fantastica");
+echo $test1->toString();*/
