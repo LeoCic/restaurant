@@ -32,8 +32,8 @@ INSERT INTO `Prodotto` (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologi
     ('Cheesecake alla nutella',4.50,'Produzione artigianale', 'Biscotti, burro, nutella, formaggio fresco, nocciole', 0,'Dolci', 0,0,1,NULL,NULL,NULL,NULL),
     ('Cake pops alla nutella',5,'Produzione artigianale', 'Albicocche, pan di spagna, cioccolato bianco, cioccolato fondente, cocco rapè, nocciole, zucchero', 0,'Dolci',0,1,1,NULL,NULL,NULL,NULL),
     ('Muffin fantasma',3.5,'Produzione artigianale', 'Burro, farina 00, uova, vaniglia, zucchero, lievito in polvere, latte, cioccolato bianco, cioccolato fondente',0,'Dolci',0,0,1,0, NULL,NULL,NULL),
-    ('Coca cola',2,'Lattina da 33 cl','zucchero, colorante E150D, aromi naturali, caffeina, acido fosforico (E 338)',0,'Bevande',0,1,0,NULL,0,1,1),
-    ('Coca cola zero',2,'Lattina da 33 cl', 'Colorante E150D, acido fosforico (E 338), aromi naturali, caffeina, correttore di acidità: citrato trisodico, edulcoranti: ciclammato di sodio, acesulfame K e aspartame',0,'Bevande',0,1,0,NULL,0,1,0),
-    ('Acqua minerale naturale',1.5,'Bottiglia da 1l','Acqua, sali minerali',NULL,'Bevande',0,1,0,NULL,0,1,1),
-    ('Birra alla spina da 0.75 cl',3,'Produzione artigianale',"Malto, luppoli, cereali non maltati, spezie, mosto d'uva",0,'Bevande',0,1,1,NULL,13.5,0,1),
-    ('Succo di frutta alla pera Yoga',2,'Bottiglietta da 0.5l','Acido ascorbico, sciroppo di glucosio, sciroppo di fruttosio, zucchero, pera (purea, succo e succo concentrato), aromi',1,'Bevande',0,1,0,NULL,0,0,1);
+    ('Coca cola',2,'Lattina da 33 cl','zucchero, colorante E150D, aromi naturali, caffeina, acido fosforico (E 338)',0,'Bevande',NULL,NULL,NULL,NULL,0,1,1),
+    ('Coca cola zero',2,'Lattina da 33 cl', 'Colorante E150D, acido fosforico (E 338), aromi naturali, caffeina, correttore di acidità: citrato trisodico, edulcoranti: ciclammato di sodio, acesulfame K e aspartame',0,'Bevande',NULL,NULL,NULL,NULL,0,1,0),
+    ('Acqua minerale naturale',1.5,'Bottiglia da 1l','Acqua, sali minerali',NULL,'Bevande',NULL,NULL,NULL,NULL,0,1,1),
+    ('Birra alla spina da 0.75 cl',3,'Produzione artigianale',"Malto, luppoli, cereali non maltati, spezie, mosto d'uva",0,'Bevande',NULL,NULL,NULL,NULL,13.5,0,1),
+    ('Succo di frutta alla pera Yoga',2,'Bottiglietta da 0.5l','Acido ascorbico, sciroppo di glucosio, sciroppo di fruttosio, zucchero, pera (purea, succo e succo concentrato), aromi',1,'Bevande',NULL,NULL,NULL,NULL,0,0,1);
