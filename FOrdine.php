@@ -2,7 +2,7 @@
 
 abstract class FOrdine
 {
-    public static function load(int $id) : EOrdine
+    public static function load(float $id) : EOrdine
     {
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM Ordine WHERE (IDOrdine='$id') ";
@@ -15,7 +15,7 @@ abstract class FOrdine
         }
     }
 
-    public static function exists(int $id) : bool
+    public static function exists(float $id) : bool
     {
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM Ordine WHERE (IDOrdine='$id') ";
@@ -74,7 +74,7 @@ abstract class FOrdine
 
     }
 
-    public static function delete (int $id) : bool
+    public static function delete (float $id) : bool
     {
         $conn = FDataBase::Connect();
         $sql ="DELETE FROM Ordine WHERE IDOrdine = '$id'";

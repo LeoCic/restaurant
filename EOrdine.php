@@ -17,7 +17,7 @@ class EOrdine
     private $Giudizio;
 
 
-    public function __construct(int $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
+    public function __construct(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d, H:i:s',"$DataOrdinazione");
@@ -34,9 +34,9 @@ class EOrdine
 
     }
 
-    public function getID() : int {return $this->ID;}
+    public function getID() : float {return $this->ID;}
 
-    public function setID(int $ID) : void {$this->ID = $ID;}
+    public function setID(float $ID) : void {$this->ID = $ID;}
 
     public function getDataOrdinazione() : DateTime
     {
