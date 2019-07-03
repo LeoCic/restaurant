@@ -7,18 +7,18 @@ require_once 'FDatabase.php';
 
 abstract class FProdotto
 {
-    public static function load(int $id): EProdotto
+    public static function load(int $id) : EProdotto
     {
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM Prodotto WHERE (IDProdotto='$id') ";
         $riss = $conn->query($sql);
         if ($riss->rowCount() === 1) {
             $ris = $riss->fetchAll();
-            if ($riss[0][6] == 'Bevande'){
+            if ($ris[0][6] === 'Bevande'){
                 $prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);
                 return $prodotto;
             }
-            else if ($riss[0][6] != 'Bevande'){
+            else if ($ris[0][6] != 'Bevande'){
                 $prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);
                 return $prodotto;
             }
@@ -140,3 +140,6 @@ abstract class FProdotto
             return 1;
     }
 }
+
+$p = FProdotto::load(1);
+print $p->toString();

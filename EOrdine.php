@@ -1,9 +1,5 @@
 <?php
 
-require 'EProdotto.php';
-require 'ELuogo.php';
-require 'EGiudizio.php';
-
 class EOrdine
 {
     private $ID;
@@ -124,9 +120,4 @@ class EOrdine
 
         return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d, H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d, H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getGiudizio()->getCommento()."\n".$this->getGiudizio()->getPunteggio()."\n".$this->getGiudizio()->getNomeUtente();
     }
-
-
-
 }
-
-/**/

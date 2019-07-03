@@ -1,8 +1,5 @@
 <?php
 
-require_once 'EOrdine.php';
-require_once 'FDatabase.php';
-
 abstract class FOrdine
 {
     public static function load(int $id) : EOrdine

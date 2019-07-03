@@ -1,13 +1,12 @@
 <?php
 
-require "EProdotto.php";
 class EBevanda extends EProdotto {
     private $GradoAlcolico;
     private $Gassato;
     private $Disponibilita;
 
 
-    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, float $GradoAlcolico, bool $Gassato, bool $Disponibilita)
+    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, float $GradoAlcolico, bool $Gassato, bool $Disponibilita)
 
     {
 
@@ -58,7 +57,3 @@ class EBevanda extends EProdotto {
         return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria()."\n".$this->getGradoAlcolico()."\n".$this->getGassato()."\n".$this->getDisponibilita();
     }
 }
-
-$test = new EBevanda("fanta",34,3,"dissetante","acqua,zucchero",0,"Bevande",0,1,1);
-$test->setDisponibilita(0);
-print $test->toString();

@@ -1,6 +1,5 @@
 <?php
 
-require "EProdotto.php";
 class ECibo extends EProdotto {
     private $Congelato;
     private $Vegano;
@@ -8,7 +7,7 @@ class ECibo extends EProdotto {
     private $Integrale;
 
 
-    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, bool $Congelato, bool $Vegano, bool $Glutine, bool $Integrale)
+    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, bool $Congelato, bool $Vegano, bool $Glutine, bool $Integrale)
 
     {
 
@@ -71,12 +70,4 @@ class ECibo extends EProdotto {
 
         return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria()."\n".$this->getCongelato()."\n".$this->getVegano()."\n".$this->getGlutine()."\n".$this->getIntegrale();
     }
-
-
-
-
 }
-
-$test = new ECibo("pasta", 456, 6.5, "deliziosa", "farina, acqua...",1,"Primi",0,0,1,0);
-$test->setVegano(1);
-echo $test->toString();

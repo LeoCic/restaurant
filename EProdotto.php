@@ -11,7 +11,7 @@ abstract class EProdotto
     protected $Categoria;
 
 
-    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria)
+    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria)
 
     {
         $this->Nome = $Nome;
@@ -35,9 +35,9 @@ abstract class EProdotto
 
     public function setPrezzo(float $Prezzo) : void {$this->Prezzo = $Prezzo;}
 
-    public function getDescrizione() : String {return $this->Descrizione;}
+    public function getDescrizione() {return $this->Descrizione;}
 
-    public function setDescrizione(String $Descrizione) : void {$this->Descrizione = $Descrizione;}
+    public function setDescrizione($Descrizione) : void {$this->Descrizione = $Descrizione;}
 
     public function getIngredienti() : String {return $this->Ingredienti;}
 
