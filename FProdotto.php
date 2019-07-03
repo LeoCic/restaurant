@@ -14,16 +14,33 @@ abstract class FProdotto
         $riss = $conn->query($sql);
         if ($riss->rowCount() === 1) {
             $ris = $riss->fetchAll();
-            if ($ris[0][6] === 'Bevande'){
+            if ($ris[0][6] === 'Bevande')
+            {
                 if($ris[0][3] === NULL)
-                {$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
-                else {$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                {
+                    if($ris[0][5] === NULL){$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], 0, $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                    else {$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                }
+                else
+                {
+                    if($ris[0][5] === NULL){$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], 0, $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                    else {$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                }
                 return $prodotto;
             }
-            else if ($ris[0][6] != 'Bevande'){
+
+            else if ($ris[0][6] != 'Bevande')
+            {
                 if($ris[0][3] === NULL)
-                {$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
-                else {$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                {
+                    if($ris[0][5] === NULL){$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], 0, $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                    else {$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                }
+                else
+                {
+                    if($ris[0][5] === NULL){$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], 0, $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                    else {$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                }
                 return $prodotto;
             }
         }
@@ -145,5 +162,5 @@ abstract class FProdotto
     }
 }
 
-$p = FProdotto::load(2);
+$p = FProdotto::load(10);
 print $p->toString();
