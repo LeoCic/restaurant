@@ -7,7 +7,7 @@ class ECibo extends EProdotto {
     private $Integrale;
 
 
-    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, bool $Congelato, bool $Vegano, bool $Glutine, bool $Integrale)
+    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, bool $Congelato, bool $Vegano, bool $Glutine, bool $Integrale)
 
     {
 

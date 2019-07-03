@@ -6,7 +6,7 @@ class EBevanda extends EProdotto {
     private $Disponibilita;
 
 
-    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, float $GradoAlcolico, bool $Gassato, bool $Disponibilita)
+    public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, float $GradoAlcolico, bool $Gassato, bool $Disponibilita)
 
     {
 
