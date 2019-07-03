@@ -1,7 +1,8 @@
 <?php
 //aggiungere idLuogo per il db e inizializzarlo a ull nel costruttore, poi fare 2 casi nel to string
 
-class ELuogo {
+class
+ELuogo {
     private $Comune;
     private $Provincia;
     private $Via;
@@ -23,7 +24,7 @@ class ELuogo {
       $this->N_Civico = $N_Civico;
       $this->IDLuogo = 0;
     }
-    public function __construct_5( int $IDLuogo, String $Comune , String $Provincia , String $Via , String $N_Civico ) {
+    public function __construct_5( float $IDLuogo, String $Comune , String $Provincia , String $Via , String $N_Civico ) {
 
         $this->Comune = $Comune;
         $this->Provincia = $Provincia;
@@ -75,7 +76,7 @@ class ELuogo {
     }
 
 
-    public function getIDLuogo() : int
+    public function getIDLuogo() : float
     {
         return $this->IDLuogo;
     }

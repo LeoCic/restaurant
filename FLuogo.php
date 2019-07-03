@@ -9,7 +9,7 @@ require_once 'FDatabase.php';
 abstract class FLuogo
 {
 
-    public static function load(int $id) : ELuogo
+    public static function load(float $id) : ELuogo
     {
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM luogo WHERE (IDLuogo='$id') ";
@@ -22,7 +22,7 @@ abstract class FLuogo
         }
     }
 
-    public static function exist(int $id): bool
+    public static function exist(float $id): bool
     {
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM luogo WHERE (IDLuogo='$id') ";
@@ -67,7 +67,7 @@ abstract class FLuogo
 
     }
 
-    public static function delete (int $id) : bool
+    public static function delete (float $id) : bool
     {
         $conn = FDataBase::Connect();
         $sql ="DELETE FROM luogo WHERE IDLuogo = '$id'";
