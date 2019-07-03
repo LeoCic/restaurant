@@ -1,6 +1,6 @@
 <?php
 
-class EProdotto
+abstract class EProdotto
 {
     protected $Nome;
     protected $IDProdotto;
@@ -14,7 +14,6 @@ class EProdotto
     public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria)
 
     {
-
         $this->Nome = $Nome;
         $this->IDProdotto = $IDProdotto;
         $this->Prezzo = $Prezzo;
@@ -66,7 +65,3 @@ class EProdotto
     }
 }
 
-
-/*$test1 = new EProdotto("pizza margherita",23,4.5,"eccezionale","acqua,farina,sale,pomodoro",1,"pizze");
-$test1->setDescrizione("fantastica");
-echo $test1->toString();*/
