@@ -2,9 +2,7 @@ DROP DATABASE IF EXISTS restaurant;
 CREATE DATABASE restaurant;
 USE restaurant;
 
---
 -- Struttura della tabella `Luogo`
---
 
 CREATE TABLE `Luogo`
 (
@@ -15,9 +13,7 @@ CREATE TABLE `Luogo`
   `N_Civico` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Dump dei dati per la tabella `Luogo`
---
 
 INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES
 ("L'Aquila", 'AQ', 'Germania', '4'),
@@ -26,9 +22,7 @@ INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES
 
 -- --------------------------------------------------------
 
---
 -- Struttura della tabella `Ristorante`
---
 
 CREATE TABLE `Ristorante`
 (
@@ -48,9 +42,7 @@ CREATE TABLE `Ristorante`
     `IDLuogo` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Struttura della tabella `Utente`
---
 
 CREATE TABLE `Utente`
 (
@@ -62,12 +54,11 @@ CREATE TABLE `Utente`
     `Password` varchar(200) NOT NULL,
     `Punti` smallint,
     `OrdiniCumulati` smallint,
-    `DataUltimoOrdine` date
+    `DataUltimoOrdine` date,
+    PRIMARY KEY (`NomeUtente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Struttura della tabella `Ordine`
---
 
 CREATE TABLE `Ordine`
 (
@@ -84,9 +75,7 @@ CREATE TABLE `Ordine`
     `IDLuogo`          bigint   NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Struttura della tabella `Giudizio`
---
 
 CREATE TABLE `Giudizio`
 (
@@ -94,12 +83,10 @@ CREATE TABLE `Giudizio`
     `Punteggio` tinyint NOT NULL,
     `Data` datetime NOT NULL,
     `IDGiudizio` bigint PRIMARY KEY AUTO_INCREMENT,
-    `IDOrdine` bigint NOT NULL
+    `IDOrdine` bigint NOT NULL UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Struttura della tabella `Prodotto`
---
 
 CREATE TABLE `Prodotto`
 (
@@ -119,9 +106,7 @@ CREATE TABLE `Prodotto`
     `Disponibilita` bit(1)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Struttura della tabella `É composto da`
---
 
 CREATE TABLE `E_composto_da`
 (
@@ -130,67 +115,47 @@ CREATE TABLE `E_composto_da`
     `Quantita` tinyint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
 -- Indici per la tabella `Ristorante`
---
+
 ALTER TABLE `Ristorante`
   ADD PRIMARY KEY (`Nome`),
   ADD KEY `ha_sede_in` (`IDLuogo`);
 
---
 -- Limiti per la tabella `Ristorante`
---
+
 ALTER TABLE `Ristorante`
   ADD CONSTRAINT `ha_sede_in` FOREIGN KEY (`IDLuogo`) REFERENCES `Luogo` (`IDLuogo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Indici per la tabella `Utente`
---
-
-ALTER TABLE `Utente`
-    ADD PRIMARY KEY (`NomeUtente`);
-
---
 -- Indici per la tabella `Ordine`
---
+
 ALTER TABLE `Ordine`
     ADD KEY `ha effettuato` (`NomeUtente`),
     ADD KEY `va consegnato in` (`IDLuogo`);
 
---
 -- Limiti per la tabella `Ordine`
---
 
 ALTER TABLE `Ordine`
     ADD CONSTRAINT `ha effettuato` FOREIGN KEY (`NomeUtente`) REFERENCES `Utente` (`NomeUtente`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `va consegnato in` FOREIGN KEY (`IDLuogo`) REFERENCES `Luogo` (`IDLuogo`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
 -- Indici per la tabella `Giudizio`
---
 
 ALTER TABLE `Giudizio`
     ADD KEY `ha associato` (`IDOrdine`);
 
---
 -- Limiti per la tabella `Giudizio`
---
 
 ALTER TABLE `Giudizio`
     ADD CONSTRAINT `ha associato` FOREIGN KEY (`IDOrdine`) REFERENCES `Ordine` (`IDOrdine`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
 -- Indici per la tabella `É_composto_da`
---
 
 ALTER TABLE `E_composto_da`
     ADD PRIMARY KEY (`IDOrdine`, `IDProdotto`),
     ADD KEY `relativo a` (`IDProdotto`),
     ADD KEY `composto da` (IDOrdine);
 
---
 -- Limiti per la tabella `E_composto_da`
---
 
 ALTER TABLE `E_composto_da`
     ADD CONSTRAINT `relativo a` FOREIGN KEY (`IDProdotto`) REFERENCES `Prodotto` (`IDProdotto`) ON DELETE CASCADE ON UPDATE CASCADE,
