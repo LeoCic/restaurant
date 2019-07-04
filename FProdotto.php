@@ -69,7 +69,7 @@ abstract class FProdotto
         $Disponibilita = $prodotto->getDisponibilita();
 
         $conn = FDataBase::Connect();
-        $sql = "INSERT INTO Prodotto (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `GradoAlcolico`, `Gassato`, `Disponibilita`) VALUES('" . addslashes("$Nome") . "' , '" . addslashes("$Prezzo") ."' , '" . addslashes("$Descrizione") . "' , '" . addslashes("$Ingredienti") . "' , '" . addslashes("$Biologico") . "' , '" . addslashes("$Categoria") . "' , '" . addslashes("$GradoAlcolico") . "' , '" . addslashes("$Gassato") . "' , '" . addslashes("$Disponibilita") ."')";
+        $sql = "INSERT INTO Prodotto (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `GradoAlcolico`, `Gassato`, `Disponibilita`) VALUES('" . addslashes("$Nome") . "' , '$Prezzo' , '" . addslashes("$Descrizione") . "' , '" . addslashes("$Ingredienti") . "' , '$Biologico' , '" . addslashes("$Categoria") . "' , '$GradoAlcolico'  , '$Gassato' , '$Disponibilita')";
         $riss = $conn->query($sql);
         if (is_bool($riss))
             return 0;
@@ -92,7 +92,7 @@ abstract class FProdotto
         $Integrale = $prodotto->getIntegrale();
 
         $conn = FDataBase::Connect();
-        $sql = "INSERT INTO Prodotto (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `Congelato`, `Vegano`, `Glutine`, `Integrale`) VALUES('" . addslashes("$Nome") . "' , '" . addslashes("$Prezzo") ."' , '" . addslashes("$Descrizione") . "' , '" . addslashes("$Ingredienti") . "' , '" . addslashes("$Biologico") . "' , '" . addslashes("$Categoria") . "' , '" . addslashes("$Congelato") . "' , '" . addslashes("$Vegano") . "' , '" . addslashes("$Glutine") . "' , '" . addslashes("$Integrale") ."')";
+        $sql = "INSERT INTO Prodotto (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `Congelato`, `Vegano`, `Glutine`, `Integrale`) VALUES('" . addslashes("$Nome") . "' , '$Prezzo' , '" . addslashes("$Descrizione") . "' , '" . addslashes("$Ingredienti") . "' , '$Biologico' , '" . addslashes("$Categoria") . "' , '$Congelato' , '$Vegano' , '$Glutine' , '$Integrale')";
         $riss = $conn->query($sql);
         if (is_bool($riss))
             return 0;
@@ -116,7 +116,7 @@ abstract class FProdotto
         $Disponibilita = $prodotto->getDisponibilita();
 
         $conn = FDataBase::Connect();
-        $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '" . addslashes($Prezzo) . "' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '" . addslashes($Biologico) . "' , Categoria = '" . addslashes($Categoria) . "' , GradoAlcolico = '" . addslashes($GradoAlcolico) . "' , Gassato = '" . addslashes($Gassato) . "' , Disponibilita = '" . addslashes($Disponibilita) . "' WHERE IDProdotto = '$IDProdotto' " ;
+        $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '$Prezzo' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '$Biologico' , Categoria = '" . addslashes($Categoria) . "' , GradoAlcolico = '$GradoAlcolico' , Gassato = '$Gassato' , Disponibilita = '$Disponibilita' WHERE IDProdotto = '$IDProdotto' " ;
         $riss = $conn->query($sql);
         if (is_bool($riss) )
             return 0;
@@ -141,7 +141,7 @@ abstract class FProdotto
         $Integrale = $prodotto->getIntegrale();
 
         $conn = FDataBase::Connect();
-        $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '" . addslashes($Prezzo) . "' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '" . addslashes($Biologico) . "' , Categoria = '" . addslashes($Categoria) . "' , Congelato = '" . addslashes($Congelato) . "' , Vegano = '" . addslashes($Vegano) . "' , Glutine = '" . addslashes($Glutine) . "' , Integrale = '" . addslashes($Integrale) . "' WHERE IDProdotto = '$IDProdotto' " ;
+        $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '$Prezzo)' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '$Biologico' , Categoria = '" . addslashes($Categoria) . "' , Congelato = '$Congelato' , Vegano = '$Vegano' , Glutine = '$Glutine' , Integrale = '$Integrale' WHERE IDProdotto = '$IDProdotto' " ;
         $riss = $conn->query($sql);
         if (is_bool($riss) )
             return 0;
@@ -162,5 +162,15 @@ abstract class FProdotto
     }
 }
 
-$p = FProdotto::load(10);
-print $p->toString();
+//$p = FProdotto::load(32);
+//print $p->toString();
+//$p->setPrezzo(1.5);
+//FProdotto::updateBevanda($p);
+
+
+//if(FProdotto::exists(67)){print "si";}
+//else{print "no";}
+
+//$test = new EBevanda("gasolio",45,1,"xxxxxx","yyyyy",1,'Bevande',1,1,1);
+//FProdotto::storeBevanda($test);
+//FProdotto::delete(75);
