@@ -18,51 +18,19 @@ class ECibo extends EProdotto {
         $this->Integrale = $Integrale;
     }
 
-    public function getCongelato() : String {
-
-        if ($this->Congelato == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getCongelato() : bool {return $this->Congelato;}
 
     public function setCongelato(bool $Congelato) : void {$this->Congelato = $Congelato;}
 
-    public function getVegano() : String {
-
-        if ($this->Vegano == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getVegano() : bool {return $this->Vegano;}
 
     public function setVegano(bool $Vegano) : void {$this->Vegano = $Vegano;}
 
-    public function getGlutine() : String {
-
-        if ($this->Glutine == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getGlutine() : bool {return $this->Glutine;}
 
     public function setGlutine(bool $Glutine) : void {$this->Glutine = $Glutine;}
 
-    public function getIntegrale() : String {
-
-        if ($this->Integrale == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getIntegrale() : bool {return $this->Integrale;}
 
     public function setIntegrale(bool $Integrale) : void {$this->Integrale = $Integrale;}
 

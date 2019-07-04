@@ -43,15 +43,7 @@ abstract class EProdotto
 
     public function setIngredienti(String $Ingredienti) : void {$this->Ingredienti = $Ingredienti;}
 
-    public function getBiologico() : String {
-
-        if ($this->Biologico == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getBiologico() : bool {return $this->Biologico;}
 
     public function setBiologico(bool $Biologico) : void {$this->Biologico = $Biologico;}
 

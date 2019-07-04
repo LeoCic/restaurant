@@ -16,39 +16,15 @@ class EBevanda extends EProdotto {
         $this->Disponibilita = $Disponibilita;
     }
 
-    public function getGradoAlcolico() : String {
-
-        if ($this->GradoAlcolico == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getGradoAlcolico() : bool {return $this->GradoAlcolico;}
 
     public function setGradoAlcolico(float $GradoAlcolico) : void {$this->GradoAlcolico = $GradoAlcolico;}
 
-    public function getGassato() : String {
-
-        if ($this->Gassato == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getGassato() : bool {return $this->Gassato;}
 
     public function setGassato(bool $Gassato) : void {$this->Gassato = $Gassato;}
 
-    public function getDisponibilita() : String {
-
-        if ($this->Disponibilita == 1){
-            return "Si";
-        }
-        else {
-            return "No";
-        }
-    }
+    public function getDisponibilita() : bool {return $this->Disponibilita;}
 
     public function setDisponibilita(bool $Disponibilita) : void {$this->Disponibilita = $Disponibilita;}
 
