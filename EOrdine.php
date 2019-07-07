@@ -1,5 +1,11 @@
 <?php
 
+require 'EGiudizio.php';
+require 'ELuogo.php';
+require 'ECibo.php';
+require 'EBevanda.php';
+
+
 class EOrdine
 {
     private $ID;
@@ -7,7 +13,7 @@ class EOrdine
     private $DataConsegna;
     private $Nota;
     private $PrezzoTotale;
-    /*private $ProdottiOrdinati;*/
+    private $ProdottiOrdinati = array();
     private $TipoPagamento;
     private $StatoOrdine;
     private $NomeUtente;
@@ -17,21 +23,27 @@ class EOrdine
     private $Giudizio;
 
 
-    public function __construct(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
+    /*public function __construct(array $ProdottiOrdinati)
+    {
+        $this->ProdottiOrdinati = $ProdottiOrdinati;
+    }*/
+
+
+    public function __construct(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
     {
         $this->ID = $ID;
-        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d, H:i:s',"$DataOrdinazione");
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d, H:i:s',"$DataConsegna");
+        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i:s',"$DataConsegna");
         $this->Nota = $Nota;
         $this->PrezzoTotale = $PrezzoTotale;
+        $this->ProdottiOrdinati = $ProdottiOrdinati;
         $this->TipoPagamento = $TipoPagamento;
         $this->StatoOrdine = $StatoOrdine;
         $this->NomeUtente = $NomeUtente;
         $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
         $this->PuntiUsati = $PuntiUsati;
         $this->TelefonoConsegna = $TelefonoConsegna;
-        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getNomeUtente());
-
+        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio());
     }
 
     public function getID() : float {return $this->ID;}
@@ -40,7 +52,7 @@ class EOrdine
 
     public function getDataOrdinazione() : DateTime
     {
-        try { return new DateTime ( $this->DataOrdinazione->format('Y-m-d, H:i:s')); }
+        try { return new DateTime ( $this->DataOrdinazione->format('Y-m-d H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -50,12 +62,12 @@ class EOrdine
 
     public function setDataOrdinazione(String $DataOrdinazione) : void
     {
-        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d, H:i:s',"$DataOrdinazione");
+        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
     }
 
     public function getDataConsegna() : DateTime
     {
-        try { return new DateTime ( $this->DataConsegna->format('Y-m-d, H:i:s')); }
+        try { return new DateTime ( $this->DataConsegna->format('Y-m-d H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -65,7 +77,7 @@ class EOrdine
 
     public function setDataConsegna(String $DataConsegna) : void
     {
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d, H:i:s',"$DataConsegna");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i:s',"$DataConsegna");
     }
 
     public function getNota() : String {return $this->Nota;}
@@ -75,6 +87,26 @@ class EOrdine
     public function getPrezzoTotale() : float {return $this->PrezzoTotale;}
 
     public function setPrezzoTotale(float $PrezzoTotale) : void {$this->PrezzoTotale = $PrezzoTotale;}
+
+    public function getProdottiOrdinati() : array
+    {
+        $prodotti = array_values($this->ProdottiOrdinati);
+        $contenitore = array();
+        foreach ($prodotti as $val)
+        {
+            if($val->getCategoria() === 'Bevande')
+            {
+                $item = new EBevanda($val->getNome(), $val->getIDProdotto(), $val->getPrezzo(), $val->getDescrizione(), $val->getIngredienti(), $val->getBiologico(), $val->getCategoria(), $val->getGradoAlcolico(), $val->getGassato(), $val->getDisponibilita());
+                array_push($contenitore , $item);
+            }
+            else if($val->getCategoria() != 'Bevande')
+            {
+                $item = new ECibo($val->getNome(), $val->getIDProdotto(), $val->getPrezzo(), $val->getDescrizione(), $val->getIngredienti(), $val->getBiologico(), $val->getCategoria(), $val->getCongelato(), $val->getVegano(), $val->getGlutine(), $val->getIntegrale());
+                array_push($contenitore , $item);
+            }
+        }
+        return $contenitore;
+    }
 
     public function getTipoPagamento() : String {return $this->TipoPagamento;}
 
@@ -106,18 +138,39 @@ class EOrdine
 
     public function setTelefonoConsegna(String $TelefonoConsegna) : void {$this->TelefonoConsegna = $TelefonoConsegna;}
 
-    public function getGiudizio() : EGiudizio
-    {
-        return new EGiudizio ($this->Giudizio->getCommento(), $this->Giudizio->getPunteggio(), $this->Giudizio->getNomeUtente());
-    }
+    public function getGiudizio() : EGiudizio {return $this->Giudizio;}
 
-    public function setGiudizio(EGiudizio $Giudizio) : void
-    {
-        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getNomeUtente());
-    }
+    public function setGiudizio(EGiudizio $Giudizio) : void {$this->Giudizio = $Giudizio;}
 
     public function toString() : String {
 
-        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d, H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d, H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getGiudizio()->getCommento()."\n".$this->getGiudizio()->getPunteggio()."\n".$this->getGiudizio()->getNomeUtente();
+        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna();
     }
 }
+
+/*$prodotti = array();
+$giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
+$luogo = new ELuogo(2.4,'vicovaro','RM','giuseppe mazzini','7');
+$cibo = new ECibo('pane',865,2,'jhgf','jhgfghf',1,'pane',0,0,1,1);
+$bevanda = new EBevanda('acqua',55,1,'khhf','trqtqwerirt',1,'acqua',12,1,0);
+array_push($prodotti, $cibo);
+array_push($prodotti, $bevanda);
+
+$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+print $ordine->toString();*/
+
+
+//print_r($prodotti);
+//print_r($ordine->getProdottiOrdinati());
+
+
+
+
+
+
+//$ordine->getDataConsegna();
+//$ordine->getDataOrdinazione();
+//$giorno = strtotime("2019-12-6 12:14:36");
+//print date("Y-m-d \a\l\l\e H:i:s");
+//print "\n";
+//print date("Y-m-d \a\l\l\e H:i:s", $giorno);
