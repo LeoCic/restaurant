@@ -52,7 +52,7 @@ class EOrdine
 
     public function getDataOrdinazione() : DateTime
     {
-        try { return new DateTime ( $this->DataOrdinazione->format('Y-m-d H:i:s')); }
+        try {return new DateTime ($this->DataOrdinazione->format('Y-m-d H:i:s'));}
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -60,14 +60,18 @@ class EOrdine
         }
     }
 
-    public function setDataOrdinazione(String $DataOrdinazione) : void
+    public function setDataOrdinazione(DateTime $DataOrdinazione) : void
     {
-        $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
+        try {$this->DataOrdinazione = new DateTime ($DataOrdinazione->format('Y-m-d H:i:s'));}
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function getDataConsegna() : DateTime
     {
-        try { return new DateTime ( $this->DataConsegna->format('Y-m-d H:i:s')); }
+        try {return new DateTime ($this->DataConsegna->format('Y-m-d H:i:s'));}
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -75,9 +79,13 @@ class EOrdine
         }
     }
 
-    public function setDataConsegna(String $DataConsegna) : void
+    public function setDataConsegna(DateTime $DataConsegna) : void
     {
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i:s',"$DataConsegna");
+        try {$this->DataConsegna = new DateTime ($DataConsegna->format('Y-m-d H:i:s'));}
+        catch (Exception $e)
+        {
+            echo $e->getMessage();
+        }
     }
 
     public function getNota() : String {return $this->Nota;}
@@ -90,9 +98,8 @@ class EOrdine
 
     public function getProdottiOrdinati() : array
     {
-        $prodotti = array_values($this->ProdottiOrdinati);
         $contenitore = array();
-        foreach ($prodotti as $val)
+        foreach ($this->ProdottiOrdinati as $val)
         {
             if($val->getCategoria() === 'Bevande')
             {
@@ -151,13 +158,20 @@ class EOrdine
 /*$prodotti = array();
 $giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
 $luogo = new ELuogo(2.4,'vicovaro','RM','giuseppe mazzini','7');
-$cibo = new ECibo('pane',865,2,'jhgf','jhgfghf',1,'pane',0,0,1,1);
-$bevanda = new EBevanda('acqua',55,1,'khhf','trqtqwerirt',1,'acqua',12,1,0);
-array_push($prodotti, $cibo);
+$cibo = new ECibo('pane',865,2,'pane con farina integrale','acqua,farina,sale',1,'pane',0,0,1,1);
+$bevanda = new EBevanda('acqua',55,1,'gassata','acqua,sali minerali',1,'Bevande',0,1,0);
 array_push($prodotti, $bevanda);
+array_push($prodotti, $cibo);
+
 
 $ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
-print $ordine->toString();*/
+print $ordine->toString();
+print "\n";
+$datacon = $ordine->getDataConsegna();
+$ordine->setDataOrdinazione($datacon);
+print"\n";
+print $ordine->toString();
+print"\n";*/
 
 
 //print_r($prodotti);
@@ -166,10 +180,6 @@ print $ordine->toString();*/
 
 
 
-
-
-//$ordine->getDataConsegna();
-//$ordine->getDataOrdinazione();
 //$giorno = strtotime("2019-12-6 12:14:36");
 //print date("Y-m-d \a\l\l\e H:i:s");
 //print "\n";
