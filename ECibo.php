@@ -1,5 +1,7 @@
 <?php
 
+require 'EProdotto.php';
+
 class ECibo extends EProdotto {
     private $Congelato;
     private $Vegano;

@@ -1,6 +1,6 @@
 <?php
 
-require_once 'EProdotto.php';
+//require_once 'EProdotto.php';
 require_once 'ECibo.php';
 require_once 'EBevanda.php';
 require_once 'FDatabase.php';
