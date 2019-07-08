@@ -141,7 +141,7 @@ abstract class FProdotto
         $Integrale = $prodotto->getIntegrale();
 
         $conn = FDataBase::Connect();
-        $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '$Prezzo)' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '$Biologico' , Categoria = '" . addslashes($Categoria) . "' , Congelato = '$Congelato' , Vegano = '$Vegano' , Glutine = '$Glutine' , Integrale = '$Integrale' WHERE IDProdotto = '$IDProdotto' " ;
+        $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '$Prezzo' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '$Biologico' , Categoria = '" . addslashes($Categoria) . "' , Congelato = '$Congelato' , Vegano = '$Vegano' , Glutine = '$Glutine' , Integrale = '$Integrale' WHERE IDProdotto = '$IDProdotto' " ;
         $riss = $conn->query($sql);
         if (is_bool($riss) )
             return 0;
