@@ -23,13 +23,21 @@ class EOrdine
     private $Giudizio;
 
 
-    /*public function __construct(array $ProdottiOrdinati)
+    public function __construct()
+    {
+        $num_args = func_num_args();
+        $args = func_get_args();
+        call_user_func_array(array(&$this, '__construct_'. $num_args), $args);
+    }
+
+
+    public function __construct_1(array $ProdottiOrdinati)
     {
         $this->ProdottiOrdinati = $ProdottiOrdinati;
-    }*/
+    }
 
 
-    public function __construct(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
+    public function __construct_13(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
@@ -43,7 +51,7 @@ class EOrdine
         $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
         $this->PuntiUsati = $PuntiUsati;
         $this->TelefonoConsegna = $TelefonoConsegna;
-        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio());
+        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getIDOrdine());
     }
 
     public function getID() : float {return $this->ID;}
@@ -115,6 +123,25 @@ class EOrdine
         return $contenitore;
     }
 
+    public function setProdottiOrdinati(array $ProdottiOrdinati) : void
+    {
+        $contenitore = array();
+        foreach ($ProdottiOrdinati as $val)
+        {
+            if($val->getCategoria() === 'Bevande')
+            {
+                $item = new EBevanda($val->getNome(), $val->getIDProdotto(), $val->getPrezzo(), $val->getDescrizione(), $val->getIngredienti(), $val->getBiologico(), $val->getCategoria(), $val->getGradoAlcolico(), $val->getGassato(), $val->getDisponibilita());
+                array_push($contenitore , $item);
+            }
+            else if($val->getCategoria() != 'Bevande')
+            {
+                $item = new ECibo($val->getNome(), $val->getIDProdotto(), $val->getPrezzo(), $val->getDescrizione(), $val->getIngredienti(), $val->getBiologico(), $val->getCategoria(), $val->getCongelato(), $val->getVegano(), $val->getGlutine(), $val->getIntegrale());
+                array_push($contenitore , $item);
+            }
+        }
+        $this->ProdottiOrdinati = $contenitore;
+    }
+
     public function getTipoPagamento() : String {return $this->TipoPagamento;}
 
     public function setTipoPagamento(String $TipoPagamento) : void {$this->TipoPagamento = $TipoPagamento;}
@@ -157,7 +184,7 @@ class EOrdine
 
 /*$prodotti = array();
 $giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
-$luogo = new ELuogo(2.4,'vicovaro','RM','giuseppe mazzini','7');
+$luogo = new ELuogo('vicovaro','RM','giuseppe mazzini','7');
 $cibo = new ECibo('pane',865,2,'pane con farina integrale','acqua,farina,sale',1,'pane',0,0,1,1);
 $bevanda = new EBevanda('acqua',55,1,'gassata','acqua,sali minerali',1,'Bevande',0,1,0);
 array_push($prodotti, $bevanda);
@@ -167,7 +194,13 @@ array_push($prodotti, $cibo);
 $ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
 print $ordine->toString();
 print "\n";
-$datacon = $ordine->getDataConsegna();
+
+$nuovoOrdine = new EOrdine($prodotti);
+print_r($nuovoOrdine->getProdottiOrdinati());*/
+
+
+
+/*$datacon = $ordine->getDataConsegna();
 $ordine->setDataOrdinazione($datacon);
 print"\n";
 print $ordine->toString();
@@ -179,8 +212,41 @@ print"\n";*/
 
 
 
+/*print"\n";
+$altroTest = new ELuogo("tivoli","Roma","garibaldi","55");
+$ordine->setLuogoConsegna($altroTest);
+$testLuogo = $ordine->getLuogoConsegna();
+print $testLuogo->toString();*/
+
+
+
 
 //$giorno = strtotime("2019-12-6 12:14:36");
 //print date("Y-m-d \a\l\l\e H:i:s");
 //print "\n";
 //print date("Y-m-d \a\l\l\e H:i:s", $giorno);
+
+
+
+/*$prodotti = array();
+$giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
+$luogo = new ELuogo('vicovaro','RM','giuseppe mazzini','7');
+$cibo = new ECibo('pane',865,2,'pane con farina integrale','acqua,farina,sale',1,'pane',0,0,1,1);
+$bevanda = new EBevanda('acqua',55,1,'gassata','acqua,sali minerali',1,'Bevande',0,1,0);
+array_push($prodotti, $bevanda);
+array_push($prodotti, $cibo);
+
+
+$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+print $ordine->toString();
+print "\n";
+
+
+$prodotti2 = array();
+$cibo2 = new ECibo('sushi',78,30,'pesce crudo','pesce,spezie',1,'pesce',0,0,1,0);
+$bevanda2 = new EBevanda('amaro',122,3,'produzione propria','alcool',1,'Bevande',20,0,1);
+array_push($prodotti2, $cibo2);
+array_push($prodotti2, $bevanda2);
+$ordine->setProdottiOrdinati($prodotti2);
+
+print_r($ordine->getProdottiOrdinati());*/
