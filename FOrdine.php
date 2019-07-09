@@ -1,5 +1,8 @@
 <?php
 
+require 'FDatabase.php';
+require_once 'EOrdine.php';
+
 abstract class FOrdine
 {
     public static function load(float $id) : EOrdine
@@ -28,8 +31,8 @@ abstract class FOrdine
     public static function store(EOrdine $ordine) : bool
     {
         $IDOrdine = $ordine->getID();
-        $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d, H:i:s');
-        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d, H:i:s');
+        $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d H:i:s');
+        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i:s');
         $Nota = $ordine->getNota();
         $PrezzoTotale = $ordine->getPrezzoTotale();
         $TipoPagamento = $ordine->getTipoPagamento();
@@ -52,8 +55,8 @@ abstract class FOrdine
     public static function update(EOrdine $ordine) : bool
     {
         $IDOrdine = $ordine->getID();
-        $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d, H:i:s');
-        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d, H:i:s');
+        $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d H:i:s');
+        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i:s');
         $Nota = $ordine->getNota();
         $PrezzoTotale = $ordine->getPrezzoTotale();
         $TipoPagamento = $ordine->getTipoPagamento();
@@ -61,7 +64,7 @@ abstract class FOrdine
         $PuntiUsati = $ordine->getPuntiUsati();
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
-        $IDLuogo = $ordine->getLuogoConsegna()->getIDLuogo();
+        $IDLuogo = $ordine->getIDLuogo();
 
 
         $conn = FDataBase::Connect();
@@ -85,3 +88,30 @@ abstract class FOrdine
             return 1;
     }
 }
+
+
+/*$test = FOrdine::load(567);
+print $test->toString1();
+print "\n";
+print "\n";
+
+
+if(FOrdine::exists(568)){print "si";}
+else{print "no";}*/
+
+/*$prodotti = array();
+$giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
+$luogo = new ELuogo('vicovaro','RM','giuseppe mazzini','7');
+$cibo = new ECibo('pane',865,2,'pane con farina integrale','acqua,farina,sale',1,'pane',0,0,1,1);
+$bevanda = new EBevanda('acqua',55,1,'gassata','acqua,sali minerali',1,'Bevande',0,1,0);
+array_push($prodotti, $bevanda);
+array_push($prodotti, $cibo);
+
+$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+FOrdine::store($ordine);*/
+
+
+
+//$test->setPrezzoTotale(200);
+//FOrdine::update($test);
+//print $test->toString1();
