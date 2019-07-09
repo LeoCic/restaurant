@@ -16,7 +16,7 @@ class EBevanda extends EProdotto {
         $this->Disponibilita = $Disponibilita;
     }
 
-    public function getGradoAlcolico() : bool {return $this->GradoAlcolico;}
+    public function getGradoAlcolico() : float {return $this->GradoAlcolico;}
 
     public function setGradoAlcolico(float $GradoAlcolico) : void {$this->GradoAlcolico = $GradoAlcolico;}
 
