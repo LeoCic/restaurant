@@ -40,10 +40,10 @@ abstract class FOrdine
         $PuntiUsati = $ordine->getPuntiUsati();
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
-        $IDLuogo = $ordine->getLuogoConsegna()->getIDLuogo();
+        $IDLuogo = $ordine->getIDLuogo();
 
         $conn = FDataBase::Connect();
-        $sql = "INSERT INTO Ordine (`IDOrdine`, `DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `StatoOrdine`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES('" . addslashes("$IDOrdine") . "' , '" . addslashes("$DataOrdinazione") ."' , '" . addslashes("$DataConsegna") . "' , '" . addslashes("$Nota") . "' , '" . addslashes("$PrezzoTotale") . "' , '" . addslashes("$TipoPagamento") . "' , '" . addslashes("$StatoOrdine") . "' , '" . addslashes("$PuntiUsati") . "' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '" . addslashes("$IDLuogo") ."')";
+        $sql = "INSERT INTO Ordine (`IDOrdine`, `DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `StatoOrdine`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES('$IDOrdine' , '".addslashes("$DataOrdinazione")."' , '".addslashes("$DataConsegna")."' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' , '" . addslashes("$StatoOrdine") . "' , '$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
         $riss = $conn->query($sql);
         if (is_bool($riss))
             return 0;
@@ -68,7 +68,7 @@ abstract class FOrdine
 
 
         $conn = FDataBase::Connect();
-        $sql =" UPDATE Ordine SET DataOrdinazione = '" . addslashes($DataOrdinazione) . "' , DataConsegna = '" . addslashes($DataConsegna) . "' , Nota = '" . addslashes($Nota) . "' , PrezzoTotale = '" . addslashes($PrezzoTotale) . "' , TipoPagamento = '" . addslashes($TipoPagamento) . "' , StatoOrdine = '" . addslashes($StatoOrdine) . "' , PuntiUsati = '" . addslashes($PuntiUsati) . "' , TelefonoConsegna = '" . addslashes($TelefonoConsegna) . "' , NomeUtente = '" . addslashes($NomeUtente) . "' , IDLuogo = '" . addslashes($IDLuogo) . "' WHERE IDOrdine = '$IDOrdine' " ;
+        $sql =" UPDATE Ordine SET DataOrdinazione = '" . addslashes($DataOrdinazione) . "' , DataConsegna = '" . addslashes($DataConsegna) . "' , Nota = '" . addslashes($Nota) . "' , PrezzoTotale = '$PrezzoTotale' , TipoPagamento = '" . addslashes($TipoPagamento) . "' , StatoOrdine = '" . addslashes($StatoOrdine) . "' , PuntiUsati = '$PuntiUsati' , TelefonoConsegna = '" . addslashes($TelefonoConsegna) . "' , NomeUtente = '" . addslashes($NomeUtente) . "' , IDLuogo = '$IDLuogo' WHERE IDOrdine = '$IDOrdine' " ;
         $riss = $conn->query($sql);
         if (is_bool($riss) )
             return 0;
@@ -90,7 +90,7 @@ abstract class FOrdine
 }
 
 
-/*$test = FOrdine::load(567);
+/*$test = FOrdine::load(111);
 print $test->toString1();
 print "\n";
 print "\n";
@@ -107,8 +107,10 @@ $bevanda = new EBevanda('acqua',55,1,'gassata','acqua,sali minerali',1,'Bevande'
 array_push($prodotti, $bevanda);
 array_push($prodotti, $cibo);
 
-$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+$ordine = new EOrdine(111,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,'contanti','ok',3,'486548654','massimo',3);
 FOrdine::store($ordine);*/
+
+//FOrdine::delete(111);
 
 
 
