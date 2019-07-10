@@ -1,6 +1,7 @@
 <?php
-require 'ELuogo.php';
-require 'EProdotto.php';
+require_once 'ELuogo.php';
+require_once 'EProdotto.php';
+
 
  //vedere se mettere metoto aggiungi prodotto al catalogo
 
@@ -194,6 +195,15 @@ require 'EProdotto.php';
             */
         self::$CatalogoProdotti = $CatalogoProdotti;
     }
+    public static function setSingoloProdotto(EProdotto $prod)
+    {
+        array_push(self::$CatalogoProdotti, $prod);
+
+    }
+
+
+
+
 
     public static function AvvisaUtentiAbituali() : void
     {
@@ -202,6 +212,7 @@ require 'EProdotto.php';
 
     public static function toString() : String
     {
+
         print ("giorni di apertura :");
         print_r(self::$Giorni_Di_Apertura);
         print"\n";
@@ -225,7 +236,7 @@ require 'EProdotto.php';
 //necessari per il test di alcuni get e set
 
 //setSede
-
+/*
  $luogo = new ELuogo("L'Aquila" , "AQ" , "germania" , "4");
  ERistorante::setSede($luogo);
  ERistorante::setCellulare("3484366708");
@@ -240,10 +251,11 @@ require 'EProdotto.php';
  ERistorante::setPromozioniAttive($attive);
  ERistorante::setEntitaScontoAPunti(1.2);
  ERistorante::setEntitaScontoBase(3.5);
-$prodotto[1] = new EProdotto("pasta", "1","33", "molto buona","pasta pomodoro","false","primi");
-$prodotto[2] = new EProdotto("pastaaa", "12","33", "molto buona","pasta pomodoro","false","primi");
-ERistorante::setCatalogoProdotti($prodotto);
- print ERistorante::toString();
+*/
+//$prodotto[1] = new EProdotto("pasta", "1","33", "molto buona","pasta pomodoro","false","primi");
+//$prodotto[2] = new EProdotto("pastaaa", "12","33", "molto buona","pasta pomodoro","false","primi");
+//ERistorante::setCatalogoProdotti($prodotto);
+ //print ERistorante::toString();
 //set giorni di apertura
 /*
 $data_di_prova =  array('lunedi' => true , 'martedi' => false , 'mercoledi' => false , 'giovedi' => true , 'venerdi' => false , 'sabato' => false , 'domenica' => true );
