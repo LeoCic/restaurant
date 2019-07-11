@@ -14,7 +14,6 @@ abstract class EProdotto
 
 
     public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria)
-
     {
         $this->Nome = $Nome;
         $this->IDProdotto = $IDProdotto;
@@ -24,6 +23,7 @@ abstract class EProdotto
         $this->Biologico = $Biologico;
         $this->Categoria = $Categoria;
     }
+
 
     public function getNome() : String {return $this->Nome;}
 
@@ -53,7 +53,8 @@ abstract class EProdotto
 
     public function setCategoria(String $Categoria) : void {$this->Categoria = $Categoria;}
 
-    public function toString() : String {
+    public function toString() : String
+    {
 
         return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria()."\n";
     }

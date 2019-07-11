@@ -2,14 +2,14 @@
 
 require_once '../Indice.php';
 
-class EBevanda extends EProdotto {
+class EBevanda extends EProdotto
+{
     private $GradoAlcolico;
     private $Gassato;
     private $Disponibilita;
 
 
     public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, float $GradoAlcolico, bool $Gassato, bool $Disponibilita)
-
     {
 
         parent::__construct($Nome, $IDProdotto, $Prezzo, $Descrizione, $Ingredienti, $Biologico, $Categoria);
@@ -17,6 +17,7 @@ class EBevanda extends EProdotto {
         $this->Gassato = $Gassato;
         $this->Disponibilita = $Disponibilita;
     }
+
 
     public function getGradoAlcolico() : float {return $this->GradoAlcolico;}
 
@@ -30,7 +31,8 @@ class EBevanda extends EProdotto {
 
     public function setDisponibilita(bool $Disponibilita) : void {$this->Disponibilita = $Disponibilita;}
 
-    public function toString() : String {
+    public function toString() : String
+    {
 
         return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria()."\n".$this->getGradoAlcolico()."\n".$this->getGassato()."\n".$this->getDisponibilita();
     }

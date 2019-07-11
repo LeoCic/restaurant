@@ -2,7 +2,8 @@
 
 require_once '../Indice.php';
 
-class ECibo extends EProdotto {
+class ECibo extends EProdotto
+{
     private $Congelato;
     private $Vegano;
     private $Glutine;
@@ -10,7 +11,6 @@ class ECibo extends EProdotto {
 
 
     public function __construct(String $Nome, int $IDProdotto, float $Prezzo, String $Descrizione, String $Ingredienti, bool $Biologico, String $Categoria, bool $Congelato, bool $Vegano, bool $Glutine, bool $Integrale)
-
     {
 
         parent::__construct($Nome, $IDProdotto, $Prezzo, $Descrizione, $Ingredienti, $Biologico, $Categoria);
@@ -19,6 +19,7 @@ class ECibo extends EProdotto {
         $this->Glutine = $Glutine;
         $this->Integrale = $Integrale;
     }
+
 
     public function getCongelato() : bool {return $this->Congelato;}
 
@@ -36,7 +37,8 @@ class ECibo extends EProdotto {
 
     public function setIntegrale(bool $Integrale) : void {$this->Integrale = $Integrale;}
 
-    public function toString() : String {
+    public function toString() : String
+    {
 
         return $this->getNome()."\n".$this->getIDProdotto()."\n".$this->getPrezzo()."\n".$this->getDescrizione()."\n".$this->getIngredienti()."\n".$this->getBiologico()."\n".$this->getCategoria()."\n".$this->getCongelato()."\n".$this->getVegano()."\n".$this->getGlutine()."\n".$this->getIntegrale();
     }
