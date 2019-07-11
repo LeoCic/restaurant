@@ -1,6 +1,6 @@
 <?php
 
-if(file_exists('config.inc.php')) require_once 'config.inc.php';
+ require_once '../config.inc.php';
 
   abstract class  FDatabase {
        public static function Connect()

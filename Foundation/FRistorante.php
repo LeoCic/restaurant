@@ -51,4 +51,4 @@ abstract class FRistorante
        }
 
 }
-//FRistorante::loadCatalogoProdotti();
+FRistorante::loadCatalogoProdotti();
