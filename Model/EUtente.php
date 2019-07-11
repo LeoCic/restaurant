@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ELuogo.php';
+require_once '../Indice.php';
 
 class EUtente
 {
