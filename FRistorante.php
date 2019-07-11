@@ -1,7 +1,8 @@
 <?php
-require_once 'FDatabase.php';
 require_once 'ERistorante.php';
-require_once 'EBevanda.php';
+require_once 'FProdotto.php';
+require 'EProdotto.php';
+
 
 
 
@@ -30,6 +31,20 @@ abstract class FRistorante
                       }
                       ERistorante::setSingoloProdotto($prodotto);
                    }
+                  else if ($ris[0][6] != 'Bevande')
+                  {
+                      if($val[3] === NULL)
+                      {
+                          if($val[5] === NULL){$prodotto = new ECibo($val[0], $val[1], $val[2], 'NULL', $val[4], 0, $val[6], $val[7], $val[8], $val[9], $val[10]);}
+                          else {$prodotto = new ECibo($val[0], $val[1], $val[2], 'NULL', $val[4], $val[5], $val[6], $val[7], $val[8], $val[9], $val[10]);}
+                      }
+                      else
+                      {
+                          if($ris[0][5] === NULL){$prodotto = new ECibo($val[0], $val[1], $val[2], $val[3], $val[4], 0, $val[6], $val[7], $val[8], $val[9], $val[10]);}
+                          else {$prodotto = new ECibo($val[0], $val[1], $val[2], $val[3], $val[4], $val[5], $val[6], $val[7], $val[8], $val[9], $val[10]);}
+                      }
+                      ERistorante::setSingoloProdotto($prodotto);
+                  }
 
               }
 
