@@ -1,8 +1,6 @@
 <?php
 
-require_once 'ECibo.php';
-require_once 'EBevanda.php';
-require_once 'FDatabase.php';
+require_once '../Indice.php';
 
 abstract class FProdotto
 {

@@ -1,7 +1,6 @@
 <?php
 
-require 'FDatabase.php';
-require_once 'EOrdine.php';
+require_once '../Indice.php';
 
 abstract class FOrdine
 {

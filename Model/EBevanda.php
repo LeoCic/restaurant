@@ -1,5 +1,7 @@
 <?php
 
+require_once '../Indice.php';
+
 class EBevanda extends EProdotto {
     private $GradoAlcolico;
     private $Gassato;

@@ -1,10 +1,6 @@
 <?php
 
-require 'EGiudizio.php';
-require 'ELuogo.php';
-require 'ECibo.php';
-require 'EBevanda.php';
-
+require_once '../Indice.php';
 
 class EOrdine
 {

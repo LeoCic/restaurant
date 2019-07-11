@@ -1,5 +1,7 @@
 <?php
 
+require_once '../Indice.php';
+
 abstract class EProdotto
 {
     protected $Nome;

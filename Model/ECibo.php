@@ -1,6 +1,6 @@
 <?php
 
-require 'EProdotto.php';
+require_once '../Indice.php';
 
 class ECibo extends EProdotto {
     private $Congelato;
