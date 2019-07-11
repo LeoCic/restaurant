@@ -1,5 +1,7 @@
 <?php
 require_once '../Indice.php';
+
+
 //  query restituisce un oggetto se va a buon fine altrimenti falso su cui posso fare rowCount comunque (se false rida zero righe)
 //prima di richiamare la store e load dobbiamo richiamare l'exists
 // se le classe torna null facciamo un try catch (NEL CONTROLLORE)
@@ -87,7 +89,7 @@ abstract class FLuogo
 }
 
 //test dei metodi
-
+/*
 $test=new ELuogo("L'Aquila","AQ","Germania",'4\n');
 //test della store
 $id = $test->getIDLuogo();
@@ -105,7 +107,7 @@ else if($id===0) {
 if($a === true){
     print "inserita con successo"."\n";}
 else print "errore inserimento"."\n";}
-
+*/
 //test della load e update
 
 /*$control = FLuogo::exist(5);
