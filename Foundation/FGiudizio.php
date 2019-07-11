@@ -1,7 +1,6 @@
 <?php
 
-require_once 'EGiudizio.php';
-require_once 'FDatabase.php';
+require_once '../Indice.php';
 
 abstract class FGiudizio
 {
@@ -72,8 +71,8 @@ abstract class FGiudizio
         else return null;
     }
 }
-$prova = new EGiudizio('ciao',2,21);
-FGiudizio::store($prova);
+//$prova = new EGiudizio('ciao',2,21);
+//FGiudizio::store($prova);
 //$giudizio = FGiudizio::loadGiudizioSingolo(21);
 //echo $giudizio->toString();
 //echo FGiudizio::MediaGiudiziComplessivi();

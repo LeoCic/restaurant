@@ -1,7 +1,6 @@
 <?php
 
-require_once 'EUtente.php';
-require_once 'FDatabase.php';
+require_once '../Indice.php';
 
 abstract class FUtente
 {
@@ -91,13 +90,13 @@ abstract class FUtente
     }
 }
 
-$prova = new EUtente('Giacomo', 'Palla', 'giacpall', 'giacpall@gmail.com','+527492847263','palla');
+//$prova = new EUtente('Giacomo', 'Palla', 'giacpall', 'giacpall@gmail.com','+527492847263','palla');
 //$prova->setPunti(4);
 //echo $prova->toString();
 //$prova2 = NULL;
-$control = FUtente::exists('giacpall');
-if ($control == 1) echo "esiste"; else if ($control == 0) echo "non esiste";
-if ($control==0) FUtente::store($prova);
+//$control = FUtente::exists('giacpall');
+//if ($control == 1) echo "esiste"; else if ($control == 0) echo "non esiste";
+//if ($control==0) FUtente::store($prova);
 //$control= FUtente::store($prova);
 //if ($control== 0) $utente = FUtente::store($prova);
 //if ($control == 1) echo "esiste"; else if ($control == 0) echo "non esiste";
