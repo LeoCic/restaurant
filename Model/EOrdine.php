@@ -67,6 +67,7 @@ class EOrdine
         $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getIDOrdine());
     }
 
+
     public function getID() : float {return $this->ID;}
 
     public function setID(float $ID) : void {$this->ID = $ID;}
@@ -191,12 +192,24 @@ class EOrdine
 
     public function getIDLuogo() : float {return $this->IDLuogo;}
 
-    public function toString() : String {
+    public function CalcolaPrezzoTotale() : float
+    {
+        $PrezzoTotaleOrdine = 0;
+        foreach ($this->ProdottiOrdinati as $val)
+        {
+            $PrezzoTotaleOrdine = $PrezzoTotaleOrdine + $val->getPrezzo();
+        }
+        return $PrezzoTotaleOrdine;
+    }
+
+    public function toString() : String
+    {
 
         return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna();
     }
 
-    public function toString1() : String {
+    public function toString1() : String
+    {
 
         return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getNomeUtente()."\n".$this->IDLuogo;
     }
@@ -270,3 +283,18 @@ array_push($prodotti2, $bevanda2);
 $ordine->setProdottiOrdinati($prodotti2);
 
 print_r($ordine->getProdottiOrdinati());*/
+
+
+
+/*$prodotti4 = array();
+for ($i=1; $i<11; $i++)
+{
+    $oggetto = FProdotto::load($i);
+    array_push($prodotti4, $oggetto);
+}
+$giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
+$luogo = new ELuogo('vicovaro','RM','giuseppe mazzini','7');
+$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti4,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+
+$prezzoTotale = $ordine->CalcolaPrezzoTotale();
+print $prezzoTotale;*/
