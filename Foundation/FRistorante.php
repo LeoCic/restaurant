@@ -1,7 +1,6 @@
 <?php
-require_once 'ERistorante.php';
-require_once 'FProdotto.php';
-require 'EProdotto.php';
+require_once '../Indice.php';
+
 
 
 

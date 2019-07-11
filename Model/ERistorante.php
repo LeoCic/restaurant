@@ -1,9 +1,7 @@
 <?php
-require_once 'ELuogo.php';
-require_once 'EProdotto.php';
+require_once '../Indice.php';
 
 
- //vedere se mettere metoto aggiungi prodotto al catalogo
 
 
  abstract class  ERistorante{

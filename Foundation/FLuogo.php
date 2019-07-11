@@ -1,6 +1,5 @@
 <?php
-require_once 'ELuogo.php';
-require_once 'FDatabase.php';
+require_once '../Indice.php';
 //  query restituisce un oggetto se va a buon fine altrimenti falso su cui posso fare rowCount comunque (se false rida zero righe)
 //prima di richiamare la store e load dobbiamo richiamare l'exists
 // se le classe torna null facciamo un try catch (NEL CONTROLLORE)
