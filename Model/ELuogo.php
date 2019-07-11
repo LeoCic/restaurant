@@ -94,8 +94,8 @@ ELuogo {
 }
 /*prova get e set */
 
-$test=new ELuogo("Roma","RM","Germania","4");
-$test1= new ELuogo("2","Roma","RM","Germania","4");
+//$test=new ELuogo("Roma","RM","Germania","4");
+//$test1= new ELuogo("2","Roma","RM","Germania","4");
 //print $test->getIDLuogo();
 //test se getIDLuogo ritorna null, NON FUNZIONANTE
 /*$test=new ELuogo("Roma","RM","Germania","4");
