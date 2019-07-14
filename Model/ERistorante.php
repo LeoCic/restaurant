@@ -116,13 +116,13 @@ require_once '../Indice.php';
 
     public static function setAttive(array $Attive) :void
     {
-        self::$Attive[0] = $Attive[0];
-        self::$Attive[1] = $Attive[1];
+        self::$PromozioniAttive[0] = $Attive[0];
+        self::$PromozioniAttive[1] = $Attive[1];
     }
 
     public static function getAttive() : array // di bool
     {
-        return self::$Attive;
+        return self::$PromozioniAttive;
     }
 
     public static function setEntitaScontoBase(float $EntitaScontoBase) : void
@@ -214,8 +214,11 @@ require_once '../Indice.php';
         print ("giorni di apertura :");
         print_r(self::$Giorni_Di_Apertura);
         print"\n";
-        foreach (self::$CatalogoProdotti as $key => $value)
+
+   /*    foreach (self::$CatalogoProdotti as $key => $value)
             print "nome = "."$value->getNome()"."\t";
+   */
+
         print ("Promozioni attive :");
         print_r(self::$PromozioniAttive);
         print"\n";

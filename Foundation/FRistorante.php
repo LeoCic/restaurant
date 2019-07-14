@@ -47,8 +47,48 @@ abstract class FRistorante
 
               }
 
-            print_r(ERistorante::getCatalogoProdotti());
+       }
+
+       public static function loadRistorante(): void
+       {
+           $conn = FDataBase::Connect();
+           $sql = " SELECT * FROM Ristorante";
+           $riss = $conn->query($sql);
+           $ris = $riss->fetchAll();
+           if (count($ris) === 1){
+               FRistorante::loadCatalogoProdotti();
+               $sede =FLuogo::load( $ris[0]['IDLuogo']);
+               ERistorante::setSede($sede);
+               ERistorante::setCellulare($ris[0]['Cellulare']);
+               ERistorante::setNome($ris[0]['Nome']);
+               ERistorante::setTelefonoFisso($ris[0]['TelefonoFisso']);
+               ERistorante::setProprietario($ris[0]['Proprietario']);
+               ERistorante::setGiudizioComplessivo($ris[0]['GiudizioComplessivo']);
+               ERistorante::setStatoApertura($ris[0]['StatoApertura']);
+               ERistorante::setAvvisiAttivi($ris[0]['AvvisiAttivi']);
+               ERistorante::setChiusoStraordinario($ris[0]['ChiusoStraordinario']);
+               ERistorante::setEntitaScontoAPunti($ris[0]['EntitaScontoAPunti']);
+               ERistorante::setEntitaScontoBase($ris[0]['EntitaScontoBase']);
+               $giorni = explode("=", $ris[0]['GiorniDiApertura']);
+               for($i=0;$i<14;$i=$i+2) {
+                   $giorniDiApertura[$giorni[$i]] = $giorni[$i+1]; //crea l'array in un formato predefinito sul db
+               }
+               ERistorante::setGiorniDiApertura($giorniDiApertura);
+               $promozioni = explode("=", $ris[0]['PromozioniAttive']);
+               $promozioniAttive[0] = $promozioni[1];
+               $promozioniAttive[1] = $promozioni[3];
+               ERistorante::setPromozioniAttive($promozioniAttive);
+
+
+
+
+
+           }
        }
 
 }
-//FRistorante::loadCatalogoProdotti();
+
+/*
+ FRistorante::loadRistorante();
+print_r(ERistorante::getCatalogoProdotti());
+*/

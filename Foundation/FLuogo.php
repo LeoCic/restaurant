@@ -9,7 +9,7 @@ require_once '../Indice.php';
 //esegue anche ELUogo perchè?
 abstract class FLuogo
 {
-
+//perche non mettere la exist dentro la load?
     public static function load(float $id) : ELuogo
     {
         $conn = FDataBase::Connect();
