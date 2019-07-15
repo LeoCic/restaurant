@@ -106,3 +106,5 @@ abstract class FUtente
 /*if ($control== TRUE) $prova2 = FUtente::update($prova);
 echo $prova2;*/
 //echo FUtente::delete('giacpall');
+
+//FUtente::store($prova);
