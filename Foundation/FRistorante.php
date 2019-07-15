@@ -79,16 +79,34 @@ abstract class FRistorante
                $promozioniAttive[1] = $promozioni[3];
                ERistorante::setPromozioniAttive($promozioniAttive);
 
-
-
-
-
            }
        }
 
+       public static function calcolaGiudizioComplessivo() : float
+       {
+           $conn = FDataBase::Connect();
+           $sql = "SELECT AVG(Punteggio) FROM `Giudizio` ";
+           $riss = $conn->query($sql);
+           if ($riss->rowCount() == 1) {
+               $ris = $riss->fetchAll();
+               return $ris[0][0];
+           }
+
+       }
+       public static function storeGiudizioComplessivo() : bool
+       {
+           $giudizio = FRistorante::calcolaGiudizioComplessivo();
+           $conn = FDataBase::Connect();
+           $sql ="UPDATE Ristorante SET GiudizioComplessivo = '$giudizio' ";
+           $riss = $conn->query($sql);
+           if (is_bool($riss) )
+               return 0;
+           else if(is_object($riss))
+               return 1;
+       }
 }
 
-/*
- FRistorante::loadRistorante();
-print_r(ERistorante::getCatalogoProdotti());
-*/
+
+
+
+

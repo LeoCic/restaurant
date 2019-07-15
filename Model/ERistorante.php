@@ -2,8 +2,6 @@
 require_once '../Indice.php';
 
 
-
-
  abstract class  ERistorante{
     static private $Sede;
     static private $Cellulare;
@@ -185,6 +183,16 @@ require_once '../Indice.php';
         return self::$CatalogoProdotti;
     }
 
+    public static function getProdottiByCategoria(String $categoria) : array
+    {
+        $prodotti[] = array();
+        foreach (self::$CatalogoProdotti as $key => $val) {
+            if($val->getCategoria() === $categoria)
+                array_push($prodotti, $val);
+        }
+        return $prodotti;
+    }
+
     public static function setCatalogoProdotti(array $CatalogoProdotti): void
     {
         //se fosse composizione
@@ -233,9 +241,10 @@ require_once '../Indice.php';
 
 
 
+
+
 }
 //necessari per il test di alcuni get e set
-
 //setSede
 /*
  $luogo = new ELuogo("L'Aquila" , "AQ" , "germania" , "4");
