@@ -2,6 +2,7 @@
   <dictionary name="UTENTE">
     <words>
       <w>acqua</w>
+      <w>aggiungere</w>
       <w>alcool</w>
       <w>altro</w>
       <w>amaro</w>
@@ -10,16 +11,20 @@
       <w>calcola</w>
       <w>cibo</w>
       <w>citofonare</w>
+      <w>conferma</w>
       <w>contanti</w>
       <w>contenitore</w>
+      <w>controllo</w>
       <w>crudo</w>
       <w>datacon</w>
+      <w>errore</w>
       <w>fantastico</w>
       <w>gasolio</w>
       <w>gassata</w>
       <w>giorno</w>
       <w>indice</w>
       <w>minerali</w>
+      <w>mostra</w>
       <w>nuovo</w>
       <w>oggetto</w>
       <w>ordinati</w>
@@ -27,11 +32,14 @@
       <w>prodotti</w>
       <w>produzione</w>
       <w>propria</w>
+      <w>registrazione</w>
+      <w>richiamo</w>
       <w>sali</w>
       <w>spezie</w>
       <w>strtotime</w>
       <w>terzo</w>
       <w>tivoli</w>
+      <w>valori</w>
       <w>vicovaro</w>
       <w>xxxxxx</w>
       <w>yyyyy</w>
