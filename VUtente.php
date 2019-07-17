@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Indice.php';
+require_once 'ConfSmarty.php';
 
 class VUtente
 {
@@ -50,7 +50,8 @@ class VUtente
             }
             else
                 {
-                    $this->smarty->display('RegistrazioneUtente.html');//Aggiungere richiamo al template di errore
+                    $this->smarty->assign('erroreNomeUtente', 'Il Nome Utente scelto è già in uso');
+                    $this->smarty->display('RegistrazioneUtente.html');
                 }
         }
         else $this->valori['NomeUtente'] = "";
@@ -81,9 +82,16 @@ class VUtente
             }
             else
             {
-                $this->smarty->display('RegistrazioneUtente.html');//Aggiungere richiamo al template di errore
+                $this->smarty->assign('errorePassword', 'La password di conferma non corrisponde a quella inserita');
+                $this->smarty->display('RegistrazioneUtente.html');
             }
         }
         else $this->valori['ConfermaPassword'] = "";
+
+        return $this->valori;
     }
 }
+
+$test = new VUtente();
+$controllo = $test->ControlloFormRegistrazione();
+print_r($controllo);
