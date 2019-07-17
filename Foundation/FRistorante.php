@@ -9,7 +9,7 @@ require_once '../Indice.php';
 abstract class FRistorante
 {
 
-    public static function loadCatalogoProdotti()
+    public static function loadCatalogoProdotti() //torna un array multidimensione chiave valore
        {
            $conn = FDataBase::Connect();
            $sql = " SELECT * FROM Prodotto";
@@ -46,6 +46,7 @@ abstract class FRistorante
                   }
 
               }
+
 
        }
 
@@ -104,6 +105,14 @@ abstract class FRistorante
            else if(is_object($riss))
                return 1;
        }
+    public static function loadProdottiByCategoria(String $cat) : array
+    {
+        $conn = FDataBase::Connect();
+        $sql = " SELECT * FROM Prodotto WHERE Categoria = '$cat' ";
+        $riss = $conn->query($sql);
+        $ris = $riss->fetchAll();
+        return $ris;
+    }
 }
 
 
