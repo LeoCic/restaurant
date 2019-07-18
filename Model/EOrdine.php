@@ -201,7 +201,7 @@ class EOrdine
         $PrezzoTotaleOrdine = 0;
         foreach ($this->ProdottiOrdinati as $val)
         {
-            $PrezzoTotaleOrdine = $PrezzoTotaleOrdine + $val[0]->getPrezzo()*$val[1];
+            $PrezzoTotaleOrdine = $PrezzoTotaleOrdine + ($val[0]->getPrezzo())*($val[1]);
         }
         return $PrezzoTotaleOrdine;
     }
@@ -290,35 +290,46 @@ print_r($ordine->getProdottiOrdinati());*/
 
 
 
-/*$prodotti4 = array();
+/*$prodotti3 = array();
 for ($i=1; $i<11; $i++)
 {
     $oggetto = FProdotto::load($i);
-    array_push($prodotti4, $oggetto);
+    array_push($prodotti3, $oggetto);
 }
+
+$prodotti4 = array(array($prodotti3[0],3),
+                   array($prodotti3[1],2),
+                   array($prodotti3[2],1),
+                   array($prodotti3[3],5),
+                   array($prodotti3[4],2));
 $giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
 $luogo = new ELuogo('vicovaro','RM','giuseppe mazzini','7');
 $ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti4,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
 
+print $ordine->toString();
+print"\n";
+print"\n";
 $prezzoTotale = $ordine->getPrezzoTotale();
 print $prezzoTotale;*/
 
 
+
 /*$spaghetti = FProdotto::load(1);
+$gnocchi = FProdotto::load(3);
+$acqua = FProdotto::load(32);
 
 $ProdottiOrdinati = array
 (
-    array($spaghetti,22),
-    array($spaghetti,15)
+    array($spaghetti,2),
+    array($gnocchi,3),
+    array($acqua,5)
 );
 $contenitore = array();
 foreach ($ProdottiOrdinati as $val)
 {
-
-
     if($val[0]->getCategoria() === 'Bevande')
     {
-        $item = new EBevanda($val->getNome(), $val->getIDProdotto(), $val->getPrezzo(), $val->getDescrizione(), $val->getIngredienti(), $val->getBiologico(), $val->getCategoria(), $val->getGradoAlcolico(), $val->getGassato(), $val->getDisponibilita());
+        $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
         array_push($contenitore , $item);
     }
     else if($val[0]->getCategoria() != 'Bevande')
@@ -326,7 +337,6 @@ foreach ($ProdottiOrdinati as $val)
     $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
     array_push($contenitore , $item);
 }
-
 }
 
 print_r($contenitore);
