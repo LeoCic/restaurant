@@ -49,7 +49,8 @@ abstract class FOrdine
         $PuntiUsati = $ordine->getPuntiUsati();
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
-        $IDLuogo = $ordine->getIDLuogo();
+        $IDLuogo = $ordine->getLuogoConsegna()->getIDLuogo();
+        $ProdottiOrdinati = $ordine->getProdottiOrdinati();
 
         $conn = FDataBase::Connect();
         $sql = "INSERT INTO Ordine (`IDOrdine`, `DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `StatoOrdine`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES('$IDOrdine' , '".addslashes("$DataOrdinazione")."' , '".addslashes("$DataConsegna")."' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' , '" . addslashes("$StatoOrdine") . "' , '$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
@@ -59,6 +60,15 @@ abstract class FOrdine
         else if (is_object($riss))
             return 1;
 
+        foreach($ProdottiOrdinati as $val) {
+            print "ciao";
+            $sql1 = "INSERT INTO E_Composto_Da (`IDOrdine`, `IDProdotto`, `Quantita`) VALUES('$IDOrdine' , '$val[0]->getID()' , '$val[1]')";
+            $riss1 = $conn->query($sql1);
+            if (is_bool($riss1))
+                return 0;
+            else if (is_object($riss1))
+                return 1;
+        }
     }
 
     public static function update(EOrdine $ordine) : bool
@@ -116,7 +126,7 @@ $bevanda = new EBevanda('acqua',55,1,'gassata','acqua,sali minerali',1,'Bevande'
 array_push($prodotti, $bevanda);
 array_push($prodotti, $cibo);
 
-$ordine = new EOrdine(111,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,'contanti','ok',3,'486548654','massimo',3);
+$ordine = new EOrdine(122,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','massimo',$luogo,3,'33441234',$giudizio);
 FOrdine::store($ordine);*/
 
 //FOrdine::delete(111);
@@ -126,3 +136,34 @@ FOrdine::store($ordine);*/
 //$test->setPrezzoTotale(200);
 //FOrdine::update($test);
 //print $test->toString1();
+
+
+
+/*$prodotti3 = array();
+for ($i=1; $i<11; $i++)
+{
+    $oggetto = FProdotto::load($i);
+    array_push($prodotti3, $oggetto);
+}
+
+$prodotti4 = array(array($prodotti3[0],3),
+    array($prodotti3[1],2),
+    array($prodotti3[2],1),
+    array($prodotti3[3],5),
+    array($prodotti3[4],2));
+$giudizio = new EGiudizio('fantastico',44,'11-11-11 15:33:00',3,13);
+$luogo = new ELuogo('vicovaro','RM','giuseppe mazzini','7');
+$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti4,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+
+print $ordine->toString();
+print"\n";
+print"\n";
+$prezzoTotale = $ordine->getPrezzoTotale();
+print $prezzoTotale;*/
+/*print"\n";
+print"\n";
+$PRODOTTISCELTI = $ordine->getProdottiOrdinati();
+print_r($PRODOTTISCELTI);*/
+
+
+//FOrdine::store($ordine);
