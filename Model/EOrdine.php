@@ -61,7 +61,7 @@ class EOrdine
         $this->TipoPagamento = $TipoPagamento;
         $this->StatoOrdine = $StatoOrdine;
         $this->NomeUtente = $NomeUtente;
-        $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
+        $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getIDLuogo(), $LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
         $this->PuntiUsati = $PuntiUsati;
         $this->TelefonoConsegna = $TelefonoConsegna;
         $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getIDOrdine());
@@ -124,21 +124,24 @@ class EOrdine
 
     public function getProdottiOrdinati() : array
     {
-        $contenitore = array();
+        $prodotti = array('Oggetto' => array(), 'Quantita' => '');
         foreach ($this->ProdottiOrdinati as $val)
         {
             if($val[0]->getCategoria() === 'Bevande')
             {
                 $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
-                array_push($contenitore , $item);
+                $prodotti['Oggetto'][] = $item;
+                $prodotti[]['Quantita'] = $val[1];
             }
             else if($val[0]->getCategoria() != 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
-                array_push($contenitore , $item);
+                $prodotti['Oggetto'][] = $item;
+                $prodotti[]['Quantita'] = $val[1];
             }
+
         }
-        return $contenitore;
+        return $prodotti;
     }
 
     public function setProdottiOrdinati(array $ProdottiOrdinati) : void
@@ -149,12 +152,12 @@ class EOrdine
             if($val->getCategoria() === 'Bevande')
             {
                 $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
-                array_push($contenitore , $item);
+                array_push($contenitore , $item, $val[1]);
             }
             else if($val->getCategoria() != 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
-                array_push($contenitore , $item);
+                array_push($contenitore , $item, $val[1]);
             }
         }
         $this->ProdottiOrdinati = $contenitore;
@@ -174,12 +177,12 @@ class EOrdine
 
     public function getLuogoConsegna() : ELuogo
     {
-        return new ELuogo ($this->LuogoConsegna->getComune(), $this->LuogoConsegna->getProvincia(), $this->LuogoConsegna->getVia(), $this->LuogoConsegna->getN_Civico());
+        return new ELuogo ($this->LuogoConsegna->getIDLuogo(), $this->LuogoConsegna->getComune(), $this->LuogoConsegna->getProvincia(), $this->LuogoConsegna->getVia(), $this->LuogoConsegna->getN_Civico());
     }
 
     public function setLuogoConsegna(ELuogo $LuogoConsegna) : void
     {
-        $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
+        $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getIDLuogo(), $LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
     }
 
     public function getPuntiUsati() : int {return $this->PuntiUsati;}
