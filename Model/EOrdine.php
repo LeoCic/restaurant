@@ -167,6 +167,27 @@ class EOrdine
         $this->ProdottiOrdinati = $contenitore;
     }
 
+    public function addSingoloProdotto(EProdotto $prodotto, int $quantita) : void
+    {
+        $array1 = array();
+        if($prodotto->getCategoria() === 'Bevande')
+        {
+            $item = new EBevanda($prodotto->getNome(), $prodotto->getIDProdotto(), $prodotto->getPrezzo(), $prodotto->getDescrizione(), $prodotto->getIngredienti(), $prodotto->getBiologico(), $prodotto->getCategoria(), $prodotto->getGradoAlcolico(), $prodotto->getGassato(), $prodotto->getDisponibilita());
+            array_push($array1, $item, $quantita);
+            array_push($this->ProdottiOrdinati, $array1);
+            array_pop($array1);
+            array_pop($array1);
+        }
+        if($prodotto->getCategoria() != 'Bevande')
+        {
+            $item = new ECibo($prodotto->getNome(), $prodotto->getIDProdotto(), $prodotto->getPrezzo(), $prodotto->getDescrizione(), $prodotto->getIngredienti(), $prodotto->getBiologico(), $prodotto->getCategoria(), $prodotto->getCongelato(), $prodotto->getVegano(), $prodotto->getGlutine(), $prodotto->getIntegrale());
+            array_push($array1, $item, $quantita);
+            array_push($this->ProdottiOrdinati, $array1);
+            array_pop($array1);
+            array_pop($array1);
+        }
+    }
+
     public function getTipoPagamento() : String {return $this->TipoPagamento;}
 
     public function setTipoPagamento(String $TipoPagamento) : void {$this->TipoPagamento = $TipoPagamento;}

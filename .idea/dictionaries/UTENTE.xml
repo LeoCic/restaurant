@@ -6,8 +6,10 @@
       <w>alcool</w>
       <w>altro</w>
       <w>amaro</w>
+      <w>baratto</w>
       <w>bevanda</w>
       <w>bevande</w>
+      <w>bussare</w>
       <w>calcola</w>
       <w>carrello</w>
       <w>cibo</w>
@@ -32,12 +34,15 @@
       <w>htdocs</w>
       <w>indice</w>
       <w>inserita</w>
+      <w>interno</w>
       <w>lista</w>
       <w>lunedì</w>
       <w>martedì</w>
+      <w>mazzeta</w>
       <w>mercoledì</w>
       <w>minerali</w>
       <w>mostra</w>
+      <w>natura</w>
       <w>nuovo</w>
       <w>oggetto</w>
       <w>ordinati</w>
@@ -54,6 +59,7 @@
       <w>sabato</w>
       <w>sali</w>
       <w>scelto</w>
+      <w>singolo</w>
       <w>spalmabile</w>
       <w>spezie</w>
       <w>strtotime</w>
