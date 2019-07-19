@@ -124,24 +124,28 @@ class EOrdine
 
     public function getProdottiOrdinati() : array
     {
-        $prodotti = array('Oggetto' => array(), 'Quantita' => '');
+        $array1 = array();
+        $array2 = array();
         foreach ($this->ProdottiOrdinati as $val)
         {
             if($val[0]->getCategoria() === 'Bevande')
             {
                 $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
-                $prodotti['Oggetto'][] = $item;
-                $prodotti[]['Quantita'] = $val[1];
+                array_push($array1, $item, $val[1]);
+                array_push($array2, $array1);
+                array_pop($array1);
+                array_pop($array1);
             }
             else if($val[0]->getCategoria() != 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
-                $prodotti['Oggetto'][] = $item;
-                $prodotti[]['Quantita'] = $val[1];
+                array_push($array1, $item, $val[1]);
+                array_push($array2, $array1);
+                array_pop($array1);
+                array_pop($array1);
             }
-
         }
-        return $prodotti;
+        return $array2;
     }
 
     public function setProdottiOrdinati(array $ProdottiOrdinati) : void
