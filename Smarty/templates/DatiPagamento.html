@@ -1,0 +1,114 @@
+	    <!DOCTYPE html>
+	    <html>
+	        <head><title>Dati Pagamento</title>
+	        		      <meta charset="utf-8">
+	      <meta name="viewport" content="width=device-width, initial-scale=1">
+	      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	      <link rel="stylesheet" href="../css/theme.css" type="text/css">
+	      <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	    </head>
+	<body>
+		<div class="container-fluid">
+<div class="row margin10" >
+        <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-xs-12 ">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center" >
+                    <h3 class="panel-title ">
+                        Dettagli pagamento
+                    </h3>
+                    
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="elebora_form.php">
+                    <div class="form-group">
+                        <label for="cardNumber">
+                            NUMERO CARTA</label>
+                        <div class="input-group">
+                            <input type="text" title="da 13 a 16 numeri" 	" class="form-control" id="cardNumber" placeholder="Numero di carta valido"
+                                required autofocus />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-7 ">
+                            <div class="form-group">
+                                <label for="expityMonth">
+                                   DATA SCADENZA</label>
+                                <div class="col-xs-12 col-lg-6 pl-ziro col-sm-5">
+                                    <select  class="form-control" id="expityMonth" placeholder="MM" required />
+                                    <option selected disabled>AA</option>
+                                                            {for $qt=1 to 12}
+                          <option>{$qt}</option>
+                          {/for}
+                      </select>
+                                </div>
+                                <div class="col-xs-12 col-lg-6 pl-ziro col-sm-5">
+                                    <select  class="form-control" id="expityYear" placeholder="AA" required />
+                                    <option selected disabled>MM</option>
+                                                            {for $qt=19 to 99}
+                          <option>{$qt}</option>
+                          {/for}
+                      </select>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-5 pull-right">
+                            <div class="form-group">
+                                <label for="cvCode">
+                                    CVV </label>
+                                <input pattern="[0-9]{literal}{3}{/literal}" title="3 numeri" type="password" class="form-control" id="cvCode" placeholder="CVV" required />
+                            </div>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <ul class="nav nav-pills nav-stacked col-12" >
+                <li class="active col-12" style="padding: 0;"><a href="#"><span class="badge pull-right "><span class="glyphicon glyphicon-euro"></span>{$Totale}</span> Totale</a>
+                </li>
+            </ul>
+            <br/>
+            <input class="btn btn-success btn-lg btn-block col-12" type="submit" value="Paga ora">
+        </div>
+    </div> 
+</form>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+			<div class="row">
+			<div class="col-10" style="margin-top: 50px">
+	              <div class="table-responsive offset-1" >
+	                <table class="table">
+	                  <tr>
+	                    <td><h5 class="card-title"><b>Informazioni generali</b></h5>
+	                <p class="card-text d-flex flex-grow-1" contenteditable="false">Sede: {$sede}<br>Cellulare: {$cellulare}<br>Telefono fisso: {$telefono_fisso}</p></td>
+	                  <td >
+	                   <b> Giorni di apertura:</b>{section name=nr loop=$giorni_apertura} <br>{$giorni_apertura[nr]}{/section}
+	                  </td>
+	                  <td>
+	                                     Aperto ora: {$stato_apertura}<br>Proprietario: {$nome_proprietario}<br> Giudizio complessivo: {$giudizio_complessivo} </p>
+	                  </td>
+	                    </tr> 
+	                     </table>
+	                              </div>
+	            </div>
+					</div>
+		</div>
+	</body>
+	</html>

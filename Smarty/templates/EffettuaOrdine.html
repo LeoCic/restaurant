@@ -1,0 +1,207 @@
+    <!DOCTYPE html>
+    <html>
+  <style>
+
+</style>
+    <head><title>Effettua Ordine</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+
+
+
+
+        <link rel="stylesheet" href="../css/theme.css" type="text/css">
+    </head>
+
+    <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">  
+    <div class="container-fluid">
+<div class="col-md-12" >
+                  <div class="row margin10">
+            <div class="col-lg-11 col-md-10" style="text-align: center" ><b>Il Ristorante</b></div>
+
+            <div class="col-lg-1 col-md-1" >
+                  <div class="container">
+      <div class="row">
+        <div class="col-md-12" >
+          <div class="btn-group" id="profile-button" >
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Profilo </button>
+            <div class="dropdown-menu"> <a class="dropdown-item" href="#">Account</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>    </div>
+
+              
+
+            </div>
+
+          </div>
+     <form method="post" action="elabora_form.php">
+
+
+    <div class="row" >
+      <div class="col-lg-1 col-md-2 col-xs-12 col-sm-12" >
+        <nav  id="myScrollspy"  >
+        <ul class="nav nav-pills nav-stacked list-group" id="menu" style="float:left;">
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Antipasti">Antipasti</a> </li>
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Primi">Primi</a></li>
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Secondi">Secondi</a> </li></li>
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Contorni">Contorni</a> </li> </li>
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Pizze">Pizze</a> </li> </li>
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Dolci">Dolci</a> </li> </li>
+          <li class=" border-0 list-group-item d-flex justify-content-between align-items-center"> <a href="#Bevande">Bevande</a> </li> </li>
+        </ul>
+      </nav>
+      </div>
+    <div class="col-lg-8 col-md-10 col-xs-12 col-sm-12" style="">              
+          <div class="row">
+            <div class="col-md-12">
+
+              <div class="table-responsive">  
+                                  {section name=cat loop=$lista_categoria}
+
+                <table class="table table-bordered">
+                  <thead class="thead-dark">
+
+                    <tr>
+                      <th id="{$lista_categoria[cat]}">{$lista_categoria[cat]}</th>
+                      <th>€</th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                   
+                      <th>Q.ta</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+            {if $lista_categoria[cat] == 'Antipasti'}
+             {$lista_prodotti = $lista_antipasti}
+              {elseif $lista_categoria[cat] == 'Primi'}
+              {$lista_prodotti = $lista_primi}
+               {elseif $lista_categoria[cat] == 'Secondi'}
+              {$lista_prodotti = $lista_secondi}
+               {elseif $lista_categoria[cat] == 'Contorni'}
+              {$lista_prodotti = $lista_contorni}
+               {elseif $lista_categoria[cat] == 'Pizze'}
+              {$lista_prodotti = $lista_pizze}
+               {elseif $lista_categoria[cat] == 'Dolci'}
+              {$lista_prodotti = $lista_dolci}
+               {elseif $lista_categoria[cat] == 'Bevande'}
+              {$lista_prodotti = $lista_bevande}
+              {/if}
+
+
+                    {section name=nr loop=$lista_prodotti}
+                    <tr>
+                      <th>  <span   aria-label= "Descrizione: {$lista_prodotti[nr].Descrizione}
+Ingredienti:
+{$lista_prodotti[nr].Ingredienti}"><strong>{$lista_prodotti[nr].Nome}</strong></span></th>
+<td>{$lista_prodotti[nr].Prezzo} €</td>
+                      
+                      <td><img {if $lista_prodotti[nr].Glutine == 0} class =" disable-img" {/if} src="images/GlutenFree.svg" alt="HTML5 Icon" style="height:30px;"></td> 
+                     
+                      <td><img {if $lista_prodotti[nr].Integrale == 0} class =" disable-img" {/if} src="images/integrale.svg" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Biologico == 0} class =" disable-img" {/if} src="images/bio.png" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Vegano == 0} class =" disable-img" {/if} src="images/vegan.png" alt="HTML5 Icon" style="height:30px;"></td>
+
+                      <td>
+                        <select class="form-control"  name={$lista_prodotti[nr].IDProdotto}>
+                          <option></option>
+                          {for $qt=0 to 20}
+                          <option>{$qt}</option>
+                          {/for}
+                        </select>
+                      </td>
+                    </tr>
+                    {/section}
+                  </tbody>
+                </table>
+                 {/section}
+               
+              </div>
+            </div>
+          </div>
+           
+            </div>
+           
+            <div class="col-lg-3 offset-lg-0 col-md-10 offset-md-2 col-xs-12 col-sm-12" id="confirm-button">
+                    <div class="row">
+            <div class="col-md-12">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <font size="6"> <strong> Carrello</strong> </font> <span class="badge badge-primary badge-pill">
+
+                  {$elementi_totali_carrello}</span>
+                  
+            
+              </li>
+               <ul class="list-group flex-grow-0">
+                {if $elementi_totali_carrello == 0}
+                <li class="list-group-item d-flex justify-content-between align-items-center">Non hai elementi nel carrello. sci nu  poraccio</li>
+                {else}
+              {section name=nr loop=$prodotti_carrello} 
+
+                <li class="list-group-item d-flex justify-content-between align-items-center"> {$prodotti_carrello[nr]} <span class="badge badge-primary badge-pill">14</span>
+                </li> {/section}
+                {/if}
+              </ul>
+            </div>
+          </div>
+                    <div class="row margin10"  >
+                      <br>
+                    <div class="col-md-12" >
+                      <input class="btn btn-primary col-12" type="submit" value="Conferma Ordine">
+                         
+                    </div>
+                    </div> 
+
+          </div>
+        
+      </div>
+    </form> 
+
+              <div class="col-10" style="margin-top: 50px">
+              <div class="table-responsive offset-1" >
+                <table class="table">
+                  <tr>
+                    <td><h5 class="card-title"><b>Informazioni generali</b></h5>
+                <p class="card-text d-flex flex-grow-1" contenteditable="false">Sede: {$sede}<br>Cellulare: {$cellulare}<br>Telefono fisso: {$telefono_fisso}</td>
+                  <td >
+                   <b> Giorni di apertura:</b>{section name=nr loop=$giorni_apertura} <br>{$giorni_apertura[nr]}{/section}
+                  </td>
+                  <td>
+                                     Aperto ora: {$stato_apertura}<br>Proprietario: {$nome_proprietario}<br> Giudizio complessivo: {$giudizio_complessivo} </p>
+                  </td>
+                    </tr> 
+                     </table>
+
+
+<br><br>
+<br>
+<br>
+                              </div>
+            </div>
+
+
+
+
+    </div> 
+>
+  
+
+  <br><br><br><br><br><br><br><br><br>
+
+
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" style=""></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+     
+     
+    </body>
+
+    </html>
