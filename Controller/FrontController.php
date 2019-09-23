@@ -20,7 +20,7 @@ class FrontController
                 else if (count($param) == 3) $controller::$function($param[0], $param[1], $param[2]);
                 else $controller::$function();
             } else {
-                $smarty = ConfSmarty::configuration();
+                /*$smarty = ConfSmarty::configuration();
                 if (!CUtente::isLogged()) {
                     $smarty->assign('info', false);
                     $smarty->display('Homepage.tpl');
@@ -28,9 +28,9 @@ class FrontController
                     $smarty->assign('userlogged', $_SESSION['username']);
                     $smarty->assign('info', false);
                     $smarty->display('Homepage.tpl');
-                }
+                }*/
             }
-        }
+        }/*
         else{
             $smarty=ConfSmarty::configuration();
             if(!CUtente::isLogged()){$smarty->assign('info', false); $smarty->display('Homepage.tpl');}
@@ -39,6 +39,6 @@ class FrontController
                 $smarty->assign('info', false);
                 $smarty->display('Homepage.tpl');
             }
-        }
+        }*/
     }
 }
