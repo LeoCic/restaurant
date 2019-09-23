@@ -18,7 +18,7 @@ class FrontController
                 if (count($param) == 1) $controller::$function($param[0]);
                 else if (count($param) == 2) $controller::$function($param[0], $param[1]);
                 else if (count($param) == 3) $controller::$function($param[0], $param[1], $param[2]);
-                else $controller::$function();
+                else { print "pippo"; $controller::$function();}
             } else {
                 /*$smarty = ConfSmarty::configuration();
                 if (!CUtente::isLogged()) {
@@ -40,5 +40,10 @@ class FrontController
                 $smarty->display('Homepage.tpl');
             }
         }*/
+    }
+
+    public function prova()
+    {
+        echo ("ciao");
     }
 }
