@@ -38,3 +38,4 @@ require_once 'Model/ECibo.php';
  * Inclusione dei file contenuti nella cartella Controller
  */
 require_once 'Controller/FrontController.php';
+require_once 'Controller/COrdine.php';
