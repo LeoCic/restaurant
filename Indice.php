@@ -34,3 +34,7 @@ require_once 'Model/EUtente.php';
 require_once 'Model/EBevanda.php';
 require_once 'Model/ECibo.php';
 
+/**
+ * Inclusione dei file contenuti nella cartella Controller
+ */
+require_once 'Controller/FrontController.php';
