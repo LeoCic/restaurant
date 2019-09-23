@@ -111,10 +111,10 @@ abstract class FRistorante
         return $ris;
     }
 }
-/*
+
 FRistorante::loadRistorante();
 //print_R(ERistorante::getCatalogoProdotti());
-
+/*
 $a = ERistorante::getProdottiByCategoria("Primi");
 print_r($a);
 
