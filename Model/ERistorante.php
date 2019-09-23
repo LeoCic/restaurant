@@ -185,8 +185,8 @@ require_once 'Indice.php';
 
     public static function getProdottiByCategoria(String $categoria) : array
     {
-        $prodotti[] = array();
-        foreach (self::$CatalogoProdotti as $key => $val) {
+        $prodotti = array();
+        foreach (self::$CatalogoProdotti as $val) {
             if($val->getCategoria() === $categoria)
                 array_push($prodotti, $val);
         }

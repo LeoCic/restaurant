@@ -107,9 +107,21 @@ abstract class FRistorante
         $sql = " SELECT * FROM Prodotto WHERE Categoria = '$cat' ";
         $riss = $conn->query($sql);
         $ris = $riss->fetchAll();
+        print_r($ris);
         return $ris;
     }
 }
+
+FRistorante::loadRistorante();
+//print_R(ERistorante::getCatalogoProdotti());
+
+$a = ERistorante::getProdottiByCategoria("Primi");
+print_r($a);
+
+$a = FRistorante::loadProdottiByCategoria("Primi");
+print_r($a);
+
+//$a=FRistorante::loadProdottiByCategoria("Primi");
 
 
 
