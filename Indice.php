@@ -1,5 +1,19 @@
 <?php
 
+/**
+ * La funzione require_once non consente di includere più volte lo stesso file; in particolare,
+ * in caso di doppia inclusione, non consente di includere più volte lo stesso file.
+ * Mentre, in caso di file non trovato, genera un parse error che interrompe l'esecuzione dello script.
+ */
+
+/**
+ * Inclusione del file che permette  la configurazione di Smarty
+ */
+require_once 'ConfSmarty.php';
+
+/**
+ * Inclusione dei file contenuti nella cartella Foundation
+ */
 require_once 'Foundation/FOrdine.php';
 require_once 'Foundation/FLuogo.php';
 require_once 'Foundation/FGiudizio.php';
@@ -8,6 +22,9 @@ require_once 'Foundation/FRistorante.php';
 require_once 'Foundation/FUtente.php';
 require_once 'Foundation/FDatabase.php';
 
+/**
+ * Inclusione dei file contenuti nella cartella Model
+ */
 require_once 'Model/EOrdine.php';
 require_once 'Model/ELuogo.php';
 require_once 'Model/EGiudizio.php';
