@@ -1,6 +1,6 @@
 <?php
 
-require_once 'ConfSmarty.php';
+require_once 'Indice.php';
 
 class VUtente
 {

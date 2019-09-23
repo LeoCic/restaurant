@@ -1,5 +1,5 @@
 <?php
-require_once '../Indice.php';
+require_once 'Indice.php';
 
 
 //  query restituisce un oggetto se va a buon fine altrimenti falso su cui posso fare rowCount comunque (se false rida zero righe)

@@ -1,5 +1,5 @@
 <?php
-require_once '../Indice.php';
+require_once 'Indice.php';
 
 
  abstract class  ERistorante{
