@@ -103,11 +103,11 @@ Ingredienti:
 {$lista_prodotti[nr].Ingredienti}"><strong>{$lista_prodotti[nr].Nome}</strong></span></th>
 <td>{$lista_prodotti[nr].Prezzo} €</td>
                       
-                      <td><img {if $lista_prodotti[nr].Glutine == 0} class =" disable-img" {/if} src="images/GlutenFree.svg" alt="HTML5 Icon" style="height:30px;"></td> 
+                      <td><img {if $lista_prodotti[nr].Glutine == 0} class =" disable-img" {/if} src="GlutenFree.svg" alt="HTML5 Icon" style="height:30px;"></td>
                      
-                      <td><img {if $lista_prodotti[nr].Integrale == 0} class =" disable-img" {/if} src="images/integrale.svg" alt="HTML5 Icon" style="height:30px;"></td>
-                      <td><img {if $lista_prodotti[nr].Biologico == 0} class =" disable-img" {/if} src="images/bio.png" alt="HTML5 Icon" style="height:30px;"></td>
-                      <td><img {if $lista_prodotti[nr].Vegano == 0} class =" disable-img" {/if} src="images/vegan.png" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Integrale == 0} class =" disable-img" {/if} src="integrale.svg" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Biologico == 0} class =" disable-img" {/if} src="bio.png" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Vegano == 0} class =" disable-img" {/if} src="vegan.png" alt="HTML5 Icon" style="height:30px;"></td>
 
                       <td>
                         <select class="form-control"  name={$lista_prodotti[nr].IDProdotto}>
