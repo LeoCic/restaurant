@@ -40,7 +40,7 @@
             </div>
 
           </div>
-     <form method="post" action="elabora_form.php">
+     <form method="post" action="/restaurant/Ordine/EffettuaOrdine">
 
 
     <div class="row" >
@@ -105,9 +105,9 @@ Ingredienti:
                       
                       <td><img {if $lista_prodotti[nr].Glutine == 0} class =" disable-img" {/if} src="/restaurant/Smarty/images/GlutenFree.svg" alt="HTML5 Icon" style="height:30px;"></td>
                      
-                      <td><img {if $lista_prodotti[nr].Integrale == 0} class =" disable-img" {/if} src="integrale.svg" alt="HTML5 Icon" style="height:30px;"></td>
-                      <td><img {if $lista_prodotti[nr].Biologico == 0} class =" disable-img" {/if} src="bio.png" alt="HTML5 Icon" style="height:30px;"></td>
-                      <td><img {if $lista_prodotti[nr].Vegano == 0} class =" disable-img" {/if} src="vegan.png" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Integrale == 0} class =" disable-img" {/if} src="/restaurant/Smarty/images/integrale.svg" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Biologico == 0} class =" disable-img" {/if} src="/restaurant/Smarty/images/bio.png" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Vegano == 0} class =" disable-img" {/if} src="/restaurant/Smarty/images/vegan.png" alt="HTML5 Icon" style="height:30px;"></td>
 
                       <td>
                         <select class="form-control"  name={$lista_prodotti[nr].IDProdotto}>

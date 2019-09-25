@@ -16,7 +16,7 @@ class COrdine
 
     public function EffettuaOrdine()
     {
-
+print ("dasfesfda");
     }
 
 
