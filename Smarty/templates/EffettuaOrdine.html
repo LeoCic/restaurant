@@ -11,7 +11,7 @@
 
 
 
-        <link rel="stylesheet" href="../css/theme.css" type="text/css">
+        <link rel="stylesheet" href="/restaurant/Smarty/css/theme.css" type="text/css">
     </head>
 
     <body data-spy="scroll" data-target="#myScrollspy" data-offset="20">  
@@ -103,7 +103,7 @@ Ingredienti:
 {$lista_prodotti[nr].Ingredienti}"><strong>{$lista_prodotti[nr].Nome}</strong></span></th>
 <td>{$lista_prodotti[nr].Prezzo} €</td>
                       
-                      <td><img {if $lista_prodotti[nr].Glutine == 0} class =" disable-img" {/if} src="GlutenFree.svg" alt="HTML5 Icon" style="height:30px;"></td>
+                      <td><img {if $lista_prodotti[nr].Glutine == 0} class =" disable-img" {/if} src="/restaurant/Smarty/images/GlutenFree.svg" alt="HTML5 Icon" style="height:30px;"></td>
                      
                       <td><img {if $lista_prodotti[nr].Integrale == 0} class =" disable-img" {/if} src="integrale.svg" alt="HTML5 Icon" style="height:30px;"></td>
                       <td><img {if $lista_prodotti[nr].Biologico == 0} class =" disable-img" {/if} src="bio.png" alt="HTML5 Icon" style="height:30px;"></td>

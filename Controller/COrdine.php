@@ -34,7 +34,6 @@ class COrdine
         $bevande = FRistorante::loadProdottiByCategoria("Bevande");
 
         $cate = array('Antipasti','Primi','Secondi','Contorni','Pizze','Dolci','Bevande');
-
         $view->MostraListaProdotti($antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate);
     }
 }

@@ -107,7 +107,6 @@ abstract class FRistorante
         $sql = " SELECT * FROM Prodotto WHERE Categoria = '$cat' ";
         $riss = $conn->query($sql);
         $ris = $riss->fetchAll();
-        print_r($ris);
         return $ris;
     }
 }
