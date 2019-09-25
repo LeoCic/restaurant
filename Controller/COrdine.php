@@ -7,8 +7,7 @@ class COrdine
 
     public function prova()
     {
-        print "pippo";
-        $smarty = new Smarty();
-        $smarty->display('DatiPagamento.html');
+        $smarty = ConfSmarty::configuration();
+        $smarty->display('RegistrazioneUtente.html');
     }
 }

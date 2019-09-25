@@ -1,6 +1,5 @@
 <?php
 
-print ("prova");
 require_once 'Indice.php';
 
 $fcontroller=new FrontController();

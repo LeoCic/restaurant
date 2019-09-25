@@ -44,6 +44,7 @@ class FrontController
 
     public function prova()
     {
-        echo ("ciao");
+        $Cordine = new COrdine();
+        $Cordine->prova();
     }
 }
