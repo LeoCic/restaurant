@@ -22,6 +22,12 @@ class VUtente
         );
     }
 
+    public function EffettuaLogin()
+    {
+
+    }
+
+
     public function MostraFormRegistrazione()
     {
         $this->smarty->assign('valori', $this->valori);
