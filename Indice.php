@@ -39,8 +39,10 @@ require_once 'Model/ECibo.php';
  */
 require_once 'Controller/FrontController.php';
 require_once 'Controller/COrdine.php';
+require_once 'Controller/CUtente.php';
 
 /**
  * Inclusione dei file contenuti nella cartella View
  */
 require_once 'View/VOrdine.php';
+require_once 'View/VUtente.php';

@@ -29,13 +29,6 @@ class VOrdine
         $this->smarty->assign('lista_categoria',$cate);
 
 
-
-
-
-
-
-
-
         $prova = 'palla';
         $prova2 = 'palla2';
         $array_giorni = array('Lunedì: 08:00-17:00', 'Martedì: 09:30-19:40', 'Mercoledì: 09:30-19:40', 'Giovedì: 09:30-19:40',  'Venerdì: 09:30-19:40', 'Sabato: 09:30-19:40',  'Domenica: Chiuso');
@@ -57,10 +50,13 @@ class VOrdine
       //  $this->smarty->assign('Totale',99);
 
 
-
-
-
-
         $this->smarty->display('EffettuaOrdine.html');
+    }
+
+    public function prova($prova)
+    {
+        $this->smarty->assign('nome_proprietario', $prova);
+        $this->smarty->display('EffettuaOrdine.html');
+
     }
 }

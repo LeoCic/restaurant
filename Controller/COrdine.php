@@ -5,24 +5,25 @@ require_once 'Indice.php';
 class COrdine
 {
 
-    public function prova()
-    {
-        $smarty = ConfSmarty::configuration();
-
-        $smarty->assign('sede', 'Via Michelangelo');
-        $smarty->display('EffettuaOrdine.html');
-
-    }
 
     public function EffettuaOrdine()
     {
-print ("dasfesfda");
+        session_start();
+        $view = new VOrdine();
+        $passato = $_SESSION['Mario'];
+        //$view->prova($passato);
+        print($passato);
+
+
+
+
     }
 
 
     public function MostraListaProdotti()
 
     {
+        session_start();
         $view = new VOrdine();
 
         $antipasti = FRistorante::loadProdottiByCategoria("Antipasti");
@@ -35,5 +36,11 @@ print ("dasfesfda");
 
         $cate = array('Antipasti','Primi','Secondi','Contorni','Pizze','Dolci','Bevande');
         $view->MostraListaProdotti($antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate);
+        print_r($_SERVER['REQUEST_URI']);
+        $Mario = 'Mario';
+        $_SESSION['Mario'] = $Mario;
+
+        //print_r($_SERVER);
+        print_r($_SESSION);
     }
 }
