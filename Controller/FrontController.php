@@ -30,21 +30,17 @@ class FrontController
                     $smarty->display('Homepage.tpl');
                 }*/
             }
-        }/*
+        }
         else{
             $smarty=ConfSmarty::configuration();
-            if(!CUtente::isLogged()){$smarty->assign('info', false); $smarty->display('Homepage.tpl');}
+            if(!CUtente::isLogged()){$smarty->assign('logged', false); $smarty->display('Homepage.html');}
             else{
-                $smarty->assign('userlogged',$_SESSION['username']);
-                $smarty->assign('info', false);
-                $smarty->display('Homepage.tpl');
+               // $smarty->assign('userlogged',$_SESSION['username']);
+                $smarty->assign('logged', true);
+                $smarty->display('Homepage.html');
             }
-        }*/
+        }
     }
 
-    public function prova()
-    {
-        $Cordine = new COrdine();
-        $Cordine->prova();
-    }
+
 }

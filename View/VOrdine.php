@@ -40,11 +40,12 @@ class VOrdine
        // $this->smarty->assign('nome_proprietario','Giacomo');
         $this->smarty->assign('nome_proprietario','Giacomo');
         $this->smarty->assign('giudizio_complessivo',4.3);
+        //da prendere
         $this->smarty->assign('giorni_apertura',$array_giorni);
-        $this->smarty->assign('prova',$prova);
+
         $this->smarty->assign('stato_apertura','SI');
-        $this->smarty->assign('prova2',$prova2);
         $this->smarty->assign('prezzoTotale',10);
+        //da vedere
         $this->smarty->assign('quant',3);
         $this->smarty->assign('puntiDisponibili',3422);
       //  $this->smarty->assign('Totale',99);

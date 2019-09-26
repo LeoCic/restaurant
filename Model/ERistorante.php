@@ -33,7 +33,7 @@ require_once 'Indice.php';
         self::$Cellulare = $Cellulare;
     }
 
-    public static function getCellulare() : voif
+    public static function getCellulare() : string
     {
         return self::$Cellulare;
     }

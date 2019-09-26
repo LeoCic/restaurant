@@ -14,9 +14,6 @@ class COrdine
         //$view->prova($passato);
         print($passato);
 
-
-
-
     }
 
 
@@ -43,4 +40,17 @@ class COrdine
         //print_r($_SERVER);
         print_r($_SESSION);
     }
+
+    public function InfoRistorante()
+    {
+        FRistorante::loadRistorante();
+        $sede = ERistorante::getSede();
+       $cellulare = ERistorante::getCellulare();
+       $telefono_fisso = ERistorante::getTelefonoFisso();
+       $nome_proprietario = ERistorante::getProprietario();
+       $giudizio_complessivo = ERistorante::getGiudizioComplessivo();
+       $stato_apertura = ERistorante::getStatoApertura();
+
+    }
+
 }
