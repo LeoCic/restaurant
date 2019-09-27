@@ -97,7 +97,8 @@ class VUtente
         return $this->valori;
     }
 }
-
+/*
 $test = new VUtente();
 $controllo = $test->ControlloFormRegistrazione();
 print_r($controllo);
+*/
