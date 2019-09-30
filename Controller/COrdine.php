@@ -60,6 +60,10 @@ class COrdine
        $nome_proprietario = ERistorante::getProprietario();
        $giudizio_complessivo = ERistorante::getGiudizioComplessivo();
        $stato_apertura = ERistorante::getStatoApertura();
+       if ($stato_apertura == true)
+           $stato_apertura = "SI";
+       else
+           $stato_apertura = "NO";
         $view = new VOrdine();
         $smarty = $view->InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura   );
          return $smarty;
