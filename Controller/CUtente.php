@@ -1,5 +1,4 @@
 <?php
-
 require_once 'Indice.php';
 
 class CUtente
@@ -19,29 +18,36 @@ class CUtente
         }
     }
 
-    static function Login()
+    public function Login()
     {
         if($_SERVER['REQUEST_METHOD']=="POST")
         {
-            if(static::isLogged()) header('Location: /restaurant/Homepage');
-            else
-            {
-                $username = $_POST['username'];
-                $password = $_POST['password'];
-                $validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
-                if($validato === 1)
+            //if(static::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
+          // else
+
+            $validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
+//momentaneamente senza cripto password
+            //$validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
+                if($validato == true)
                 {
                     $controller = new COrdine();
-                    $controller->MostraListaProdotti();
+                     $controller->MostraListaProdotti();
                 }
-                else header('Location: /restaurant/Homepage');
-            }
+
+                else {
+                    $msg="user o pass errati";
+                    print ("$msg");
+                    header("Refresh:2; URL=/restaurant/Homepage");
+                  //  header('Location: /restaurant/Homepage');
+                }
+
         }
-        else
+        /*else
         {
             header('HTTP/1.1 405 Method Not Allowed');
             header('Allow: POST');
         }
+        */
     }
 
     /** Metodo che provvede alla rimozione delle variabili di sessione, alla sua distruzione e a rinviare alla homepage  */

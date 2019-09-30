@@ -44,14 +44,14 @@
                             <div class="btn-group" id ="login-button">
                                 <button  class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Login </button>
                                 <div id="drop_menu" class="dropdown-menu"   style="margin-right: 50px; ">
-                                    <form class="p-3" method="post" action="/restaurant/Utente/Login" >
+                                    <form method="post" action="/restaurant/Utente/Login" class="p-3" >
                                         <div class="form-group" >
                                             <label for="exampleDropdownFormEmail1">Email address</label>
-                                            <input name="username" type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com">
+                                            <input type="text"  name="username" class="form-control" id="exampleDropdownFormEmail1" placeholder="email@example.com" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleDropdownFormPassword1">Password</label>
-                                            <input name="password" type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
+                                            <input type="password" name="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password" required>
                                         </div>
                                         <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="dropdownCheck">

@@ -9,6 +9,7 @@ class FrontController
         $request = preg_split("#[][&?/]#", $url);
         $controller = "C" . $request[2];
         if (class_exists($controller)) {
+
             $function = $request[3];
             if (method_exists($controller, $function)) {
                 $param = array();
@@ -25,6 +26,7 @@ class FrontController
                 $smarty = $controllore->InfoRistorante();
                 if(!CUtente::isLogged()){$smarty->assign('logged', false); $smarty->display('Homepage.html');}
                 else{
+
                     // $smarty->assign('userlogged',$_SESSION['username']);
                     $smarty->assign('logged', true);
 
@@ -35,6 +37,7 @@ class FrontController
             }
         }
         else{
+
             $smarty=ConfSmarty::configuration();
             $controllore = new COrdine();
             $smarty = $controllore->InfoRistorante();
@@ -42,7 +45,6 @@ class FrontController
             else{
                // $smarty->assign('userlogged',$_SESSION['username']);
                 $smarty->assign('logged', true);
-
                 $smarty->display('Homepage.html');
             }
         }
