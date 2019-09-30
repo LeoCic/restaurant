@@ -43,13 +43,18 @@
   #menu {position: fixed !important;}
 #confirm-button {position: fixed !important;right: 0px; margin-top: 20px;}
   #profile-button{position: fixed !important; z-index: 10;}
+  #login-button{position: fixed !important; z-index: 10;}
 
   }
   @media screen and (max-width: 650px) {
-    span[aria-label]:hover:after {visibility: hidden !important;
+    span[aria-label]:hover:after {visibility: hidden !important;}
+      #glutine{ display: none !important;}
+    }
+    @media screen and ( max-width: 900px ) {
+      #drop_menu{}
 
-    } 
-}
+    }
+
 /*adding margin-bottom to header*/
 .margin10 {
   margin: 10px;
