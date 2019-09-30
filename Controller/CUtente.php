@@ -6,6 +6,7 @@ class CUtente
 {
 
     /**Metodo che verifica se l'utente è loggato */
+    //funziona
     static function isLogged()
     {
         if (session_status() == PHP_SESSION_NONE) {

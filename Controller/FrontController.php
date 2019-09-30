@@ -20,23 +20,29 @@ class FrontController
                 else if (count($param) == 3) $controller::$function($param[0], $param[1], $param[2]);
                 else { $controller::$function();}
             } else {
-                /*$smarty = ConfSmarty::configuration();
-                if (!CUtente::isLogged()) {
-                    $smarty->assign('info', false);
-                    $smarty->display('Homepage.tpl');
-                } else {
-                    $smarty->assign('userlogged', $_SESSION['username']);
-                    $smarty->assign('info', false);
-                    $smarty->display('Homepage.tpl');
-                }*/
+                $smarty=ConfSmarty::configuration();
+                $controllore = new COrdine();
+                $smarty = $controllore->InfoRistorante();
+                if(!CUtente::isLogged()){$smarty->assign('logged', false); $smarty->display('Homepage.html');}
+                else{
+                    // $smarty->assign('userlogged',$_SESSION['username']);
+                    $smarty->assign('logged', true);
+
+                    $smarty->display('Homepage.html');
+                }
+
+
             }
         }
         else{
             $smarty=ConfSmarty::configuration();
+            $controllore = new COrdine();
+            $smarty = $controllore->InfoRistorante();
             if(!CUtente::isLogged()){$smarty->assign('logged', false); $smarty->display('Homepage.html');}
             else{
                // $smarty->assign('userlogged',$_SESSION['username']);
                 $smarty->assign('logged', true);
+
                 $smarty->display('Homepage.html');
             }
         }

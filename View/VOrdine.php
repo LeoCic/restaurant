@@ -30,13 +30,10 @@ class VOrdine
         $this->smarty->assign('lista_categoria',$cate);
 
 
-        $array_giorni = array('Lunedì: 08:00-17:00', 'Martedì: 09:30-19:40', 'Mercoledì: 09:30-19:40', 'Giovedì: 09:30-19:40',  'Venerdì: 09:30-19:40', 'Sabato: 09:30-19:40',  'Domenica: Chiuso');
 
         $this->smarty->assign('elementi_totali_carrello',0);
 
         //da prendere
-        $this->smarty->assign('giorni_apertura',$array_giorni);
-
         $this->smarty->assign('prezzoTotale',10);
         $this->smarty->assign('quant',3);
         $this->smarty->assign('puntiDisponibili',3422);
@@ -54,14 +51,16 @@ class VOrdine
 
     }
 
-    public function InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura )
+    public function InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura ,  $array_giorni)
     {
+        $this->smarty->assign('giorni_apertura',$array_giorni);
         $this->smarty->assign('sede',$sede);
         $this->smarty->assign('cellulare',$cellulare);
         $this->smarty->assign('telefono_fisso',$telefono_fisso);
         $this->smarty->assign('nome_proprietario',$nome_proprietario);
         $this->smarty->assign('giudizio_complessivo',$giudizio_complessivo);
         $this->smarty->assign('stato_apertura',$stato_apertura);
+
         return $this->smarty;
 
     }

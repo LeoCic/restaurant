@@ -52,6 +52,7 @@ class COrdine
 
     public function InfoRistorante()
     {
+        //mancano giorni di apertura
         FRistorante::loadRistorante();
         $luogo = ERistorante::getSede();
         $sede = $luogo->getComune().","."Via"." ".$luogo->getVia()." ".$luogo->getN_Civico();
@@ -60,12 +61,14 @@ class COrdine
        $nome_proprietario = ERistorante::getProprietario();
        $giudizio_complessivo = ERistorante::getGiudizioComplessivo();
        $stato_apertura = ERistorante::getStatoApertura();
-       if ($stato_apertura == true)
+        $array_giorni = array('Lunedì: 08:00-17:00', 'Martedì: 09:30-19:40', 'Mercoledì: 09:30-19:40', 'Giovedì: 09:30-19:40',  'Venerdì: 09:30-19:40', 'Sabato: 09:30-19:40',  'Domenica: Chiuso');
+       // $giorni_di_apertura = ERistorante::getGiorniDiApertura();
+        if ($stato_apertura == true)
            $stato_apertura = "SI";
        else
            $stato_apertura = "NO";
         $view = new VOrdine();
-        $smarty = $view->InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura   );
+        $smarty = $view->InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura ,  $array_giorni   );
          return $smarty;
     }
 
