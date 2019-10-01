@@ -84,7 +84,7 @@ class CUtente
         else header('Location: /restaurant/Homepage');
     }
 
-    static function EnterIn($user)
+    /*static function EnterIn($user)
     {
         if(!isset($user))
         {
@@ -97,7 +97,7 @@ class CUtente
             }
             else { $view->MostraFormLogin(); }
         }
-    }
+    }*/
 
     static function Registrazione()
     {
