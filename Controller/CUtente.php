@@ -23,15 +23,18 @@ class CUtente
         if($_SERVER['REQUEST_METHOD']=="POST")
         {
             //if(static::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
-          // else
+            // else
 
             $validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
-//momentaneamente senza cripto password
+            //momentaneamente senza cripto password
             //$validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
-                if($validato == true)
+                if($validato === true)
                 {
+                    session_start();
+                    $_SESSION['username'] = $_POST['username'];
+                    $_SESSION['password'] = $_POST['password']; //forse non necessaria
                     $controller = new COrdine();
-                     $controller->MostraListaProdotti();
+                    $controller->MostraListaProdotti();
                 }
 
                 else {
