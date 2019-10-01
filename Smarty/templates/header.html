@@ -1,0 +1,70 @@
+ <!DOCTYPE html>
+    <html>
+    <head><title>{$title|default:"Il ristorante"}</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
+
+        <link rel="stylesheet" href="/restaurant/Smarty/css/theme.css" type="text/css">
+    </head>
+
+<body>
+
+	<div class="container-fluid">
+
+        <!--- intestazione-->
+        <div class="col-md-12" >
+            <div class="row margin10">
+                {if $logged == true}
+                <div class="col-lg-11 col-md-10" style="text-align: center" ><b>Il Ristorante</b></div>
+
+                <div class="col-lg-1 col-md-1" >
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" >
+                                <div class="btn-group" id="profile-button" >
+                                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Profilo </button>
+                                    <div class="dropdown-menu"> <a class="dropdown-item" href="#">Account</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/restaurant/Utente/Logout">Logout</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>    </div>
+                {else}
+                <div class="col-lg-10 col-md-9" style="text-align: center" ><b>Il Ristorante</b></div>
+
+                <div class="col-lg-2 col-md-2" >
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12" >
+                            <div class="btn-group" id ="login-button">
+                                <button  class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Login </button>
+                                <div id="drop_menu" class="dropdown-menu"   style="margin-right: 50px; ">
+                                    <form method="post" action="/restaurant/Utente/Login" class="p-3" >
+                                        <div class="form-group" >
+                                            <label for="exampleDropdownFormEmail1">Username</label>
+                                            <input type="text"  name="username" class="form-control" id="exampleDropdownFormEmail1" placeholder="Enter username" required>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleDropdownFormPassword1">Password</label>
+                                            <input type="password" name="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Enter password" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Sign in</button>
+                                    </form>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {/if}
+            </div>
+        </div>
