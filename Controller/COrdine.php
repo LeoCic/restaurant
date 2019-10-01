@@ -20,6 +20,7 @@ class COrdine
     public function MostraListaProdotti()
 
     {
+
         $view = new VOrdine();
 
         $antipasti = FRistorante::loadProdottiByCategoria("Antipasti");
@@ -37,6 +38,9 @@ class COrdine
         //in modo da mantenere le inforistorante
 
         $smarty = self::InfoRistorante();
+
+        if(!CUtente::isLogged())$smarty->assign('logged', false);
+        else $smarty->assign('logged', true);
         //passo smarty per tener conto anche delle info ristorante
         $view->MostraListaProdotti($smarty ,$antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate);
 
