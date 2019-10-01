@@ -20,7 +20,6 @@ class COrdine
     public function MostraListaProdotti()
 
     {
-        session_start();
         $view = new VOrdine();
 
         $antipasti = FRistorante::loadProdottiByCategoria("Antipasti");
@@ -41,13 +40,7 @@ class COrdine
         //passo smarty per tener conto anche delle info ristorante
         $view->MostraListaProdotti($smarty ,$antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate);
 
-        /*
-         * test sessisoni print_r($_SERVER['REQUEST_URI']);
-        $Mario = 'Mario';
-        $_SESSION['Mario'] = $Mario;
 
-        //print_r($_SERVER);
-        print_r($_SESSION);*/
     }
 
     public function InfoRistorante()
