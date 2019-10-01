@@ -84,21 +84,6 @@ class CUtente
         else header('Location: /restaurant/Homepage');
     }
 
-    /*static function EnterIn($user)
-    {
-        if(!isset($user))
-        {
-            $view = new VUtente();
-            if (FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT)) === 1) $user = FUtente::load($_POST['username']);
-            if($user!=null)
-            {
-                if (session_status() == PHP_SESSION_NONE) { session_start(); }
-                $_SESSION['username']=$user->getUserName();
-            }
-            else { $view->MostraFormLogin(); }
-        }
-    }*/
-
     static function Registrazione()
     {
         if($_SERVER['REQUEST_METHOD']=="POST")
