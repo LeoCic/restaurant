@@ -33,9 +33,7 @@ class CUtente
                     session_start();
                     $_SESSION['username'] = $_POST['username'];
                     $_SESSION['password'] = $_POST['password']; //forse non necessaria
-
-                    $controller = new COrdine();
-                    $controller->MostraListaProdotti();
+                    header("Location: /restaurant/Ordine/MostraListaProdotti");
                 }
 
                 else {
