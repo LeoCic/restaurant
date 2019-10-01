@@ -135,8 +135,7 @@ class EOrdine
                 array_push($array2, $array1);
                 array_pop($array1);
                 array_pop($array1);
-            }
-            else if($val[0]->getCategoria() != 'Bevande')
+            } else if ($val[0]->getCategoria() !== 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
                 array_push($array1, $item, $val[1]);
@@ -157,8 +156,7 @@ class EOrdine
             {
                 $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
                 array_push($contenitore , $item, $val[1]);
-            }
-            else if($val->getCategoria() != 'Bevande')
+            } else if ($val->getCategoria() !== 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
                 array_push($contenitore , $item, $val[1]);
@@ -178,7 +176,7 @@ class EOrdine
             array_pop($array1);
             array_pop($array1);
         }
-        if($prodotto->getCategoria() != 'Bevande')
+        if ($prodotto->getCategoria() !== 'Bevande')
         {
             $item = new ECibo($prodotto->getNome(), $prodotto->getIDProdotto(), $prodotto->getPrezzo(), $prodotto->getDescrizione(), $prodotto->getIngredienti(), $prodotto->getBiologico(), $prodotto->getCategoria(), $prodotto->getCongelato(), $prodotto->getVegano(), $prodotto->getGlutine(), $prodotto->getIntegrale());
             array_push($array1, $item, $quantita);

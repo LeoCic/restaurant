@@ -25,8 +25,7 @@ abstract class FRistorante
                           else {$prodotto = new EBevanda($val[0], $val[1], $val[2], $val[3], $val[4], $val[5], $val[6], $val[11], $val[12], $val[13]);}
                       }
                       ERistorante::setSingoloProdotto($prodotto);
-                   }
-                  else if ($ris[0][6] != 'Bevande')
+                   } else if ($ris[0][6] !== 'Bevande')
                   {
                       if($val[3] === NULL)
                       {

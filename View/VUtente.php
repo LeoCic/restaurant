@@ -50,7 +50,7 @@ class VUtente
 
         if (isset($_POST['NomeUtente']))
         {
-            if (FUtente::exists($_POST['NomeUtente']) != 1)
+            if (FUtente::exists($_POST['NomeUtente']) !== 1)
             {
                 $this->valori['NomeUtente'] = $_POST['NomeUtente'];
             }
