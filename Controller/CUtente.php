@@ -86,11 +86,38 @@ class CUtente
         else header('Location: /restaurant/Homepage');
     }
 
+    static function MostraFormRegistrazione()
+    {
+        $view = new VUtente();
+        $view->MostraFormRegistrazione();
+
+    }
+
     static function Registrazione()
     {
         if($_SERVER['REQUEST_METHOD']=="POST")
         {
-            if(CUtente::isLogged()) header('Location: /restaurant/Homepage');
+            if(CUtente::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
+            else
+                {
+                    $nome = $_POST['nome'];
+                    $cognome = $_POST['cognome'];
+                    $username = $_POST['username'];
+                    $telefono = $_POST['telefono'];
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+                    $conferma_password = $_POST['conferma_password'];
+                    if ($password != $conferma_password){
+                        $error = "Le password non coincidono";
+                        $view = new VUtente();
+                        $view->MostraFormConErrore($error);
+                      //  if(FUtente::exists($username) === true)
+
+                    }
+
+
+
+                }
         }
     }
 }
