@@ -1,43 +1,6 @@
-	    <!DOCTYPE html>
-	    <html>
-	  <style>
+{include file="header.html" title="Riepilogo Ordine"}
 
-	</style>
-	    <head><title>Riepilogo Ordine</title>
-	      <meta charset="utf-8">
-	      <meta name="viewport" content="width=device-width, initial-scale=1">
-	      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-
-
-
-
-            <link rel="stylesheet" href="/restaurant/Smarty/css/theme.css" type="text/css">
-	    </head>
-	<body>
-		<div class="container-fluid">
-
-			      <div class="col-md-12" >
-                  <div class="row margin10">
-            <div class="col-md-11" style="text-align: center" >Riepilogo Ordine</div>
-            <div class="col-md-1" >
-                  <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="btn-group" >
-            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"> Profilo </button>
-            <div class="dropdown-menu"> <a class="dropdown-item" href="#">Account</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Logout</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-            </div>
-          </div>	</div>
-
-
-          <div class = "row">
+<div class = "row">
       	
 
           <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12" >    
@@ -57,17 +20,15 @@
                   <tbody>
 
                     {section name=nr loop=$lista_prodotti}
-                    {foreach $lista_prodotti[nr] as $prodotto}
 
                     <tr>
-                      <th><strong>{$prodotto->getNome()}</strong> </th>
-                      <td >{$prodotto->getPrezzo() } </td>
+                      <th><strong>{$lista_prodotti[nr][0]->getNome()}</strong> </th>
+                      <td >{$lista_prodotti[nr][0]->getPrezzo() } </td>
                      <td >{$lista_prodotti[nr][1]} </td>
-                        {/foreach}
                     {/section}
                     </tr>
                                          <th>Prezzo totale</th>
-                                                              <th>{$prezzoTotale}</th>
+                                                              <th></th>
                   </tbody>
                 </table>               
                     </div> </div></div>

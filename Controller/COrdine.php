@@ -25,6 +25,8 @@ class COrdine
 
         $view = new VOrdine();
         $smarty = self::InfoRistorante();
+        if(!CUtente::isLogged())$smarty->assign('logged', false);
+        else $smarty->assign('logged', true);
         $punti = (FUtente::load($_SESSION['username']))->getPunti();
         $view->RiepilogoOrdine($smarty,$punti);
 
