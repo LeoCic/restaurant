@@ -22,9 +22,9 @@ class CUtente
             //if(static::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
             // else
 
-            //$validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
+            $validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
             //momentaneamente senza cripto password
-            $validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
+            //$validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
                 if($validato === true)
                 {
                     session_start();
@@ -36,8 +36,8 @@ class CUtente
                 else {
                     $msg="user o pass errati";
                     print ("$msg");
-                    print (password_hash($_POST['password'],PASSWORD_DEFAULT));
-                    //header("Refresh:2; URL=/restaurant/Homepage");
+                    //print (password_hash($_POST['password'],PASSWORD_DEFAULT));
+                    header("Refresh:2; URL=/restaurant/Homepage");
                   //  header('Location: /restaurant/Homepage');
                 }
 
