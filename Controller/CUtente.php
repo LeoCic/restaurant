@@ -23,8 +23,6 @@ class CUtente
             // else
 
             $validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
-            //momentaneamente senza cripto password
-            //$validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
                 if($validato === true)
                 {
                     session_start();
@@ -32,7 +30,6 @@ class CUtente
                     $_SESSION['password'] = $_POST['password']; //forse non necessaria
                     header("Location: /restaurant/Ordine/MostraListaProdotti");
                 }
-
                 else {
                     $msg="user o pass errati";
                     print ("$msg");
@@ -40,7 +37,6 @@ class CUtente
                     header("Refresh:2; URL=/restaurant/Homepage");
                   //  header('Location: /restaurant/Homepage');
                 }
-
         }
         else
         {

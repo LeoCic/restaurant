@@ -28,13 +28,13 @@ abstract class FUtente
        else return 0;
    }
 
-   public static function accountvalidation(String $id, String $password_hash) : bool
+    public static function accountvalidation(String $id, String $password): bool
    {
        $conn = FDataBase::Connect();
-       $sql = " SELECT * FROM Utente WHERE (NomeUtente='$id' AND Password='$password_hash') ";
+       $sql = " SELECT * FROM Utente WHERE (NomeUtente='$id') ";
        $riss = $conn->query($sql);
        $ris = $riss->fetchAll();
-       if (count($ris) === 1) return 1;
+       if ((count($ris) === 1) && (password_verify($password, $ris[0][5]) === TRUE)) return 1;
        else return 0;
    }
 
