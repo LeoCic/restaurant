@@ -57,11 +57,13 @@
                   <tbody>
 
                     {section name=nr loop=$lista_prodotti}
-                    <tr>
-                      <th><strong>{$lista_prodotti[nr].Nome}</strong> </th>
-                      <td >{$lista_prodotti[nr].Prezzo * $quant} </td>
-                     <td >{$quant} </td>
+                    {foreach $lista_prodotti[nr] as $prodotto}
 
+                    <tr>
+                      <th><strong>{$prodotto->getNome()}</strong> </th>
+                      <td >{$prodotto->getPrezzo() } </td>
+                     <td >{$lista_prodotti[nr][1]} </td>
+                        {/foreach}
                     {/section}
                     </tr>
                                          <th>Prezzo totale</th>
@@ -69,7 +71,7 @@
                   </tbody>
                 </table>               
                     </div> </div></div>
-          <div class="col-lg-4  col-md-12  col-xs-12 col-sm-12" >    
+          <div class="col-lg-4  col-md-12  col-xs-12 col-sm-12" >
 <div class="container">
   <form method="POST" action="elabora_form.php">
     

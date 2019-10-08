@@ -68,6 +68,10 @@ class VOrdine
     {
         $this->smarty = $smarty;
         $this->smarty->assign('puntiDisponibili',$punti);
+        $this->smarty->assign('lista_prodotti', $_SESSION['ordine_parziale']->getProdottiOrdinati());
+
+      // print_r($_SESSION['ordine_parziale']->getProdottiOrdinati());
         $this->smarty->display("riepilogo_ordine.html");
+
     }
 }

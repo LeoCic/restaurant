@@ -12,7 +12,7 @@ abstract class FUtente
         if ($riss->rowCount() === 1)
         {
             $ris = $riss->fetchAll();
-            $utente = new EUtente($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8]);
+            $utente = new EUtente($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0]['Punti']);
             return $utente;
         }
         else return null;

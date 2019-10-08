@@ -26,9 +26,7 @@ class COrdine
         $view = new VOrdine();
         $smarty = self::InfoRistorante();
         $punti = (FUtente::load($_SESSION['username']))->getPunti();
-        print($_SESSION['username']);
-        print ($punti);
-        //$view->RiepilogoOrdine($smarty,$punti);
+        $view->RiepilogoOrdine($smarty,$punti);
 
 
     }
