@@ -12,10 +12,7 @@ class CUtente
             session_start();
         }
         if(isset($_SESSION['username'])) return true;
-        else {
-            //if($_SERVER['REQUEST_URI']!="/restaurant/Utente/login") $_SESSION['redirect']=$_SERVER['REQUEST_URI'];
-            return false;
-        }
+        else {return false;}
     }
 
     public function Login()
@@ -25,9 +22,9 @@ class CUtente
             //if(static::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
             // else
 
-            $validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
+            //$validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
             //momentaneamente senza cripto password
-            //$validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
+            $validato = FUtente::accountvalidation($_POST['username'],password_hash($_POST['password'],PASSWORD_DEFAULT));
                 if($validato === true)
                 {
                     session_start();
@@ -39,7 +36,8 @@ class CUtente
                 else {
                     $msg="user o pass errati";
                     print ("$msg");
-                    header("Refresh:2; URL=/restaurant/Homepage");
+                    print (password_hash($_POST['password'],PASSWORD_DEFAULT));
+                    //header("Refresh:2; URL=/restaurant/Homepage");
                   //  header('Location: /restaurant/Homepage');
                 }
 
@@ -108,11 +106,28 @@ class CUtente
                     $password = $_POST['password'];
                     $conferma_password = $_POST['conferma_password'];
                     if ($password != $conferma_password){
+
                         $error = "Le password non coincidono";
                         $view = new VUtente();
                         $view->MostraFormConErrore($error);
-                      //  if(FUtente::exists($username) === true)
+                    }
+                    else if ($password === $conferma_password){
 
+                        if(FUtente::exists($username) === true){
+
+                            $error = "Username già presente";
+                            $view = new VUtente();
+                            $view->MostraFormConErrore($error);
+                        }
+
+                        else if (FUtente::exists($username) === false){
+
+                            $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password);
+                            FUtente::store($utente);
+                            session_start();
+                            $_SESSION['username'] = $username;
+                            header('Location: /restaurant/Ordine/MostraListaProdotti');
+                        }
                     }
 
 
