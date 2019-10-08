@@ -14,6 +14,9 @@ class EUtente
     private $OrdiniCumulati;
     private $DataUltimoOrdine;
 
+
+
+
     public function __construct(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password)
     {
         $this->Nome = $Nome;
@@ -23,7 +26,7 @@ class EUtente
         $this->Telefono = $Telefono;
         $this->Password = password_hash("$Password", PASSWORD_DEFAULT);
         $this->Punti = 0;
-        $this->OrdiniCumulati = 0;
+        $this->OrdiniCumulati = 0 ;
         $this->DataUltimoOrdine = null;
     }
 

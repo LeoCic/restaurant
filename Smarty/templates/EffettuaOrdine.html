@@ -4,6 +4,7 @@
 <form method="post" action="/restaurant/Ordine/EffettuaOrdine">
 
 
+
     <div class="row" >
       <div class="col-lg-1 col-md-2 col-xs-12 col-sm-12" >
         <nav  id="myScrollspy"  >
@@ -72,7 +73,6 @@ Ingredienti:
 
                       <td>
                         <select class="form-control"  name={$lista_prodotti[nr].IDProdotto}>
-                          <option></option>
                           {for $qt=0 to 20}
                           <option>{$qt}</option>
                           {/for}
@@ -115,8 +115,12 @@ Ingredienti:
                     <div class="row margin10"  >
                       <br>
                     <div class="col-md-12" >
+                        {if $logged == true}
                       <input class="btn btn-primary col-12" type="submit" value="Conferma Ordine">
-                         
+                         {else}
+                        <input class="btn btn-primary col-12" type="submit" value="Conferma Ordine" disabled>
+
+                        {/if}
                     </div>
                     </div> 
 

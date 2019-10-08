@@ -64,4 +64,10 @@ class VOrdine
         return $this->smarty;
 
     }
+    public function RiepilogoOrdine($smarty,$punti)
+    {
+        $this->smarty = $smarty;
+        $this->smarty->assign('puntiDisponibili',$punti);
+        $this->smarty->display("riepilogo_ordine.html");
+    }
 }
