@@ -19,7 +19,7 @@ class COrdine
             if($value != 0) {
                $prodotto = FProdotto::load($key);
                $ordine_parziale->addSingoloProdotto($prodotto, $value);
-               $prezzo = $prezzo + $prodotto->getPrezzo() * $value;
+               $prezzo = $ordine_parziale->getPrezzoTotale();
             }
         }
         session_start();
