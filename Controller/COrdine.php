@@ -12,16 +12,19 @@ class COrdine
         //creo array chiava valore con i soli valori di quantita diversi da zero
         $prodotti = array();
         $ordine_parziale = new EOrdine($prodotti);
+        $prezzo = 0;
 
         foreach ($_POST as  $key => $value)
         {
             if($value != 0) {
                $prodotto = FProdotto::load($key);
-           $ordine_parziale->addSingoloProdotto($prodotto, $value);
+               $ordine_parziale->addSingoloProdotto($prodotto, $value);
+               $prezzo = $prezzo + $prodotto->getPrezzo() * $value;
             }
         }
         session_start();
         $_SESSION['ordine_parziale'] = $ordine_parziale;
+        $_SESSION['prezzo_totale'] = $prezzo;
 
         $view = new VOrdine();
         $smarty = self::InfoRistorante();
