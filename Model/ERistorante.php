@@ -15,8 +15,8 @@ require_once 'Indice.php';
     static private $AvvisiAttivi;
     static private $ChiusoStraordinario;
     static private $PromozioniAttive = array(); //di bool
-    static private $EntitaScontoBase;
-    static private $EntitaScontoAPunti;
+     static private $EntitaScontoBase = 10;
+     static private $EntitaScontoAPunti = 1;
 
     public static function getSede(): ELuogo
     {
