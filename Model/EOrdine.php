@@ -37,7 +37,7 @@ class EOrdine
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i:s',"$DataConsegna");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i', "$DataConsegna");
         $this->Nota = $Nota;
         $this->PrezzoTotale = $PrezzoTotale;
         $this->TipoPagamento = $TipoPagamento;
@@ -52,7 +52,7 @@ class EOrdine
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
-        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i:s',"$DataConsegna");
+        $this->DataConsegna = DateTime::createFromformat('Y-m-d H:i', "$DataConsegna");
         $this->Nota = $Nota;
         $this->PrezzoTotale = $PrezzoTotale;
         $this->ProdottiOrdinati = $ProdottiOrdinati;
@@ -90,7 +90,9 @@ class EOrdine
 
     public function getDataConsegna() : DateTime
     {
-        try {return new DateTime ($this->DataConsegna->format('Y-m-d H:i:s'));}
+        try {
+            return new DateTime ($this->DataConsegna->format('Y-m-d H:i'));
+        }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -100,7 +102,9 @@ class EOrdine
 
     public function setDataConsegna(DateTime $DataConsegna) : void
     {
-        try {$this->DataConsegna = new DateTime ($DataConsegna->format('Y-m-d H:i:s'));}
+        try {
+            $this->DataConsegna = new DateTime ($DataConsegna->format('Y-m-d H:i'));
+        }
         catch (Exception $e)
         {
             echo $e->getMessage();
