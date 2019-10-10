@@ -64,6 +64,7 @@ class VOrdine
         return $this->smarty;
 
     }
+
     public function RiepilogoOrdine($smarty,$punti)
     {
         $this->smarty = $smarty;
@@ -74,5 +75,24 @@ class VOrdine
       // print_r($_SESSION['ordine_parziale']->getProdottiOrdinati());
         $this->smarty->display("riepilogo_ordine.html");
 
+    }
+
+    public function SceltaTipoPagamento()
+    {
+        $this->smarty->display("SceltaTipoPagamento.html");
+
+
+    }
+
+    public function MostraDatiPagamento()
+    {
+        session_start();
+        $this->smarty->display("DatiPagamento.html");
+
+
+
+
+        print_r($_SESSION);
+        //print_r($_POST);
     }
 }
