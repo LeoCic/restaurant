@@ -48,7 +48,6 @@ abstract class FOrdine
         $Nota = $ordine->getNota();
         $PrezzoTotale = $ordine->getPrezzoTotale();
         $TipoPagamento = $ordine->getTipoPagamento();
-        $StatoOrdine = $ordine->getStatoOrdine();
         $PuntiUsati = $ordine->getPuntiUsati();
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
@@ -64,7 +63,7 @@ abstract class FOrdine
             $conn->query($sql1);
         }
 
-        $sql = "INSERT INTO Ordine (`DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `StatoOrdine`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES('".addslashes("$DataOrdinazione")."' , '".addslashes("$DataConsegna")."' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' , '" . addslashes("$StatoOrdine") . "' , '$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
+        $sql = "INSERT INTO Ordine (`DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES('" . addslashes("$DataOrdinazione") . "' , '" . addslashes("$DataConsegna") . "' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' , '" . "' , '$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
         $riss = $conn->query($sql);
         if (is_bool($riss))
             return 0;
@@ -80,14 +79,13 @@ abstract class FOrdine
         $Nota = $ordine->getNota();
         $PrezzoTotale = $ordine->getPrezzoTotale();
         $TipoPagamento = $ordine->getTipoPagamento();
-        $StatoOrdine = $ordine->getStatoOrdine();
         $PuntiUsati = $ordine->getPuntiUsati();
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
         $IDLuogo = $ordine->getIDLuogo();
 
         $conn = FDataBase::Connect();
-        $sql =" UPDATE Ordine SET DataOrdinazione = '" . addslashes($DataOrdinazione) . "' , DataConsegna = '" . addslashes($DataConsegna) . "' , Nota = '" . addslashes($Nota) . "' , PrezzoTotale = '$PrezzoTotale' , TipoPagamento = '" . addslashes($TipoPagamento) . "' , StatoOrdine = '" . addslashes($StatoOrdine) . "' , PuntiUsati = '$PuntiUsati' , TelefonoConsegna = '" . addslashes($TelefonoConsegna) . "' , NomeUtente = '" . addslashes($NomeUtente) . "' , IDLuogo = '$IDLuogo' WHERE IDOrdine = '$IDOrdine' " ;
+        $sql = " UPDATE Ordine SET DataOrdinazione = '" . addslashes($DataOrdinazione) . "' , DataConsegna = '" . addslashes($DataConsegna) . "' , Nota = '" . addslashes($Nota) . "' , PrezzoTotale = '$PrezzoTotale' , TipoPagamento = '" . addslashes($TipoPagamento) . "' , PuntiUsati = '$PuntiUsati' , TelefonoConsegna = '" . addslashes($TelefonoConsegna) . "' , NomeUtente = '" . addslashes($NomeUtente) . "' , IDLuogo = '$IDLuogo' WHERE IDOrdine = '$IDOrdine' ";
         $riss = $conn->query($sql);
         if (is_bool($riss) )
             return 0;

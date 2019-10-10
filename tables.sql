@@ -68,7 +68,6 @@ CREATE TABLE `Ordine`
     `Nota`             varchar(600),
     `PrezzoTotale`     float       NOT NULL,
     `TipoPagamento`    varchar(8)  NOT NULL,
-    `StatoOrdine`      varchar(10) NOT NULL,
     `PuntiUsati`       smallint NOT NULL,
     `TelefonoConsegna` varchar(13),
     `NomeUtente`       varchar(20) NOT NULL,

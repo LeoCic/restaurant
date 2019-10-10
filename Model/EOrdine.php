@@ -11,7 +11,6 @@ class EOrdine
     private $PrezzoTotale;
     private $ProdottiOrdinati = array();
     private $TipoPagamento;
-    private $StatoOrdine;
     private $NomeUtente;
     private $LuogoConsegna;
     private $PuntiUsati;
@@ -34,7 +33,7 @@ class EOrdine
     }
 
 
-    public function __construct_11(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, String $StatoOrdine, int $PuntiUsati, String $TelefonoConsegna, String $NomeUtente, float $IDLuogo)
+    public function __construct_11(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, int $PuntiUsati, String $TelefonoConsegna, String $NomeUtente, float $IDLuogo)
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
@@ -42,7 +41,6 @@ class EOrdine
         $this->Nota = $Nota;
         $this->PrezzoTotale = $PrezzoTotale;
         $this->TipoPagamento = $TipoPagamento;
-        $this->StatoOrdine = $StatoOrdine;
         $this->PuntiUsati = $PuntiUsati;
         $this->TelefonoConsegna = $TelefonoConsegna;
         $this->NomeUtente = $NomeUtente;
@@ -50,7 +48,7 @@ class EOrdine
     }
 
 
-    public function __construct_13(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $StatoOrdine, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
+    public function __construct_13(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
@@ -59,7 +57,6 @@ class EOrdine
         $this->PrezzoTotale = $PrezzoTotale;
         $this->ProdottiOrdinati = $ProdottiOrdinati;
         $this->TipoPagamento = $TipoPagamento;
-        $this->StatoOrdine = $StatoOrdine;
         $this->NomeUtente = $NomeUtente;
         $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getIDLuogo(), $LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
         $this->PuntiUsati = $PuntiUsati;
@@ -190,10 +187,6 @@ class EOrdine
 
     public function setTipoPagamento(String $TipoPagamento) : void {$this->TipoPagamento = $TipoPagamento;}
 
-    public function getStatoOrdine() : String {return $this->StatoOrdine;}
-
-    public function setStatoOrdine(String $StatoOrdine) : void {$this->StatoOrdine = $StatoOrdine;}
-
     public function getNomeUtente() : String {return $this->NomeUtente;}
 
     public function setNomeUtente(String $NomeUtente) : void {$this->NomeUtente = $NomeUtente;}
@@ -235,13 +228,13 @@ class EOrdine
     public function toString() : String
     {
 
-        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getNomeUtente()."\n".$this->getLuogoConsegna()->getComune()."\n".$this->getLuogoConsegna()->getProvincia()."\n".$this->getLuogoConsegna()->getVia()."\n".$this->getLuogoConsegna()->getN_Civico()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna();
+        return $this->getID() . "\n" . $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getNomeUtente() . "\n" . $this->getLuogoConsegna()->getComune() . "\n" . $this->getLuogoConsegna()->getProvincia() . "\n" . $this->getLuogoConsegna()->getVia() . "\n" . $this->getLuogoConsegna()->getN_Civico() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna();
     }
 
     public function toString1() : String
     {
 
-        return $this->getID()."\n".$this->getDataOrdinazione()->format("Y-m-d H:i:s")."\n".$this->getDataConsegna()->format("Y-m-d H:i:s")."\n".$this->getNota()."\n".$this->getPrezzoTotale()."\n".$this->getTipoPagamento()."\n".$this->getStatoOrdine()."\n".$this->getPuntiUsati()."\n".$this->getTelefonoConsegna()."\n".$this->getNomeUtente()."\n".$this->IDLuogo;
+        return $this->getID() . "\n" . $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna() . "\n" . $this->getNomeUtente() . "\n" . $this->IDLuogo;
     }
 }
 
