@@ -8,11 +8,31 @@ class COrdine
 
     public function EffettuaOrdine()
     {
+
+        //creo array chiava valore con i soli valori di quantita diversi da zero
+        $prodotti = array();
+        $ordine_parziale = new EOrdine($prodotti);
+        $prezzo = 0;
+
+        foreach ($_POST as  $key => $value)
+        {
+            if($value != 0) {
+               $prodotto = FProdotto::load($key);
+               $ordine_parziale->addSingoloProdotto($prodotto, $value);
+               $prezzo = $ordine_parziale->getPrezzoTotale();
+            }
+        }
         session_start();
+        $_SESSION['ordine_parziale'] = $ordine_parziale;
+        $_SESSION['prezzo_totale'] = $prezzo;
+
         $view = new VOrdine();
-        $passato = $_SESSION['Mario'];
-        //$view->prova($passato);
-        print($passato);
+        $smarty = self::InfoRistorante();
+        if(!CUtente::isLogged())$smarty->assign('logged', false);
+        else $smarty->assign('logged', true);
+        $punti = (FUtente::load($_SESSION['username']))->getPunti();
+        $view->RiepilogoOrdine($smarty,$punti);
+
 
     }
 
@@ -20,7 +40,7 @@ class COrdine
     public function MostraListaProdotti()
 
     {
-
+// fare le assegazioni di logged nella view e non qio nel controller
         $view = new VOrdine();
 
         $antipasti = FRistorante::loadProdottiByCategoria("Antipasti");
