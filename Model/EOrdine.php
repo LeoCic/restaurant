@@ -260,7 +260,7 @@ array_push($prodotti, $bevanda);
 array_push($prodotti, $cibo);
 
 
-$ordine = new EOrdine(256,'2019-12-12 14:36:12','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
+$ordine = new EOrdine(256,'Fnew','2019-12-12 15:00:00','citofonare al terzo piano',34.5,$prodotti,'contanti','ok','giacomo', $luogo,3,'486548654', $giudizio);
 print $ordine->toString();
 print "\n";
 
