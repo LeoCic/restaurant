@@ -44,7 +44,7 @@ abstract class FOrdine
     {
         $IDOrdine = $ordine->getID();
         $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d H:i:s');
-        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i');
+        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i:s');
         $Nota = $ordine->getNota();
         $PrezzoTotale = $ordine->getPrezzoTotale();
         $TipoPagamento = $ordine->getTipoPagamento();
@@ -75,7 +75,7 @@ abstract class FOrdine
     {
         $IDOrdine = $ordine->getID();
         $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d H:i:s');
-        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i');
+        $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i:s');
         $Nota = $ordine->getNota();
         $PrezzoTotale = $ordine->getPrezzoTotale();
         $TipoPagamento = $ordine->getTipoPagamento();
