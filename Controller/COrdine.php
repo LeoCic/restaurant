@@ -19,11 +19,12 @@ class COrdine
             if($value != 0) {
                $prodotto = FProdotto::load($key);
                $ordine_parziale->addSingoloProdotto($prodotto, $value);
-               $prezzo = $ordine_parziale->getPrezzoTotale();
             }
         }
+        $prezzo = $ordine_parziale->CalcolaPrezzoTotale();
         session_start();
         $_SESSION['ordine_parziale'] = $ordine_parziale;
+        $_SESSION['ordine_parziale']->setPrezzoTotale($prezzo);
         $_SESSION['prezzo_totale'] = $prezzo;
 
         $view = new VOrdine();
@@ -102,13 +103,36 @@ class COrdine
         $_SESSION['ordine_parziale']->setPuntiUsati($_POST['punti_usati']);
 
         $view = new VOrdine();
-        //$view->SceltaTipoPagamento();
+        $view->SceltaTipoPagamento();
     }
 
     public function MostraDatiPagamento()
     {
         $view = new VOrdine();
         $view->MostraDatiPagamento();
+    }
+
+    public function PagamentoCarta()
+    {
+        session_start();
+        $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
+        $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+
+        $view = new VOrdine();
+        $view->PagamentoCarta();
+    }
+
+    public function PagamentoContanti()
+    {
+        session_start();
+        $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+
+        header('Location: /restaurant/Ordine/RiepilogoFinale');
+    }
+
+    public function RiepilogoFinale()
+    {
+
     }
 
 }

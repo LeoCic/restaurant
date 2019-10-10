@@ -21,7 +21,7 @@
 
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="elebora_form.php">
+                    <form role="form" action="/restaurant/Ordine/RiepilogoFinale">
                     <div class="form-group">
                         <label for="cardNumber"> NUMERO CARTA</label>
                         <div class="input-group">
@@ -83,31 +83,5 @@
 
 
 
-
-
-
-
-
-
-
-			<div class="row">
-			<div class="col-10" style="margin-top: 50px">
-	              <div class="table-responsive offset-1" >
-	                <table class="table">
-	                  <tr>
-	                    <td><h5 class="card-title"><b>Informazioni generali</b></h5>
-	                <p class="card-text d-flex flex-grow-1" contenteditable="false">Sede: {$sede}<br>Cellulare: {$cellulare}<br>Telefono fisso: {$telefono_fisso}</p></td>
-	                  <td >
-	                   <b> Giorni di apertura:</b>{section name=nr loop=$giorni_apertura} <br>{$giorni_apertura[nr]}{/section}
-	                  </td>
-	                  <td>
-	                                     Aperto ora: {$stato_apertura}<br>Proprietario: {$nome_proprietario}<br> Giudizio complessivo: {$giudizio_complessivo} </p>
-	                  </td>
-	                    </tr> 
-	                     </table>
-	                              </div>
-	            </div>
-					</div>
-		</div>
 	</body>
 	</html>

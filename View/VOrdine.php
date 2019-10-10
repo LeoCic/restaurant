@@ -80,19 +80,17 @@ class VOrdine
     public function SceltaTipoPagamento()
     {
         $this->smarty->display("SceltaTipoPagamento.html");
-
-
     }
 
-    public function MostraDatiPagamento()
+    public function PagamentoCarta()
     {
-        session_start();
+        $this->smarty->assign('Totale', $_SESSION['ordine_parziale']->getPrezzoTotale());
         $this->smarty->display("DatiPagamento.html");
+    }
 
-
-
-
-        print_r($_SESSION);
-        //print_r($_POST);
+    public function RiepilogoFinale()
+    {
+        $this->smarty->assign('Ordine', $_SESSION['ordine_parziale']);
+        $this->smarty->display("RiepilogoFinale.html");
     }
 }

@@ -117,11 +117,10 @@ class EOrdine
 
     public function getPrezzoTotale() : float
     {
-        $this->PrezzoTotale = $this->CalcolaPrezzoTotale();
         return $this->PrezzoTotale;
     }
 
-    public function setPrezzoTotale(float $PrezzoTotale) : void {$this->PrezzoTotale = $PrezzoTotale;}
+    public function setPrezzoTotale(float $PrezzoTotale) : void {$this->PrezzoTotale = $PrezzoTotale; }
 
     public function getProdottiOrdinati() : array
     {
@@ -219,7 +218,7 @@ class EOrdine
 
     public function getIDLuogo() : float {return $this->IDLuogo;}
 
-    private function CalcolaPrezzoTotale() : float
+    public function CalcolaPrezzoTotale() : float
     {
         $PrezzoTotaleOrdine = 0;
         foreach ($this->ProdottiOrdinati as $val)
@@ -239,6 +238,16 @@ class EOrdine
     {
 
         return $this->getID() . "\n" . $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna() . "\n" . $this->getNomeUtente() . "\n" . $this->IDLuogo;
+    }
+
+    public function CalcolaPrezzoScontato($punti) : float
+    {
+        return $this->PrezzoTotale - $punti * ERistorante::getEntitaScontoAPunti();
+    }
+
+    public function CalcolaPrezzoConCarta() : float
+    {
+        return $this->PrezzoTotale - (ERistorante::getEntitaScontoBase() * $this->PrezzoTotale) / 100;
     }
 }
 
