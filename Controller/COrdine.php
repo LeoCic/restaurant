@@ -89,4 +89,26 @@ class COrdine
          return $smarty;
     }
 
+    public function SceltaTipoPagamento()
+    {
+        session_start();
+        $data = $_POST['dataconsegna'].' '.$_POST['oraconsegna'].':'.'00';
+        $data_consegna = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+        $_SESSION['ordine_parziale']->setDataConsegna($data_consegna);
+        $luogo = new ELuogo($_POST['Comune'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
+        $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+        $_SESSION['ordine_parziale']->setTelefonoConsegna($_POST['telefono']);
+        $_SESSION['ordine_parziale']->setNota($_POST['note']);
+        $_SESSION['ordine_parziale']->setPuntiUsati($_POST['punti_usati']);
+
+        $view = new VOrdine();
+        //$view->SceltaTipoPagamento();
+    }
+
+    public function MostraDatiPagamento()
+    {
+        $view = new VOrdine();
+        $view->MostraDatiPagamento();
+    }
+
 }
