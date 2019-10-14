@@ -156,16 +156,3 @@ abstract class FProdotto
             return 1;
     }
 }
-
-//$p = FProdotto::load(32);
-//print $p->toString();
-//$p->setPrezzo(1.5);
-//FProdotto::updateBevanda($p);
-
-
-//if(FProdotto::exists(67)){print "si";}
-//else{print "no";}
-
-//$test = new EBevanda("gasolio",45,1,"xxxxxx","yyyyy",1,'Bevande',1,1,1);
-//FProdotto::storeBevanda($test);
-//FProdotto::delete(75);
