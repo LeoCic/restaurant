@@ -29,6 +29,10 @@ class VOrdine
         $this->smarty->assign('lista_bevande',$bevande);
         $this->smarty->assign('lista_categoria',$cate);
 
+        if (isset($_SESSION['username']))
+        $this->smarty->assign('user',$_SESSION['username']);
+
+
 
 
         $this->smarty->assign('elementi_totali_carrello',0);
@@ -91,6 +95,7 @@ class VOrdine
     public function RiepilogoFinale()
     {
         $this->smarty->assign('Ordine', $_SESSION['ordine_parziale']);
+        $this->smarty->assign('lista_prodotti', $_SESSION['ordine_parziale']->getProdottiOrdinati());
         $this->smarty->display("RiepilogoFinale.html");
     }
 }

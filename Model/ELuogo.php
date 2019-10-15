@@ -81,6 +81,11 @@ ELuogo {
         return $this->IDLuogo;
     }
 
+    public function setIDLuogo(int $id) :void
+    {
+        $this->IDLuogo = $id;
+    }
+
     public function toString() : String
     {
         if (isset($this->IDLuogo))

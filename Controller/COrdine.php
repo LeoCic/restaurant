@@ -21,20 +21,27 @@ class COrdine
                $ordine_parziale->addSingoloProdotto($prodotto, $value);
             }
         }
-        $prezzo = $ordine_parziale->CalcolaPrezzoTotale();
-        session_start();
-        $_SESSION['ordine_parziale'] = $ordine_parziale;
-        $_SESSION['ordine_parziale']->setPrezzoTotale($prezzo);
-        $_SESSION['prezzo_totale'] = $prezzo;
+        if( !isset($prodotto))
+        {
+            print("Scegli almeno un prodotto");
+            header("Refresh:2; URL=/restaurant/Ordine/MostraListaProdotti");
+        }
+        else {
 
-        $view = new VOrdine();
-        $smarty = self::InfoRistorante();
-        if(!CUtente::isLogged())$smarty->assign('logged', false);
-        else $smarty->assign('logged', true);
-        $punti = (FUtente::load($_SESSION['username']))->getPunti();
-        $view->RiepilogoOrdine($smarty,$punti);
+            $prezzo = $ordine_parziale->CalcolaPrezzoTotale();
+            session_start();
+            $_SESSION['ordine_parziale'] = $ordine_parziale;
+            $_SESSION['ordine_parziale']->setPrezzoTotale($prezzo);
+            $_SESSION['prezzo_totale'] = $prezzo;
 
+            $view = new VOrdine();
+            $smarty = self::InfoRistorante();
+            if (!CUtente::isLogged()) $smarty->assign('logged', false);
+            else $smarty->assign('logged', true);
+            $punti = (FUtente::load($_SESSION['username']))->getPunti();
+            $view->RiepilogoOrdine($smarty, $punti);
 
+        }
     }
 
 
@@ -115,8 +122,14 @@ class COrdine
     public function PagamentoCarta()
     {
         session_start();
-        $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
-        $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+
+        $_SESSION['ordine_parziale']->setTipoPagamento="Carta";
+
+        if($_SESSION['sconto'] == false) {
+            $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
+            $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+            $_SESSION['sconto']= true;
+        }
 
         $view = new VOrdine();
         $view->PagamentoCarta();
@@ -125,14 +138,69 @@ class COrdine
     public function PagamentoContanti()
     {
         session_start();
-        $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+        $_SESSION['ordine_parziale']->setTipoPagamento="Contanti";
 
-        header('Location: /restaurant/Ordine/RiepilogoFinale');
+        if($_SESSION['sconto'] == false) {
+            $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+            $_SESSION['sconto']= true;
+
+        }
+
+          header('Location: /restaurant/Ordine/RiepilogoFinale');
     }
 
     public function RiepilogoFinale()
     {
+        session_start();
+
+        $view = new VOrdine();
+        $view->RiepilogoFinale();
+    }
+
+    public function ConfermaOrdine()
+    {
+        session_start();
+        $dataOrd = new DateTime();
+        $_SESSION['ordine_parziale']->setDataOrdinazione($dataOrd);
+        $utente = FUtente::load($_SESSION['username']);
+        $utente->setPunti($utente->getPunti() - $_SESSION['ordine_parziale']->getPuntiUsati());
+        $utente->setDataUltimoOrdine($dataOrd->format('Y-m-d'));
+        $utente->setOrdiniCumulati($utente->getOrdiniCumulati() + 1);
+        FUtente::update($utente);
+
+       //da fare prima
+
+
+
+
+
+         FLuogo::store($_SESSION['ordine_parziale']->getLuogoConsegna());
+        $Comune =$_SESSION['ordine_parziale']->getLuogoConsegna()->getComune();
+        $Via = $_SESSION['ordine_parziale']->getLuogoConsegna()->getVia();
+        $N_Civico =$_SESSION['ordine_parziale']->getLuogoConsegna()->getN_Civico();
+
+        $IDL=FLuogo::id($Comune,$Via,$N_Civico) ;
+
+        $luogo=$_SESSION['ordine_parziale']->getLuogoConsegna();
+        $luogo->setProvincia("AQ");
+        $luogo->setIDLuogo($IDL);
+        $luogo=$_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+
+
+
+
+
+       FOrdine::store($_SESSION['ordine_parziale']);
+
+
+
+
+
+        //FOrdine::store($_SESSION['ordine_parziale']);
+
 
     }
+
+
 
 }

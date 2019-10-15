@@ -44,7 +44,9 @@ abstract class FLuogo
 
         $conn = FDataBase::Connect();
         $sql = "INSERT INTO Luogo (Comune, Provincia, Via, N_Civico) VALUES('" . addslashes($Comune) . "' , '$Provincia' , '" . addslashes($Via) . "' , '" . addslashes($N_Civico) . "')";
+
         $riss = $conn->query($sql);
+
         if (is_bool($riss) )
             return 0;
         else if(is_object($riss))
@@ -77,6 +79,19 @@ abstract class FLuogo
         else if(is_object($riss))
             return 1;
 
+
+
+    }
+
+    public static function id (String $Comune, String $Via , String $N_Civico): int
+    {
+        $conn = FDataBase::Connect();
+        //$sql = " SELECT * FROM luogo WHERE ( (Comune='$Comune' )AND ( Via='$Via') AND ( N_Civico='$N_Civico' )) ";
+        $sql = " SELECT DISTINCT * FROM Luogo WHERE   ( Comune = '" . addslashes($Comune) . "' ) AND ( Via = '" . addslashes($Via) . "')  AND ( N_Civico = '" . addslashes($N_Civico) . "') ";
+
+        $riss = $conn->query($sql);
+        $ris = $riss->fetchAll();
+       return $ris[0][0];
 
 
     }

@@ -1,0 +1,52 @@
+{include file="header.html" title="Riepilogo Ordine"}
+<div class = "row">
+
+
+    <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12" >
+        <div class="container">
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+
+                    <tr>
+                        <th>Prodotti ordinati</th>
+                        <th>€</th>
+                        <th>Q.ta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {section name=nr loop=$lista_prodotti}
+
+                    <tr>
+                        <th><strong>{$lista_prodotti[nr][0]->getNome()}</strong> </th>
+                        <td >{$lista_prodotti[nr][0]->getPrezzo() } </td>
+                        <td >{$lista_prodotti[nr][1]} </td>
+                        {/section}
+                    </tr>
+                    <th>Prezzo totale</th>
+                    <th>{$Ordine->getPrezzoTotale()}</th>
+                    </tbody>
+                </table>
+
+                {$Ordine->getDataConsegna()->format('Y-m-d H:i')}
+                <br>
+                {$Ordine->getLuogoConsegna()->getComune()}
+                <br>
+                {$Ordine->getLuogoConsegna()->getVia()}
+                <br>
+                {$Ordine->getLuogoConsegna()->getN_Civico()}
+                <br>
+                {$Ordine->getNota()}
+                <br>
+                {$Ordine->getTelefonoConsegna()}
+
+
+                <a href="/restaurant/Ordine/ConfermaOrdine">CONFERMA ORDINE</a>
+
+            </div> </div></div>
+
+</body>
+</html>

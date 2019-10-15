@@ -4,6 +4,7 @@ require_once 'Indice.php';
 
 abstract class FOrdine
 {
+
     public static function load(float $id) : EOrdine
     {
         $conn = FDataBase::Connect();
