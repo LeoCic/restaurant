@@ -123,7 +123,7 @@ class COrdine
     {
         session_start();
 
-        $_SESSION['ordine_parziale']->setTipoPagamento="Carta";
+        $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
 
         if($_SESSION['sconto'] == false) {
             $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
@@ -138,7 +138,7 @@ class COrdine
     public function PagamentoContanti()
     {
         session_start();
-        $_SESSION['ordine_parziale']->setTipoPagamento="Contanti";
+        $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
 
         if($_SESSION['sconto'] == false) {
             $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));

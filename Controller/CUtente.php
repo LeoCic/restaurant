@@ -123,6 +123,7 @@ class CUtente
                             FUtente::store($utente);
                             session_start();
                             $_SESSION['username'] = $username;
+                            $_SESSION['sconto'] =false;
                             header('Location: /restaurant/Ordine/MostraListaProdotti');
                         }
                     }
