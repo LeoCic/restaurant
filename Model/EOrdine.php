@@ -218,6 +218,8 @@ class EOrdine
 
     public function getIDLuogo() : float {return $this->IDLuogo;}
 
+    public function setIDLuogo(int $IDLuogo) : void {$this->IDLuogo = $IDLuogo;}
+
     public function CalcolaPrezzoTotale() : float
     {
         $PrezzoTotaleOrdine = 0;
