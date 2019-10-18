@@ -15,9 +15,16 @@ class EUtente
     private $DataUltimoOrdine;
 
 
+    public function __construct()
+    {
+        $num_args = func_num_args();
+        $args = func_get_args();
+        call_user_func_array(array(&$this, '__construct_'. $num_args), $args);
+    }
 
 
-    public function __construct(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $punti)
+
+    public function __construct_7(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $punti)
     {
         $this->Nome = $Nome;
         $this->Cognome = $Cognome;
@@ -28,6 +35,20 @@ class EUtente
         $this->Punti = $punti;
         $this->OrdiniCumulati = 0 ;
         $this->DataUltimoOrdine = null;
+    }
+
+
+    public function __construct_9(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $punti, int $OrdiniCumulati, string $DataUltimoOrdine)
+    {
+        $this->Nome = $Nome;
+        $this->Cognome = $Cognome;
+        $this->NomeUtente = $NomeUtente;
+        $this->Email = $Email;
+        $this->Telefono = $Telefono;
+        $this->Password = password_hash("$Password", PASSWORD_DEFAULT);
+        $this->Punti = $punti;
+        $this->OrdiniCumulati = $OrdiniCumulati;
+        $this->DataUltimoOrdine = DateTime::createFromformat('Y-m-d H:i:s',"$DataUltimoOrdine");;
     }
 
     public function getNome(): String { return $this->Nome; }

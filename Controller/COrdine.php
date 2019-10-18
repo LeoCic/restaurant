@@ -8,8 +8,6 @@ class COrdine
 
     public function EffettuaOrdine()
     {
-
-        //creo array chiava valore con i soli valori di quantita diversi da zero
         $prodotti = array();
         $ordine_parziale = new EOrdine($prodotti);
         $prezzo = 0;
@@ -40,15 +38,11 @@ class COrdine
             else $smarty->assign('logged', true);
             $punti = (FUtente::load($_SESSION['username']))->getPunti();
             $view->RiepilogoOrdine($smarty, $punti);
-
         }
     }
 
-
     public function MostraListaProdotti()
-
     {
-// fare le assegazioni di logged nella view e non qio nel controller
         $view = new VOrdine();
 
         $antipasti = FRistorante::loadProdottiByCategoria("Antipasti");
@@ -61,40 +55,33 @@ class COrdine
 
         $cate = array('Antipasti','Primi','Secondi','Contorni','Pizze','Dolci','Bevande');
 
-        //inietto i valori relativi alla info ristorante
-        // e salvo $smarty per poi passarla alla successiva vista
-        //in modo da mantenere le inforistorante
-
         $smarty = self::InfoRistorante();
 
         if(!CUtente::isLogged())$smarty->assign('logged', false);
         else $smarty->assign('logged', true);
-        //passo smarty per tener conto anche delle info ristorante
+
         $view->MostraListaProdotti($smarty ,$antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate);
-
-
     }
 
     public function InfoRistorante()
     {
-        //mancano giorni di apertura
-        FRistorante::loadRistorante();
-        $luogo = ERistorante::getSede();
-        $sede = $luogo->getComune().","."Via"." ".$luogo->getVia()." ".$luogo->getN_Civico();
-       $cellulare = ERistorante::getCellulare();
-       $telefono_fisso = ERistorante::getTelefonoFisso();
-       $nome_proprietario = ERistorante::getProprietario();
-       $giudizio_complessivo = ERistorante::getGiudizioComplessivo();
-       $stato_apertura = ERistorante::getStatoApertura();
-        $array_giorni = array('Lunedì: 08:00-17:00', 'Martedì: 09:30-19:40', 'Mercoledì: 09:30-19:40', 'Giovedì: 09:30-19:40',  'Venerdì: 09:30-19:40', 'Sabato: 09:30-19:40',  'Domenica: Chiuso');
-       // $giorni_di_apertura = ERistorante::getGiorniDiApertura();
-        if ($stato_apertura == true)
+         FRistorante::loadRistorante();
+         $luogo = ERistorante::getSede();
+         $sede = $luogo->getComune().","."Via"." ".$luogo->getVia()." ".$luogo->getN_Civico();
+         $cellulare = ERistorante::getCellulare();
+         $telefono_fisso = ERistorante::getTelefonoFisso();
+         $nome_proprietario = ERistorante::getProprietario();
+         $giudizio_complessivo = ERistorante::getGiudizioComplessivo();
+         $stato_apertura = ERistorante::getStatoApertura();
+         $array_giorni = array('Lunedì: 08:00-17:00', 'Martedì: 09:30-19:40', 'Mercoledì: 09:30-19:40', 'Giovedì: 09:30-19:40',  'Venerdì: 09:30-19:40', 'Sabato: 09:30-19:40',  'Domenica: Chiuso');
+
+         if ($stato_apertura == true)
            $stato_apertura = "SI";
-       else
+         else
            $stato_apertura = "NO";
-        $view = new VOrdine();
-        $smarty = $view->InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura ,  $array_giorni   );
-         return $smarty;
+           $view = new VOrdine();
+           $smarty = $view->InfoRistorante($sede ,$cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$stato_apertura ,  $array_giorni   );
+           return $smarty;
     }
 
     public function SceltaTipoPagamento()
@@ -145,8 +132,7 @@ class COrdine
             $_SESSION['sconto']= true;
 
         }
-
-          header('Location: /restaurant/Ordine/RiepilogoFinale');
+        header('Location: /restaurant/Ordine/RiepilogoFinale');
     }
 
     public function RiepilogoFinale()
@@ -165,12 +151,14 @@ class COrdine
         $utente = FUtente::load($_SESSION['username']);
         $utente->setPunti($utente->getPunti() - $_SESSION['ordine_parziale']->getPuntiUsati());
         $utente->setDataUltimoOrdine($dataOrd->format('Y-m-d'));
-        $utente->setOrdiniCumulati($utente->getOrdiniCumulati() + 1);
+        if($_SESSION['ordine_parziale']->getPrezzoTotale() >= 10)
+        {$utente->setPunti($utente->getPunti() + 1);}
+
+
+        $numero_ordini = $utente->getOrdiniCumulati();
+        $numero_ordini = $numero_ordini + 1;
+        $utente->setOrdiniCumulati($numero_ordini);
         FUtente::update($utente);
-
-
-
-
 
 
         $luogo_consegna = $_SESSION['ordine_parziale']->getLuogoConsegna();
@@ -185,34 +173,19 @@ class COrdine
         $IDL = FLuogo::id($Comune,$Via,$N_Civico);
 
 
-
-
         $_SESSION['ordine_parziale']->setIDLuogo($IDL);
         $luogo->setIDLuogo($IDL);
         $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
         $_SESSION['ordine_parziale']->setNomeUtente($_SESSION['username']);
 
-
-
-        $dataOrdinazione = $_SESSION['ordine_parziale']->getDataOrdinazione();
-        $dataConsegna = $_SESSION['ordine_parziale']->getDataConsegna();
-        $Nota = $_SESSION['ordine_parziale']->getNota();
-        $PrezzoTotale = $_SESSION['ordine_parziale']->getPrezzoTotale();
-        $TipoPagamento = $_SESSION['ordine_parziale']->getTipoPagamento();
-        $PuntiUsati = $_SESSION['ordine_parziale']->getPuntiUsati();
-        $TelefonoConsegna = $_SESSION['ordine_parziale']->getTelefonoConsegna();
-        $NomeUtente = $_SESSION['ordine_parziale']->getNomeUtente();
-
-
-
-        $ordineFinale = new EOrdine($dataOrdinazione, $dataConsegna, $Nota, $PrezzoTotale, $TipoPagamento, $PuntiUsati, $TelefonoConsegna, $NomeUtente, $IDL);
-
-        print($ordineFinale->toString1());
-        FOrdine::store($ordineFinale);
-
-
+        $a = FOrdine::store($_SESSION['ordine_parziale']);
+        $b = FOrdine::storeECompostoDa($_SESSION['ordine_parziale']->getProdottiOrdinati(), $_SESSION['lastIDOrdine']);
+        if($a === true && $b === true)
+        {
+            print("Ordine effettuato con successo!! Grazie per aver scelto 'Il Ristorante'!!");
+            header("Refresh:2; URL=/restaurant/Homepage");
+        }
+        else{print("Ordine non effettuato. Riprova.");
+            header("Refresh:2; URL=/restaurant/Ordine/SceltaTipoPagamento");}
     }
-
-
-
 }

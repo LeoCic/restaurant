@@ -43,7 +43,6 @@ abstract class FOrdine
 
     public static function store(EOrdine $ordine) : bool
     {
-        //$IDOrdine = $ordine->getID();
         $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d H:i:s');
         $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i:s');
         $Nota = $ordine->getNota();
@@ -53,29 +52,33 @@ abstract class FOrdine
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
         $IDLuogo = $ordine->getIDLuogo();
-        //$ProdottiOrdinati = $ordine->getProdottiOrdinati();
 
 
         $conn = FDataBase::Connect();
-        /*foreach($ProdottiOrdinati as $val)
+        $sql = "INSERT INTO Ordine (`DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES ('" . addslashes("$DataOrdinazione") . "' , '" . addslashes("$DataConsegna") . "' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' ,'$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
+        $riss = $conn->query($sql);
+        $_SESSION['lastIDOrdine'] = $conn->lastInsertId();
+
+        if (is_bool($riss)) {return 0;}
+        else if (is_object($riss)) {return 1;}
+
+
+    }
+
+    public static function storeECompostoDa(array $ProdottiOrdinati, int $IDOrdine) : bool
+    {
+        $conn = FDataBase::Connect();
+        foreach($ProdottiOrdinati as $val)
         {
             $ID = $val[0]->getIDProdotto();
             $quantita = $val[1];
-            $sql1 = "INSERT INTO E_Composto_Da (`IDOrdine`, `IDProdotto`, `Quantita`) VALUES('$IDOrdine' , '$ID' , '$quantita')";
-            $conn->query($sql1);
-        }*/
+            $sql = "INSERT INTO E_Composto_Da (`IDOrdine`, `IDProdotto`, `Quantita`) VALUES('$IDOrdine' , '$ID' , '$quantita')";
 
-        $sql = "INSERT INTO Ordine (`DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES ('" . addslashes("$DataOrdinazione") . "' , '" . addslashes("$DataConsegna") . "' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' ,'$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
-        print("CIAO");
-        $riss = $conn->query($sql);
-        if (is_bool($riss))
-        {print("male");
-            return 0;}
-        else if (is_object($riss))
-        {print("bene");
-            return 1;
+            $riss = $conn->query($sql);
         }
 
+            if (is_bool($riss)) {return 0;}
+            else if (is_object($riss)) {return 1;}
 
     }
 
