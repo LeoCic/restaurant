@@ -29,6 +29,18 @@ abstract class FLuogo
             return 0;
     }
 
+    public static function exist2(string $Comune, string $Via, string $N_Civico): bool
+    {
+        $conn = FDataBase::Connect();
+        $sql = " SELECT * FROM luogo WHERE (`Comune` = '$Comune') AND (`Via` = '$Via') AND (`N_Civico` = '$N_Civico') ";
+        $riss = $conn->query($sql);
+        $ris = $riss->fetchAll();
+        if (count($ris) > 0)
+            return 1;
+        else
+            return 0;
+    }
+
     public static function store(ELuogo $luogo) : bool
     {
         $Comune = $luogo->getComune();

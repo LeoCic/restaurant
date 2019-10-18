@@ -15,17 +15,17 @@ abstract class FOrdine
             $ris = $riss->fetchAll();
             if ($ris[0][3] === NULL)
             {
-                if ($ris[0][8] === NULL) {
-                    $ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], 'NULL', $ris[0][9], $ris[0][10]);
+                if ($ris[0][7] === NULL) {
+                    $ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], 'NULL', $ris[0][8], $ris[0][9]);
                 }
-                else{$ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                else{$ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9]);}
                 return $ordine;
             } else if ($ris[0][3] !== NULL)
             {
-                if ($ris[0][8] === NULL) {
-                    $ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], 'NULL', $ris[0][9], $ris[0][10]);
+                if ($ris[0][7] === NULL) {
+                    $ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], 'NULL', $ris[0][8], $ris[0][9]);
                 }
-                else{$ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                else{$ordine = new EOrdine($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9]);}
                 return $ordine;
             }
         }
@@ -41,9 +41,9 @@ abstract class FOrdine
         else return 0;
     }
 
-    public static function store(EOrdine $ordine)
+    public static function store(EOrdine $ordine) : bool
     {
-        $IDOrdine = $ordine->getID();
+        //$IDOrdine = $ordine->getID();
         $DataOrdinazione = $ordine->getDataOrdinazione()->format('Y-m-d H:i:s');
         $DataConsegna = $ordine->getDataConsegna()->format('Y-m-d H:i:s');
         $Nota = $ordine->getNota();
@@ -52,24 +52,31 @@ abstract class FOrdine
         $PuntiUsati = $ordine->getPuntiUsati();
         $TelefonoConsegna = $ordine->getTelefonoConsegna();
         $NomeUtente = $ordine->getNomeUtente();
-        $IDLuogo = $ordine->getLuogoConsegna()->getIDLuogo();
-        $ProdottiOrdinati = $ordine->getProdottiOrdinati();
+        $IDLuogo = $ordine->getIDLuogo();
+        //$ProdottiOrdinati = $ordine->getProdottiOrdinati();
+
 
         $conn = FDataBase::Connect();
-        foreach($ProdottiOrdinati as $val)
+        /*foreach($ProdottiOrdinati as $val)
         {
             $ID = $val[0]->getIDProdotto();
             $quantita = $val[1];
             $sql1 = "INSERT INTO E_Composto_Da (`IDOrdine`, `IDProdotto`, `Quantita`) VALUES('$IDOrdine' , '$ID' , '$quantita')";
             $conn->query($sql1);
-        }
+        }*/
 
-        $sql = "INSERT INTO Ordine (`DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES('" . addslashes("$DataOrdinazione") . "' , '" . addslashes("$DataConsegna") . "' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' , '" . "' , '$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
+        $sql = "INSERT INTO Ordine (`DataOrdinazione`, `DataConsegna`, `Nota`, `PrezzoTotale`, `TipoPagamento`, `PuntiUsati`, `TelefonoConsegna`, `NomeUtente`, `IDLuogo`) VALUES ('" . addslashes("$DataOrdinazione") . "' , '" . addslashes("$DataConsegna") . "' , '" . addslashes("$Nota") . "' , '$PrezzoTotale' , '" . addslashes("$TipoPagamento") . "' ,'$PuntiUsati' , '" . addslashes("$TelefonoConsegna") . "' , '" . addslashes("$NomeUtente") . "' , '$IDLuogo')";
+        print("CIAO");
         $riss = $conn->query($sql);
         if (is_bool($riss))
-            return 0;
+        {print("male");
+            return 0;}
         else if (is_object($riss))
+        {print("bene");
             return 1;
+        }
+
+
     }
 
     public static function update(EOrdine $ordine) : bool

@@ -119,6 +119,10 @@ class CUtente
 
                         else if (FUtente::exists($username) === false){
 
+                            session_start();
+                            session_unset();
+                            session_destroy();
+
                             $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password,0);
                             FUtente::store($utente);
                             session_start();
