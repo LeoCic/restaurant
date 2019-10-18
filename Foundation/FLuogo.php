@@ -4,6 +4,8 @@ require_once 'Indice.php';
 
 abstract class FLuogo
 {
+
+
     public static function load(float $id) : ELuogo
     {
         $conn = FDataBase::Connect();

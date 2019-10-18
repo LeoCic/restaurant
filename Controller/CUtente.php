@@ -55,7 +55,7 @@ class CUtente
         header('Location: /restaurant/Homepage');
     }
 
-    /**Metodo per la cancellazione di un account. Si basa su una URL del tipo: /AppCrowdFunding/Utente/removeUser/username
+    /**Metodo per la cancellazione di un account. Si basa su una URL del tipo: /restaurant/Utente/removeUser/username
      * dove lo username è quello dell'utente da rimuovere. Possono verificarsi diverse situazioni:
      * 1) se l'utente è loggato:
      *   1a) se il suo username corrisponde a quello dell'utente da cancellare si provvede alla cancellazione, viene effettuato il logout e
@@ -119,13 +119,13 @@ class CUtente
 
                         else if (FUtente::exists($username) === false){
 
-                            session_start();
+                            //session_start();
                             session_unset();
                             session_destroy();
 
                             $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password,0);
 
-                            if (FUtente::store($utente) === 1) {
+                            if (FUtente::store($utente) === true) {
                                 session_start();
                                 $_SESSION['username'] = $username;
                                 $_SESSION['sconto'] =false;header('Location: /restaurant/Ordine/MostraListaProdotti');
