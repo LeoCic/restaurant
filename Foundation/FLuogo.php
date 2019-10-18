@@ -34,7 +34,7 @@ abstract class FLuogo
     public static function exist2(string $Comune, string $Via, string $N_Civico): bool
     {
         $conn = FDataBase::Connect();
-        $sql = " SELECT * FROM luogo WHERE (`Comune` = '$Comune') AND (`Via` = '$Via') AND (`N_Civico` = '$N_Civico') ";
+        $sql = " SELECT * FROM luogo WHERE (`Comune` ='" . addslashes($Comune) . "') AND (`Via` = '" . addslashes($Comune) . "') AND (`N_Civico` = '" . addslashes($Comune) . "') ";
         $riss = $conn->query($sql);
         $ris = $riss->fetchAll();
         if (count($ris) > 0)
