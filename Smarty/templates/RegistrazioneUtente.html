@@ -26,7 +26,11 @@
           <div class="form-group"> <label>Nome</label> <input placeholder="Inserisci nome" class="form-control" type="text" name = "nome" required>
             <div class="form-group"><label>Cognome</label><input type="text" class="form-control" placeholder="Inserisci cognome" name = "cognome" required>
               <div class="form-group"><label>Username</label><input type="text" class="form-control" placeholder="Inserisci username" name = "username" required>
-                <div class="form-group"><label>Telefono</label><input type="tel" class="form-control" placeholder="Inserisci numero di telefono" name = "telefono" required></div>
+                  <div class="form-group"><label>Telefono</label><input type="tel" pattern="^[0-9-+\s()]*$"
+                                                                        maxlength="13" class="form-control"
+                                                                        placeholder="Inserisci numero di telefono"
+                                                                        oninvalid="setCustomValidity('Formato richiesto: +39 3452323233')"
+                                                                        name="telefono" required></div>
               </div>
               <div class="form-group"><label>Email</label><input type="email" class="form-control" placeholder="Inserisci email" name = "email" required></div>
             </div>
