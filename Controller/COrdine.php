@@ -123,7 +123,7 @@ class COrdine
     {
         session_start();
 
-        $_SESSION['ordine_parziale']->setTipoPagamento="Carta";
+        $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
 
         if($_SESSION['sconto'] == false) {
             $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
@@ -138,7 +138,7 @@ class COrdine
     public function PagamentoContanti()
     {
         session_start();
-        $_SESSION['ordine_parziale']->setTipoPagamento="Contanti";
+        $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
 
         if($_SESSION['sconto'] == false) {
             $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
@@ -168,35 +168,47 @@ class COrdine
         $utente->setOrdiniCumulati($utente->getOrdiniCumulati() + 1);
         FUtente::update($utente);
 
-       //da fare prima
 
 
 
 
 
-         FLuogo::store($_SESSION['ordine_parziale']->getLuogoConsegna());
-        $Comune =$_SESSION['ordine_parziale']->getLuogoConsegna()->getComune();
-        $Via = $_SESSION['ordine_parziale']->getLuogoConsegna()->getVia();
-        $N_Civico =$_SESSION['ordine_parziale']->getLuogoConsegna()->getN_Civico();
+        $luogo_consegna = $_SESSION['ordine_parziale']->getLuogoConsegna();
+        $Comune = $luogo_consegna->getComune();
+        $Via = $luogo_consegna->getVia();
+        $N_Civico = $luogo_consegna->getN_Civico();
+        $Provincia = "AQ";
+        $luogo = new ELuogo($Comune, $Provincia, $Via, $N_Civico);
+        $controllo = FLuogo::exist2($Comune, $Via, $N_Civico);
+        if($controllo === false) {FLuogo::store($luogo);}
 
-        $IDL=FLuogo::id($Comune,$Via,$N_Civico) ;
+        $IDL = FLuogo::id($Comune,$Via,$N_Civico);
 
-        $luogo=$_SESSION['ordine_parziale']->getLuogoConsegna();
-        $luogo->setProvincia("AQ");
+
+
+
+        $_SESSION['ordine_parziale']->setIDLuogo($IDL);
         $luogo->setIDLuogo($IDL);
-        $luogo=$_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+        $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+        $_SESSION['ordine_parziale']->setNomeUtente($_SESSION['username']);
 
 
 
+        $dataOrdinazione = $_SESSION['ordine_parziale']->getDataOrdinazione();
+        $dataConsegna = $_SESSION['ordine_parziale']->getDataConsegna();
+        $Nota = $_SESSION['ordine_parziale']->getNota();
+        $PrezzoTotale = $_SESSION['ordine_parziale']->getPrezzoTotale();
+        $TipoPagamento = $_SESSION['ordine_parziale']->getTipoPagamento();
+        $PuntiUsati = $_SESSION['ordine_parziale']->getPuntiUsati();
+        $TelefonoConsegna = $_SESSION['ordine_parziale']->getTelefonoConsegna();
+        $NomeUtente = $_SESSION['ordine_parziale']->getNomeUtente();
 
 
-       FOrdine::store($_SESSION['ordine_parziale']);
 
+        $ordineFinale = new EOrdine($dataOrdinazione, $dataConsegna, $Nota, $PrezzoTotale, $TipoPagamento, $PuntiUsati, $TelefonoConsegna, $NomeUtente, $IDL);
 
-
-
-
-        //FOrdine::store($_SESSION['ordine_parziale']);
+        print($ordineFinale->toString1());
+        FOrdine::store($ordineFinale);
 
 
     }

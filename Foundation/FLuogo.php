@@ -1,12 +1,7 @@
 <?php
+
 require_once 'Indice.php';
 
-
-//  query restituisce un oggetto se va a buon fine altrimenti falso su cui posso fare rowCount comunque (se false rida zero righe)
-//prima di richiamare la store e load dobbiamo richiamare l'exists
-// se le classe torna null facciamo un try catch (NEL CONTROLLORE)
-// addslashes i caratteri '  " nulbyte \ non vengono visti come caratteri speciali
-//esegue anche ELUogo perchè?
 abstract class FLuogo
 {
     public static function load(float $id) : ELuogo
@@ -32,7 +27,18 @@ abstract class FLuogo
             return 1;
         else
             return 0;
+    }
 
+    public static function exist2(string $Comune, string $Via, string $N_Civico): bool
+    {
+        $conn = FDataBase::Connect();
+        $sql = " SELECT * FROM luogo WHERE (`Comune` = '$Comune') AND (`Via` = '$Via') AND (`N_Civico` = '$N_Civico') ";
+        $riss = $conn->query($sql);
+        $ris = $riss->fetchAll();
+        if (count($ris) > 0)
+            return 1;
+        else
+            return 0;
     }
 
     public static function store(ELuogo $luogo) : bool
@@ -43,10 +49,8 @@ abstract class FLuogo
         $N_Civico = $luogo->getN_Civico();
 
         $conn = FDataBase::Connect();
-        $sql = "INSERT INTO Luogo (Comune, Provincia, Via, N_Civico) VALUES('" . addslashes($Comune) . "' , '$Provincia' , '" . addslashes($Via) . "' , '" . addslashes($N_Civico) . "')";
-
+        $sql = "INSERT INTO Luogo (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES('" . addslashes($Comune) . "' , '$Provincia' , '" . addslashes($Via) . "' , '" . addslashes($N_Civico) . "')";
         $riss = $conn->query($sql);
-
         if (is_bool($riss) )
             return 0;
         else if(is_object($riss))
@@ -66,7 +70,6 @@ abstract class FLuogo
             return 0;
         else if(is_object($riss))
             return 1;
-
     }
 
     public static function delete (float $id) : bool
@@ -78,22 +81,15 @@ abstract class FLuogo
             return 0;
         else if(is_object($riss))
             return 1;
-
-
-
     }
 
     public static function id (String $Comune, String $Via , String $N_Civico): int
     {
         $conn = FDataBase::Connect();
-        //$sql = " SELECT * FROM luogo WHERE ( (Comune='$Comune' )AND ( Via='$Via') AND ( N_Civico='$N_Civico' )) ";
         $sql = " SELECT DISTINCT * FROM Luogo WHERE   ( Comune = '" . addslashes($Comune) . "' ) AND ( Via = '" . addslashes($Via) . "')  AND ( N_Civico = '" . addslashes($N_Civico) . "') ";
-
         $riss = $conn->query($sql);
         $ris = $riss->fetchAll();
-       return $ris[0][0];
-
-
+        return $ris[0][0];
     }
 
 

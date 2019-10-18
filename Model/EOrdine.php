@@ -33,6 +33,20 @@ class EOrdine
     }
 
 
+    public function __construct_9(DateTime $DataOrdinazione, DateTime $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, int $PuntiUsati, String $TelefonoConsegna, String $NomeUtente, float $IDLuogo)
+    {
+        $this->DataOrdinazione = $DataOrdinazione;
+        $this->DataConsegna = $DataConsegna;
+        $this->Nota = $Nota;
+        $this->PrezzoTotale = $PrezzoTotale;
+        $this->TipoPagamento = $TipoPagamento;
+        $this->PuntiUsati = $PuntiUsati;
+        $this->TelefonoConsegna = $TelefonoConsegna;
+        $this->NomeUtente = $NomeUtente;
+        $this->IDLuogo = $IDLuogo;
+    }
+
+
     public function __construct_11(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, int $PuntiUsati, String $TelefonoConsegna, String $NomeUtente, float $IDLuogo)
     {
         $this->ID = $ID;
@@ -218,6 +232,8 @@ class EOrdine
 
     public function getIDLuogo() : float {return $this->IDLuogo;}
 
+    public function setIDLuogo(int $IDLuogo) : void {$this->IDLuogo = $IDLuogo;}
+
     public function CalcolaPrezzoTotale() : float
     {
         $PrezzoTotaleOrdine = 0;
@@ -237,7 +253,7 @@ class EOrdine
     public function toString1() : String
     {
 
-        return $this->getID() . "\n" . $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna() . "\n" . $this->getNomeUtente() . "\n" . $this->IDLuogo;
+        return $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna() . "\n" . $this->getNomeUtente() . "\n" . $this->getIDLuogo();
     }
 
     public function CalcolaPrezzoScontato($punti) : float

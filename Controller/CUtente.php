@@ -119,18 +119,21 @@ class CUtente
 
                         else if (FUtente::exists($username) === false){
 
+                            session_start();
+                            session_unset();
+                            session_destroy();
+
                             $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password,0);
 
                             if (FUtente::store($utente) === 1) {
                                 session_start();
                                 $_SESSION['username'] = $username;
-                                header('Location: /restaurant/Ordine/MostraListaProdotti');
+                                $_SESSION['sconto'] =false;header('Location: /restaurant/Ordine/MostraListaProdotti');
                             } else {
                                 $error = "C'è stato un errore. Per favore reinserire i dati";
                                 $view = new VUtente();
                                 $view->MostraFormConErrore($error);
                             }
-
                         }
                     }
 
