@@ -6,7 +6,9 @@
       <w>addon</w>
       <w>addslashes</w>
       <w>aggiornate</w>
+      <w>aggiornato</w>
       <w>aggiungere</w>
+      <w>aggiunta</w>
       <w>aggiunto</w>
       <w>alcool</w>
       <w>altro</w>
@@ -16,6 +18,7 @@
       <w>appositi</w>
       <w>assegazioni</w>
       <w>attenzione</w>
+      <w>attualmente</w>
       <w>baratto</w>
       <w>basa</w>
       <w>bevanda</w>
@@ -80,7 +83,6 @@
       <w>gassata</w>
       <w>generali</w>
       <w>gestione</w>
-      <w>giacpall</w>
       <w>giorno</w>
       <w>giovedì</w>
       <w>glyphicon</w>
@@ -97,6 +99,7 @@
       <w>livello</w>
       <w>loggato</w>
       <w>lunedì</w>
+      <w>manca</w>
       <w>mancano</w>
       <w>mantenere</w>
       <w>martedì</w>
@@ -107,6 +110,8 @@
       <w>minerali</w>
       <w>modifica</w>
       <w>modificare</w>
+      <w>modificarla</w>
+      <w>modificati</w>
       <w>modo</w>
       <w>mostra</w>
       <w>mostrata</w>
@@ -116,6 +121,7 @@
       <w>netdna</w>
       <w>numeri</w>
       <w>numero</w>
+      <w>nuova</w>
       <w>nuovo</w>
       <w>occupa</w>
       <w>oggetto</w>
@@ -161,6 +167,7 @@
       <w>riprova</w>
       <w>risolto</w>
       <w>rispedito</w>
+      <w>risultato</w>
       <w>sabato</w>
       <w>sali</w>
       <w>salvare</w>
@@ -178,6 +185,7 @@
       <w>strtotime</w>
       <w>successiva</w>
       <w>successo</w>
+      <w>sulle</w>
       <w>tartufo</w>
       <w>tener</w>
       <w>terzo</w>
