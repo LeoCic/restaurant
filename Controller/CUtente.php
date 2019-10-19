@@ -3,9 +3,7 @@ require_once 'Indice.php';
 
 class CUtente
 {
-
     /**Metodo che verifica se l'utente è loggato */
-    //funziona
     static function isLogged()
     {
         if (session_status() == PHP_SESSION_NONE) {
@@ -19,24 +17,19 @@ class CUtente
     {
         if($_SERVER['REQUEST_METHOD']=="POST")
         {
-            //if(static::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
-            // else
-
             $validato = FUtente::accountvalidation($_POST['username'],$_POST['password']);
                 if($validato === true)
                 {
                     session_start();
                     $_SESSION['username'] = $_POST['username'];
-                    $_SESSION['password'] = $_POST['password']; //forse non necessaria
+                    $_SESSION['password'] = $_POST['password'];
                     $_SESSION['sconto'] =false;
                     header("Location: /restaurant/Ordine/MostraListaProdotti");
                 }
                 else {
                     $msg="user o pass errati";
                     print ("$msg");
-                    //print (password_hash($_POST['password'],PASSWORD_DEFAULT));
                     header("Refresh:2; URL=/restaurant/Homepage");
-                  //  header('Location: /restaurant/Homepage');
                 }
         }
         else
@@ -44,7 +37,6 @@ class CUtente
             header('HTTP/1.1 405 Method Not Allowed');
             header('Allow: POST');
         }
-
     }
 
     /** Metodo che provvede alla rimozione delle variabili di sessione, alla sua distruzione e a rinviare alla homepage  */
@@ -85,7 +77,6 @@ class CUtente
     {
         $view = new VUtente();
         $view->MostraFormRegistrazione();
-
     }
 
     static function Registrazione()
@@ -102,44 +93,48 @@ class CUtente
                     $email = $_POST['email'];
                     $password = $_POST['password'];
                     $conferma_password = $_POST['conferma_password'];
-                    if ($password != $conferma_password){
-
+                    if ($password != $conferma_password)
+                    {
                         $error = "Le password non coincidono";
                         $view = new VUtente();
                         $view->MostraFormConErrore($error);
                     }
-                    else if ($password === $conferma_password){
-
-                        if(FUtente::exists($username) === true){
-
+                    else if ($password === $conferma_password)
+                    {
+                        if(FUtente::exists($username) === true)
+                        {
                             $error = "Username già presente";
                             $view = new VUtente();
                             $view->MostraFormConErrore($error);
                         }
 
-                        else if (FUtente::exists($username) === false){
-
-                            //session_start();
+                        else if (FUtente::exists($username) === false)
+                        {
                             session_unset();
                             session_destroy();
 
                             $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password,0);
 
-                            if (FUtente::store($utente) === true) {
+                            if (FUtente::store($utente) === true)
+                            {
                                 session_start();
                                 $_SESSION['username'] = $username;
                                 $_SESSION['sconto'] =false;header('Location: /restaurant/Ordine/MostraListaProdotti');
-                            } else {
+                            } else
+                                {
                                 $error = "C'è stato un errore. Per favore reinserire i dati";
                                 $view = new VUtente();
                                 $view->MostraFormConErrore($error);
                             }
                         }
                     }
-
-
-
                 }
         }
+    }
+
+    static function GestioneAccount()
+    {
+        $view = new VUtente();
+        $view->GestioneAccount();
     }
 }

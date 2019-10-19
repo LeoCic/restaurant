@@ -6,12 +6,10 @@ class VUtente
 {
     private $smarty;
 
-
     public function __construct()
     {
         $this->smarty = ConfSmarty::configuration();
     }
-
 
     public function MostraFormConErrore($error)
     {
@@ -22,6 +20,11 @@ class VUtente
     public function MostraFormRegistrazione()
     {
         $this->smarty->display('RegistrazioneUtente.html');
+    }
+
+    public function GestioneAccount()
+    {
+        $this->smarty->display('GestioneAccount.html');
     }
 
 }

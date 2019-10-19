@@ -38,15 +38,15 @@ class EUtente
     }
 
 
-    public function __construct_9(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $punti, int $OrdiniCumulati, string $DataUltimoOrdine)
+    public function __construct_9(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $Punti, int $OrdiniCumulati, string $DataUltimoOrdine)
     {
         $this->Nome = $Nome;
         $this->Cognome = $Cognome;
         $this->NomeUtente = $NomeUtente;
         $this->Email = $Email;
         $this->Telefono = $Telefono;
-        $this->Password = password_hash("$Password", PASSWORD_DEFAULT);
-        $this->Punti = $punti;
+        $this->Password = $Password;
+        $this->Punti = $Punti;
         $this->OrdiniCumulati = $OrdiniCumulati;
         $this->DataUltimoOrdine = DateTime::createFromformat('Y-m-d H:i:s',"$DataUltimoOrdine");;
     }

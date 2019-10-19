@@ -34,8 +34,9 @@ abstract class FUtente
        $sql = " SELECT * FROM Utente WHERE (NomeUtente='$id') ";
        $riss = $conn->query($sql);
        $ris = $riss->fetchAll();
-       if ((count($ris) === 1) && (password_verify($password, $ris[0][5]) === TRUE)) return 1;
-       else return 0;
+       $controllo = $ris[0][5];
+       if ((count($ris) === 1) && (password_verify("$password", "$controllo") === TRUE)) {return 1;}
+       else {return 0;}
    }
 
    public static function store(EUtente $utente) : bool

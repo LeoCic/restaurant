@@ -1,8 +1,10 @@
 <component name="ProjectDictionaryState">
   <dictionary name="UTENTE">
     <words>
+      <w>accountvalidation</w>
       <w>acqua</w>
       <w>addon</w>
+      <w>addslashes</w>
       <w>aggiornate</w>
       <w>aggiungere</w>
       <w>aggiunto</w>
@@ -15,6 +17,7 @@
       <w>assegazioni</w>
       <w>attenzione</w>
       <w>baratto</w>
+      <w>basa</w>
       <w>bevanda</w>
       <w>bevande</w>
       <w>bisogna</w>
@@ -22,6 +25,7 @@
       <w>bussare</w>
       <w>calcola</w>
       <w>cambiamenti</w>
+      <w>campi</w>
       <w>cancellare</w>
       <w>cancellazione</w>
       <w>carrello</w>
@@ -30,6 +34,8 @@
       <w>cibo</w>
       <w>citofonare</w>
       <w>classe</w>
+      <w>coincidono</w>
+      <w>condivideremo</w>
       <w>conferma</w>
       <w>contanti</w>
       <w>contenitore</w>
@@ -63,13 +69,18 @@
       <w>errati</w>
       <w>errore</w>
       <w>errori</w>
+      <w>esiste</w>
       <w>expity</w>
       <w>fanno</w>
       <w>fantastico</w>
+      <w>favore</w>
+      <w>formato</w>
       <w>funziona</w>
       <w>gasolio</w>
       <w>gassata</w>
       <w>generali</w>
+      <w>gestione</w>
+      <w>giacpall</w>
       <w>giorno</w>
       <w>giovedì</w>
       <w>glyphicon</w>
@@ -78,6 +89,7 @@
       <w>inforistorante</w>
       <w>informazioni</w>
       <w>inietto</w>
+      <w>inserisci</w>
       <w>inserita</w>
       <w>inseriti</w>
       <w>interno</w>
@@ -93,11 +105,14 @@
       <w>metodi</w>
       <w>metodo</w>
       <w>minerali</w>
+      <w>modifica</w>
+      <w>modificare</w>
       <w>modo</w>
       <w>mostra</w>
       <w>mostrata</w>
       <w>natura</w>
       <w>nella</w>
+      <w>nessuno</w>
       <w>netdna</w>
       <w>numeri</w>
       <w>numero</w>
@@ -119,6 +134,7 @@
       <w>pizze</w>
       <w>possono</w>
       <w>prendere</w>
+      <w>presente</w>
       <w>prodotti</w>
       <w>prodottiscelti</w>
       <w>produzione</w>
@@ -129,9 +145,13 @@
       <w>quella</w>
       <w>quello</w>
       <w>registrazione</w>
+      <w>reinserire</w>
+      <w>reinserisci</w>
       <w>relativi</w>
       <w>richiamando</w>
       <w>richiamo</w>
+      <w>richiesto</w>
+      <w>riempi</w>
       <w>riepilogo</w>
       <w>riguardanti</w>
       <w>rimozione</w>
@@ -139,6 +159,7 @@
       <w>rinviare</w>
       <w>rinviato</w>
       <w>riprova</w>
+      <w>risolto</w>
       <w>rispedito</w>
       <w>sabato</w>
       <w>sali</w>
@@ -171,8 +192,11 @@
       <w>venerdì</w>
       <w>verifica</w>
       <w>verificarsi</w>
+      <w>verogiallo</w>
       <w>vicovaro</w>
       <w>viene</w>
+      <w>vostra</w>
+      <w>vuoi</w>
       <w>xampp</w>
       <w>xxxxxx</w>
       <w>yyyyy</w>
