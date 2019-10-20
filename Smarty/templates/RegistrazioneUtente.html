@@ -27,6 +27,7 @@
             <div class="form-group"><label>Cognome</label><input type="text" class="form-control" placeholder="Inserisci cognome" name = "cognome" required>
               <div class="form-group"><label>Username</label><input type="text" class="form-control" placeholder="Inserisci username" name = "username" required>
                   <div class="form-group"><label>Telefono</label><input type="tel" pattern="^[0-9-+\s()]*$"
+                                                                        minlength="10"
                                                                         maxlength="13" class="form-control"
                                                                         placeholder="Inserisci numero di telefono"
                                                                         oninvalid="setCustomValidity('Formato richiesto: +39 3452323233')"

@@ -1,12 +1,12 @@
 {include file="header.html" title="Riepilogo Ordine"}
 
 <div class = "row">
-      	
 
-          <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12" >    
+
+    <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12">
         <div class="container">
 
-              <div class="table-responsive">  
+            <div class="table-responsive">
 
                 <table class="table table-bordered">
                   <thead class="thead-dark">
@@ -30,12 +30,12 @@
                                          <th>Prezzo totale</th>
                                                               <th>{$Prezzo_Totale}</th>
                   </tbody>
-                </table>               
+                </table>
                     </div> </div></div>
           <div class="col-lg-4  col-md-12  col-xs-12 col-sm-12" >
 <div class="container">
   <form method="POST" action="/restaurant/Ordine/SceltaTipoPagamento">
-    
+
  <div class="form-group">
   <div class="col-md-12">
     <div class="row">
@@ -67,10 +67,14 @@
 <div class="row">
 
       <div class="input-group-text col-md-1">+</div>
-    
-    <input type="text" class="form-control col-md-2"  name="prefisso" value="39">
-  <input type="text" class="form-control col-md-9" title="Formato richiesto 10 numeri"  name="telefono" pattern="[0-9]{literal}{10}{/literal}" placeholder="Telefono" required>
-</div> 
+
+    <input type="text" class="form-control col-md-2" name="prefisso" value="39"
+           oninvalid="setCustomValidity('Formato richiesto: 39 oppure 071')" minlength="2"
+           maxlength="3" readonly="readonly">
+    <input type="text" class="form-control col-md-9" title="Formato richiesto 10 numeri" name="telefono"
+           oninvalid="setCustomValidity('Formato richiesto: 3452323233 (10 numeri)')"
+           pattern="[0-9]{literal}{10}{/literal}" placeholder="Telefono" required>
+</div>
 </div>
 </div>
 
@@ -97,9 +101,9 @@
 
 
   </form>
-</div> 
-         
 </div>
+
+          </div>
 </div>
 
 
