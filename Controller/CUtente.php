@@ -106,36 +106,45 @@ class CUtente
                     $email = $_POST['email'];
                     $password = $_POST['password'];
                     $conferma_password = $_POST['conferma_password'];
-                    if ($password != $conferma_password)
+                    if($password != $conferma_password)
                     {
                         $error = "Le password non coincidono";
                         $view = new VUtente();
                         $view->MostraFormConErrore($error);
                     }
-                    else if ($password === $conferma_password)
+                    else if($password === $conferma_password)
                     {
                         if(FUtente::exists($username) === true)
                         {
-                            $error = "Username già presente";
+                            $error = "Username già in uso";
                             $view = new VUtente();
                             $view->MostraFormConErrore($error);
                         }
 
-                        else if (FUtente::exists($username) === false)
+                        else if(FUtente::exists($username) === false)
                         {
-                            session_unset();
-                            session_destroy();
-
-                            $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password,0);
-
-                            if (FUtente::store($utente) === true)
+                            if(FUtente::verificaEmail($_POST['email']) === false)
                             {
-                                session_start();
-                                $_SESSION['username'] = $username;
-                                $_SESSION['sconto'] =false;header('Location: /restaurant/Ordine/MostraListaProdotti');
-                            } else
+                                session_unset();
+                                session_destroy();
+                                $utente = new EUtente($nome, $cognome, $username, $email, $telefono, $password,0);
+
+                                if (FUtente::store($utente) === true)
                                 {
-                                $error = "C'è stato un errore. Per favore reinserire i dati";
+                                    session_start();
+                                    $_SESSION['username'] = $username;
+                                    $_SESSION['sconto'] =false;header('Location: /restaurant/Ordine/MostraListaProdotti');
+                                }
+                                else
+                                {
+                                    $error = "C'è stato un errore. Per favore reinserire i dati";
+                                    $view = new VUtente();
+                                    $view->MostraFormConErrore($error);
+                                }
+                            }
+                            else
+                            {
+                                $error = "Email già in uso";
                                 $view = new VUtente();
                                 $view->MostraFormConErrore($error);
                             }
@@ -160,12 +169,15 @@ class CUtente
         $password_cifrata = $utente->getPasswordHash();
         if(password_verify("$password", "$password_cifrata") === true)
         {
-            if ($_POST['password'] === $_POST['conferma_password']) {
+            if ($_POST['password'] === $_POST['conferma_password'])
+            {
                 $utente->setPassword(($_POST['password']));
-                if (!empty($_POST['telefono'])) {
+                if (!empty($_POST['telefono']))
+                {
                     $utente->setTelefono($_POST['telefono']);
                 }
-                if (!empty($_POST['email'])) {
+                if (!empty($_POST['email']))
+                {
                     $utente->setEmail($_POST['email']);
                 }
                 $nome = $utente->getNome();
@@ -184,7 +196,9 @@ class CUtente
                 $msg = "Dati modificati con successo!";
                 print("$msg");
                 header("Refresh:2; URL=/restaurant/Homepage");
-            } else {
+            }
+            else
+            {
                 $error = "Le password non coincidono";
                 $view = new VUtente();
                 $view->GestioneAccountErrore($error);
