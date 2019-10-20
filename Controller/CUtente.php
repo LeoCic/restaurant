@@ -172,30 +172,39 @@ class CUtente
             if ($_POST['password'] === $_POST['conferma_password'])
             {
                 $utente->setPassword(($_POST['password']));
-                if (!empty($_POST['telefono']))
+                if(FUtente::verificaEmail($_POST['email']) === false)
                 {
-                    $utente->setTelefono($_POST['telefono']);
+                    if (!empty($_POST['email']))
+                    {
+                        $utente->setEmail($_POST['email']);
+                    }
+                    if (!empty($_POST['telefono']))
+                    {
+                        $utente->setTelefono($_POST['telefono']);
+                    }
+                    $nome = $utente->getNome();
+                    $cognome = $utente->getCognome();
+                    $email = $utente->getEmail();
+                    $telefono = $utente->getTelefono();
+                    $password = $utente->getPasswordHash();
+                    $punti = $utente->getPunti();
+                    $ordini_cumulati = $utente->getOrdiniCumulati();
+                    $data_ultimo_ordine = $utente->getDataUltimoOrdine();
+                    $risultato = $data_ultimo_ordine->format('Y-m-d');
+
+                    $utente_aggiornato = new EUtente($nome, $cognome, $_SESSION['username'], $email, $telefono, $password, $punti, $ordini_cumulati, $risultato);
+                    FUtente::update($utente_aggiornato);
+
+                    $msg = "Dati modificati con successo!";
+                    print("$msg");
+                    header("Refresh:2; URL=/restaurant/Homepage");
                 }
-                if (!empty($_POST['email']))
+                else
                 {
-                    $utente->setEmail($_POST['email']);
+                    $error = "Email già in uso";
+                    $view = new VUtente();
+                    $view->GestioneAccountErrore($error);
                 }
-                $nome = $utente->getNome();
-                $cognome = $utente->getCognome();
-                $email = $utente->getEmail();
-                $telefono = $utente->getTelefono();
-                $password = $utente->getPasswordHash();
-                $punti = $utente->getPunti();
-                $ordini_cumulati = $utente->getOrdiniCumulati();
-                $data_ultimo_ordine = $utente->getDataUltimoOrdine();
-                $risultato = $data_ultimo_ordine->format('Y-m-d');
-
-                $utente_aggiornato = new EUtente($nome, $cognome, $_SESSION['username'], $email, $telefono, $password, $punti, $ordini_cumulati, $risultato);
-                FUtente::update($utente_aggiornato);
-
-                $msg = "Dati modificati con successo!";
-                print("$msg");
-                header("Refresh:2; URL=/restaurant/Homepage");
             }
             else
             {
