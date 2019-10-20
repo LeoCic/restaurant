@@ -48,7 +48,7 @@ class EUtente
         $this->Password = $Password;
         $this->Punti = $Punti;
         $this->OrdiniCumulati = $OrdiniCumulati;
-        $this->DataUltimoOrdine = DateTime::createFromformat('Y-m-d H:i:s',"$DataUltimoOrdine");;
+        $this->DataUltimoOrdine = DateTime::createFromformat('Y-m-d',"$DataUltimoOrdine");;
     }
 
     public function getNome(): String { return $this->Nome; }
