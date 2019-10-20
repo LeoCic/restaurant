@@ -28,6 +28,16 @@ abstract class FUtente
        else return 0;
    }
 
+    public static function verificaEmail(String $email) : bool
+    {
+        $conn = FDataBase::Connect();
+        $sql = " SELECT * FROM Utente WHERE (Email='$email') ";
+        $riss = $conn->query($sql);
+        $ris = $riss->fetchAll();
+        if (count($ris) === 1) return 1;
+        else return 0;
+    }
+
     public static function accountvalidation(String $id, String $password): bool
    {
        $conn = FDataBase::Connect();
