@@ -42,5 +42,18 @@ class VUtente
         $this->smarty->display('GestioneAccount.html');
     }
 
+    public function EliminaProfilo()
+    {
+        session_start();
+        $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
+        $this->smarty->display('EliminaProfilo.html');
+    }
+
+    public function RimuoviProfiloErrore($error)
+    {
+        $this->smarty->assign('error', $error);
+        $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
+        $this->smarty->display('EliminaProfilo.html');
+    }
 }
 

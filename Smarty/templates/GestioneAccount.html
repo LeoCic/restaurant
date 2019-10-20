@@ -6,6 +6,15 @@
 </head>
 
 <body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="post" action="/restaurant/Utente/EliminaProfilo">
+                <button type="submit" class="btn btn-primary">Rimuovi profilo</button>
+            </form>
+        </div>
+    </div>
+</div>
 <div class="py-5">
     <div class="container">
         <div class="row">
@@ -34,9 +43,9 @@
 
                 <small class="form-text text-muted">Non condivideremo mai la vostra email con nessuno.</small>
 
-                <div class="form-group"> <label>Se vuoi modificare i tuoi dati, inserisci la Password e la Conferma Password</label> <input type="password" class="form-control" placeholder="Inserisci Password" name = "password">
+                <div class="form-group"> <label>Se vuoi modificare i tuoi dati, inserisci la Password e la Conferma Password</label> <input type="password" class="form-control" placeholder="Inserisci Password" name = "password" required>
                 </div>
-                <div class="form-group"> <label>Conferma password</label> <input type="password" class="form-control" placeholder="Reinserisci Password" name = "conferma_password">
+                <div class="form-group"> <label>Conferma password</label> <input type="password" class="form-control" placeholder="Reinserisci Password" name = "conferma_password" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Modifica Account</button>
             </form>
