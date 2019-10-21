@@ -89,15 +89,30 @@ class COrdine
         session_start();
         $data = $_POST['dataconsegna'].' '.$_POST['oraconsegna'].':'.'00';
         $data_consegna = DateTime::createFromFormat('Y-m-d H:i:s', $data);
-        $_SESSION['ordine_parziale']->setDataConsegna($data_consegna);
-        $luogo = new ELuogo($_POST['Comune'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
-        $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
-        $_SESSION['ordine_parziale']->setTelefonoConsegna($_POST['telefono']);
-        $_SESSION['ordine_parziale']->setNota($_POST['note']);
-        $_SESSION['ordine_parziale']->setPuntiUsati($_POST['punti_usati']);
 
-        $view = new VOrdine();
-        $view->SceltaTipoPagamento();
+        $differenza = $data_consegna->diff(new DateTime());
+        if ($differenza->invert === 1)
+        {
+            $_SESSION['ordine_parziale']->setDataConsegna($data_consegna);
+            $luogo = new ELuogo($_POST['Comune'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
+            $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+            $_SESSION['ordine_parziale']->setTelefonoConsegna($_POST['telefono']);
+            $_SESSION['ordine_parziale']->setNota($_POST['note']);
+            $_SESSION['ordine_parziale']->setPuntiUsati($_POST['punti_usati']);
+
+            $view = new VOrdine();
+            $view->SceltaTipoPagamento();
+        }
+        else
+        {
+            $view = new VOrdine();
+            $smarty = self::InfoRistorante();
+            if (!CUtente::isLogged()) $smarty->assign('logged', false);
+            else $smarty->assign('logged', true);
+            $punti = (FUtente::load($_SESSION['username']))->getPunti();
+            $error = "La data di consegna inserita è errata";
+            $view->RiepilogoOrdineErrore($smarty, $punti, $error);
+        }
     }
 
     public function MostraDatiPagamento()

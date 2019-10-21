@@ -69,16 +69,23 @@ class VOrdine
 
     }
 
-    public function RiepilogoOrdine($smarty,$punti)
+    public function RiepilogoOrdine($smarty, $punti)
     {
         $this->smarty = $smarty;
         $this->smarty->assign('puntiDisponibili',$punti);
         $this->smarty->assign('lista_prodotti', $_SESSION['ordine_parziale']->getProdottiOrdinati());
         $this->smarty->assign('Prezzo_Totale', $_SESSION['prezzo_totale']);
-
-      // print_r($_SESSION['ordine_parziale']->getProdottiOrdinati());
         $this->smarty->display("riepilogo_ordine.html");
+    }
 
+    public function RiepilogoOrdineErrore($smarty, $punti, $error)
+    {
+        $this->smarty = $smarty;
+        $this->smarty->assign('error',$error);
+        $this->smarty->assign('puntiDisponibili',$punti);
+        $this->smarty->assign('lista_prodotti', $_SESSION['ordine_parziale']->getProdottiOrdinati());
+        $this->smarty->assign('Prezzo_Totale', $_SESSION['prezzo_totale']);
+        $this->smarty->display("riepilogo_ordine.html");
     }
 
     public function SceltaTipoPagamento()

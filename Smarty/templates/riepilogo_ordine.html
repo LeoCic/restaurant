@@ -35,6 +35,9 @@
           <div class="col-lg-4  col-md-12  col-xs-12 col-sm-12" >
 <div class="container">
   <form method="POST" action="/restaurant/Ordine/SceltaTipoPagamento">
+      {if isset($error)}
+      <p>{$error}</p>
+      {/if}
 
  <div class="form-group">
   <div class="col-md-12">
