@@ -20,6 +20,12 @@ class VOrdine
     {
         $this->smarty = $smarty;
 
+        if (isset($_COOKIE['carrello'])===TRUE){
+            $car= unserialize($_COOKIE['carrello']) ;
+            $this->smarty->assign('prodottiCarrello',$car);
+
+        }
+
         $this->smarty->assign('lista_antipasti',$antipasti);
         $this->smarty->assign('lista_primi',$primi);
         $this->smarty->assign('lista_secondi',$secondi);
@@ -35,14 +41,15 @@ class VOrdine
 
 
 
+
+
         $this->smarty->assign('elementi_totali_carrello',0);
 
         //da prendere
-        $this->smarty->assign('prezzoTotale',10);
+     /*   $this->smarty->assign('prezzoTotale',10);
         $this->smarty->assign('quant',3);
         $this->smarty->assign('puntiDisponibili',3422);
-      //  $this->smarty->assign('Totale',99);
-
+*/
 
 
         $this->smarty->display('EffettuaOrdine.html');

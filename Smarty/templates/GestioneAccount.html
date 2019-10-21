@@ -9,9 +9,14 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-10" ></div>
+                <div class="col-md-2" >
             <form method="post" action="/restaurant/Utente/EliminaProfilo">
-                <button type="submit" class="btn btn-primary">Rimuovi profilo</button>
+                 <button type="submit" class="btn btn-primary">Rimuovi profilo</button>
             </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -19,7 +24,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="" contenteditable="true"><strong>{$NOME_UTENTE} riempi i campi che vuoi modificare:</strong></h1>
+                <h1 class="" ><strong>{$NOME_UTENTE} riempi i campi che vuoi modificare:</strong></h1>
                 {if isset($error)}
                 <p>{$error}</p>
                 {/if}
@@ -32,7 +37,7 @@
         <div class="col-md-12">
             <form method="post" action="/restaurant/Utente/ModificaAccount">
                 <div class="form-group"><label>Telefono attualmente in uso</label><input type="tel" pattern="^[0-9-+\s()]*$"
-                                                                                  maxlength="13" class="form-control"
+                                                                                  maxlength="10" class="form-control"
                                                                                   placeholder={$TELEFONO}
                                                                                   oninvalid="setCustomValidity('Formato richiesto: +39 3452323233')"
                                                                                   name="telefono">

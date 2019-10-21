@@ -13,7 +13,7 @@ class CUtente
         else {return false;}
     }
 
-    public function Login()
+    static function Login()
     {
         if($_SERVER['REQUEST_METHOD']=="POST")
         {
@@ -165,7 +165,6 @@ class CUtente
     {
         session_start();
         $utente = FUtente::load($_SESSION['username']);
-
         $password = $_POST['password'];
         $password_cifrata = $utente->getPasswordHash();
         if(password_verify("$password", "$password_cifrata") === true)
@@ -198,7 +197,7 @@ class CUtente
 
                     $msg = "Dati modificati con successo!";
                     print("$msg");
-                    header("Refresh:2; URL=/restaurant/Homepage");
+                  //  header("Refresh:2; URL=/restaurant/Homepage");
                 }
                 else
                 {
@@ -220,5 +219,6 @@ class CUtente
             $view = new VUtente();
             $view->GestioneAccountErrore($error);
         }
+
     }
 }

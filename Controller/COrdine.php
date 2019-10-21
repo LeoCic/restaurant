@@ -6,31 +6,156 @@ class COrdine
 {
 
 
-    public function EffettuaOrdine()
+    static function EffettuaOrdine()
     {
         $prodotti = array();
         $ordine_parziale = new EOrdine($prodotti);
         $prezzo = 0;
 
+
+      //  print(isset($_COOKIE['carrello']));
+
+
         foreach ($_POST as  $key => $value)
         {
             if($value != 0) {
-               $prodotto = FProdotto::load($key);
-               $ordine_parziale->addSingoloProdotto($prodotto, $value);
+
+                $prodotto = FProdotto::load($key);
+                $ordine_parziale->addSingoloProdotto($prodotto, $value);
+
+                /*
+                if(isset($_COOKIE['carrello']))
+                {
+                    $prod= unserialize($_COOKIE['carrello']);
+                      //  print_r($prod);
+                    foreach ($prod as $elemento => $val)
+                    {
+                        if($val[0]->getIDProdotto() == $prodotto->getIDProdotto() )
+                        {
+                             //print("<br><br>");
+                  // print("val:    ");
+                            //print_r($val);
+                           // print("<br><br>");
+
+                            $value = $value + $val[1];
+                           // $chiaveDaCancellare =array_search($elemento[0],$prod) ;
+                            unset($prod[$elemento]);
+
+                        }
+
+                    }
+                   // print("<br><br><br><br>");
+                    //print_r($prod);
+
+                    $carr = serialize($prod);
+                   // print($carr);
+                    unset($_COOKIE['carrello']);
+                    setcookie('carrello', null, -1, '/');
+                    setcookie("carrello","$carr",time() + 3*60,"/");
+                    //print("<br><br><br><br>");
+                    //print($_COOKIE['carrello']);
+
+                }
+
+                */
             }
         }
-        if( !isset($prodotto))
+
+
+        // print(isset($prodotto));
+        if( !isset($prodotto) && !isset($_COOKIE['carrello']))
         {
             print("Scegli almeno un prodotto");
             header("Refresh:2; URL=/restaurant/Ordine/MostraListaProdotti");
         }
-        else {
+        else
+        {
+
+            $prodottiPost = $ordine_parziale->getProdottiOrdinati();
+            if(isset($_COOKIE['carrello']))
+            {
+
+                $array1 = array();
+                $prodottiPost = $ordine_parziale->getProdottiOrdinati();
+                if ($prodottiPost != null){
+
+                $appoggio = $ordine_parziale->getProdottiOrdinati();
+               // print_r($appoggio);
+
+                $prodottiCarrello = unserialize($_COOKIE['carrello']);
+                foreach ($prodottiCarrello as $item  )
+                {
+                    $giaPresente = false;
+
+                    foreach ($prodottiPost as $prodottiDaPost )
+                    {
+                        if($prodottiDaPost[0]->getIDProdotto() == $item[0]->getIDProdotto())
+                        {
+                            foreach ($appoggio as $app => $val )
+                            {
+                                if ($val[0]->getIDProdotto() == $prodottiDaPost[0]->getIDProdotto())
+                                    unset($appoggio[$app]);
+
+
+                            }
+
+                                $giaPresente = true;
+                            array_push($array1, $prodottiDaPost[0], $prodottiDaPost[1] + $item[1]);
+                            array_push($appoggio, $array1);
+                            array_pop($array1);
+                            array_pop($array1);
+
+
+
+                        }
+
+                    }
+                    if ($giaPresente === false)
+                    {
+                        array_push($array1, $item[0],$item[1]);
+                        array_push($appoggio, $array1);
+                        array_pop($array1);
+                        array_pop($array1);
+
+                    }
+
+                    // $ordine_parziale->addSingoloProdotto($item[0], $item[1]);
+                }
+                }else if($prodottiPost == null){
+                    $prodottiCarrello = unserialize($_COOKIE['carrello']);
+                    $appoggio=array();
+                    foreach ($prodottiCarrello as $item  )
+                    {
+                        array_push($array1, $item[0],$item[1]);
+                        array_push($appoggio, $array1);
+                        array_pop($array1);
+                        array_pop($array1);
+                    }
+
+
+
+                }
+
+
+
+
+
+
+                        $ordine_parziale->setProdottiOrdinati($appoggio);
+               // print("<br><br>");
+                //print_r($appoggio);
+
+            }
 
             $prezzo = $ordine_parziale->CalcolaPrezzoTotale();
             session_start();
+
             $_SESSION['ordine_parziale'] = $ordine_parziale;
             $_SESSION['ordine_parziale']->setPrezzoTotale($prezzo);
             $_SESSION['prezzo_totale'] = $prezzo;
+
+            $carrello = serialize($_SESSION['ordine_parziale']->getProdottiOrdinati());
+            setcookie("carrello","$carrello",time() + 3*60,"/");
 
             $view = new VOrdine();
             $smarty = self::InfoRistorante();
@@ -38,10 +163,20 @@ class COrdine
             else $smarty->assign('logged', true);
             $punti = (FUtente::load($_SESSION['username']))->getPunti();
             $view->RiepilogoOrdine($smarty, $punti);
-        }
-    }
 
-    public function MostraListaProdotti()
+
+
+
+
+
+        }
+
+
+
+        }
+
+
+    static function MostraListaProdotti()
     {
         $view = new VOrdine();
 
@@ -63,7 +198,7 @@ class COrdine
         $view->MostraListaProdotti($smarty ,$antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate);
     }
 
-    public function InfoRistorante()
+    static function InfoRistorante()
     {
          FRistorante::loadRistorante();
          $luogo = ERistorante::getSede();
@@ -84,7 +219,7 @@ class COrdine
            return $smarty;
     }
 
-    public function SceltaTipoPagamento()
+    static function SceltaTipoPagamento()
     {
         session_start();
         $data = $_POST['dataconsegna'].' '.$_POST['oraconsegna'].':'.'00';
@@ -115,13 +250,13 @@ class COrdine
         }
     }
 
-    public function MostraDatiPagamento()
+    static function MostraDatiPagamento()
     {
         $view = new VOrdine();
         $view->MostraDatiPagamento();
     }
 
-    public function PagamentoCarta()
+    static function PagamentoCarta()
     {
         session_start();
 
@@ -137,7 +272,7 @@ class COrdine
         $view->PagamentoCarta();
     }
 
-    public function PagamentoContanti()
+    static function PagamentoContanti()
     {
         session_start();
         $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
@@ -150,7 +285,7 @@ class COrdine
         header('Location: /restaurant/Ordine/RiepilogoFinale');
     }
 
-    public function RiepilogoFinale()
+    static function RiepilogoFinale()
     {
         session_start();
 
@@ -158,7 +293,7 @@ class COrdine
         $view->RiepilogoFinale();
     }
 
-    public function ConfermaOrdine()
+    static function ConfermaOrdine()
     {
         session_start();
         $dataOrd = new DateTime();
@@ -203,4 +338,19 @@ class COrdine
         else{print("Ordine non effettuato. Riprova.");
             header("Refresh:2; URL=/restaurant/Ordine/SceltaTipoPagamento");}
     }
+
+
+    static function SvuotaCarrello()
+    {
+
+        session_start();
+        //setcookie("carrello","",time() - 100*60 , "/");
+
+        unset($_COOKIE['carrello']);
+        setcookie('carrello', null, -1, '/');
+        header('Location: /restaurant/Ordine/MostraListaProdotti');
+    }
+
+
+
 }

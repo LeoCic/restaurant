@@ -91,22 +91,29 @@ Ingredienti:
             </div>
            
             <div class="col-lg-3 offset-lg-0 col-md-10 offset-md-2 col-xs-12 col-sm-12" id="confirm-button">
-                    <div class="row">
+
+                <div class="row">
             <div class="col-md-12">
               <li class="list-group-item d-flex justify-content-between align-items-center">
-                <font size="6"> <strong> Carrello</strong> </font> <span class="badge badge-primary badge-pill">
+                <b size="6"> <strong> Carrello</strong> </b>
+                  <span class="badge badge-primary badge-pill">
+                      {$ElementiTotali=0}
+       {section name=nr loop=$prodottiCarrello}
+                      {$ElementiTotali =$ElementiTotali + $prodottiCarrello[nr][1]}
+                      {/section}
+                  {$ElementiTotali}
 
-                  {$elementi_totali_carrello}</span>
-                  
-            
+                  </span>
+
               </li>
                <ul class="list-group flex-grow-0">
-                {if $elementi_totali_carrello == 0}
+                {if $ElementiTotali == 0}
                 <li class="list-group-item d-flex justify-content-between align-items-center">Non hai elementi nel carrello. sci nu  poraccio</li>
                 {else}
-              {section name=nr loop=$prodotti_carrello} 
+              {section name=nr loop=$prodottiCarrello}
 
-                <li class="list-group-item d-flex justify-content-between align-items-center"> {$prodotti_carrello[nr]} <span class="badge badge-primary badge-pill">14</span>
+
+                <li class="list-group-item d-flex justify-content-between align-items-center"> {$prodottiCarrello[nr][0]->getNome()} <span class="badge badge-primary badge-pill">{$prodottiCarrello[nr][1]}</span>
                 </li> {/section}
                 {/if}
               </ul>
@@ -121,13 +128,16 @@ Ingredienti:
                         <input class="btn btn-primary col-12" type="submit" value="Conferma Ordine" disabled>
 
                         {/if}
+                        <a href="/restaurant/Ordine/SvuotaCarrello">Svuota Carrello</a>
+
                     </div>
                     </div> 
 
           </div>
         
       </div>
-    </form> 
+    </form>
+
 
               <div class="col-10" style="margin-top: 50px">
               <div class="table-responsive offset-1" >
@@ -155,18 +165,19 @@ Ingredienti:
 
 
     </div> 
->
+
   
 
   <br><br><br><br><br><br><br><br><br>
 
 
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" style=""></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous" style=""></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
      
-     
+
     </body>
 
     </html>

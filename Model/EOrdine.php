@@ -163,18 +163,24 @@ class EOrdine
 
     public function setProdottiOrdinati(array $ProdottiOrdinati) : void
     {
+        $array1 = array();
         $contenitore = array();
         foreach ($ProdottiOrdinati as $val)
         {
-            if($val->getCategoria() === 'Bevande')
+            if($val[0]->getCategoria() === 'Bevande')
             {
                 $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
-                array_push($contenitore , $item, $val[1]);
-            } else if ($val->getCategoria() !== 'Bevande')
+                array_push($array1 , $item, $val[1]);
+                array_push($contenitore, $array1);
+                array_pop($array1);
+                array_pop($array1);
+            } else if ($val[0]->getCategoria() !== 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
-                array_push($contenitore , $item, $val[1]);
-            }
+                array_push($array1 , $item, $val[1]);
+                array_push($contenitore, $array1);
+                array_pop($array1);
+                array_pop($array1);            }
         }
         $this->ProdottiOrdinati = $contenitore;
     }
