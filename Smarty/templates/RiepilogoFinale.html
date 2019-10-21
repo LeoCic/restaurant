@@ -42,22 +42,114 @@
                     </tbody>
                 </table>
 
-                {$Ordine->getDataConsegna()->format('Y-m-d H:i')}
-                <br>
-                {$Ordine->getLuogoConsegna()->getComune()}
-                <br>
-                {$Ordine->getLuogoConsegna()->getVia()}
-                <br>
-                {$Ordine->getLuogoConsegna()->getN_Civico()}
-                <br>
-                {$Ordine->getNota()}
-                <br>
-                {$Ordine->getTelefonoConsegna()}
+                <div class="col-lg-4  col-md-12  col-xs-12 col-sm-12">
+                    <div class="container">
+                        <form method="POST" action="/restaurant/Ordine/OrdineEffettuato">
+
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <label for="usr" class="col-md-12 text-center">Data e ora di
+                                            consegna:</label>
+                                        <input type="txt" class="form-control col-md-6 "
+                                               placeholder="{$Ordine->getDataConsegna()->format('m-d')}"
+                                               readonly="readonly" id="usr" name="dataconsegna" required>
+                                        <!--label for="usr">Ora Consegna:</label> -->
+                                        <input type="text" class="form-control col-md-6" name="oraconsegna"
+                                               placeholder="{$Ordine->getDataConsegna()->format('H:i')}"
+                                               readonly="readonly" required>
+                                    </div>
+                                </div>
 
 
-                <a href="/restaurant/Ordine/ConfermaOrdine">CONFERMA ORDINE</a>
+                            </div>
 
-            </div> </div></div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="Comune"
+                                       placeholder="{$Ordine->getLuogoConsegna()->getComune()}" readonly="readonly"
+                                       required>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+
+                                    <div class="row">
+
+                                        <input type="text" class="form-control col-md-9" name="Via"
+                                               placeholder="{$Ordine->getLuogoConsegna()->getVia()}"
+                                               readonly="readonly" required>
+
+                                        <input type="text" class="form-control col-md-3" name="N_Civico"
+                                               placeholder="{$Ordine->getLuogoConsegna()->getN_Civico()}"
+                                               readonly="readonly" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+
+                                    <div class="row">
+
+                                        <div class="input-group-text col-md-1">+</div>
+
+                                        <input type="text" class="form-control col-md-2" name="prefisso" value="39"
+                                               minlength="2"
+                                               maxlength="3" readonly="readonly">
+                                        <input type="text" class="form-control col-md-9"
+                                               name="telefono" pattern="[0-9]{literal}{10}{/literal}"
+                                               placeholder="{$Ordine->getTelefonoConsegna()}" readonly="readonly"
+                                               required>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!--div class="form-group">
+                              <input type="text" class="form-control" id="pwd" name="puntiusati" placeholder="Punti" >
+                            </div-->
+
+                            <input type="text" class="form-control" title="punti usati"
+                                   placeholder="Punti usati: {$Ordine->getPuntiUsati()}" name="punti_usati"
+                                   readonly="readonly" required>
+
+
+                            <div class="form-group" id="">
+                                <!-- <label for="comment" >Note aggiuntive:</label>-->
+                                <textarea class="form-control" rows="2" id="comment" name="note"
+                                          placeholder="Note Aggiuntive: {$Ordine->getNota()}"
+                                          readonly="readonly"></textarea>
+                                <br>
+
+                                <input class="btn btn-primary col-12" type="submit" value="Conferma Ordine">
+
+                            </div>
+
+
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            {$Ordine->getDataConsegna()->format('Y-m-d H:i')}
+            <br>
+            {$Ordine->getLuogoConsegna()->getComune()}
+            <br>
+            {$Ordine->getLuogoConsegna()->getVia()}
+            <br>
+            {$Ordine->getLuogoConsegna()->getN_Civico()}
+            <br>
+            {$Ordine->getNota()}
+            <br>
+            {$Ordine->getTelefonoConsegna()}
+            <br>
+            {$Ordine->getPuntiUsati()}
+
+
+            <a href="/restaurant/Ordine/ConfermaOrdine">CONFERMA ORDINE</a>
+
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

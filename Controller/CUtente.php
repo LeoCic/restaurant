@@ -137,7 +137,8 @@ class CUtente
                                 }
                                 else
                                 {
-                                    $error = "C'è stato un errore. Per favore reinserire i dati";
+                                    if (FUtente::store($utente) === false) $error = 'store fallita';
+                                    //$error = "C'è stato un errore. Per favore reinserire i dati";
                                     $view = new VUtente();
                                     $view->MostraFormConErrore($error);
                                 }
