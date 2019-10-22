@@ -262,6 +262,7 @@ class COrdine
 
         $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
 
+
         if($_SESSION['sconto'] == false) {
             $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
             $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
@@ -336,6 +337,8 @@ class COrdine
             setcookie('carrello', null, -1, '/');
             print("Ordine effettuato con successo!! Grazie per aver scelto 'Il Ristorante'!!");
             header("Refresh:2; URL=/restaurant/Homepage");
+            $_SESSION['sconto']=false;
+
         }
         else{print("Ordine non effettuato. Riprova.");
             header("Refresh:2; URL=/restaurant/Ordine/SceltaTipoPagamento");}
