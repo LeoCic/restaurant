@@ -20,13 +20,11 @@
                     </h3>
 
                 </div>
-                <div class="panel-body">
-                    <form role="form" action="/restaurant/Ordine/RiepilogoFinale">
+                <form role="form" action="/restaurant/Ordine/RiepilogoFinale">
                     <div class="form-group">
                         <label for="cardNumber"> NUMERO CARTA</label>
                         <div class="input-group">
-                            <input type="text" title="da 13 a 16 numeri" 	 class="form-control" id="cardNumber" placeholder="Numero di carta valido"
-                                required autofocus />
+                            <input type="text" title="da 13 a 16 numeri" class="form-control" id="cardNumber" minlength="13" maxlength="16" pattern="[0-9]{literal}{13,16}{/literal}" placeholder="Numero di carta valido" required autofocus />
                             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         </div>
                     </div>
@@ -34,22 +32,22 @@
                         <div class="col-xs-12 col-md-7 ">
                             <div class="form-group">
                                 <label for="expityMonth">
-                                   DATA SCADENZA</label>
+                                    DATA SCADENZA</label>
                                 <div class="col-xs-12 col-lg-6 pl-ziro col-sm-5">
                                     <select  class="form-control" id="expityMonth" placeholder="MM" required />
                                     <option selected disabled>AA</option>
-                                                            {for $qt=1 to 12}
-                          <option>{$qt}</option>
-                          {/for}
-                      </select>
+                                    {for $qt=19 to 99}
+                                    <option>{$qt}</option>
+                                    {/for}
+                                    </select>
                                 </div>
                                 <div class="col-xs-12 col-lg-6 pl-ziro col-sm-5">
                                     <select  class="form-control" id="expityYear" placeholder="AA" required />
                                     <option selected disabled>MM</option>
-                                                            {for $qt=19 to 99}
-                          <option>{$qt}</option>
-                          {/for}
-                      </select>
+                                    {for $qt=1 to 12}
+                                    <option>{$qt}</option>
+                                    {/for}
+                                    </select>
 
 
                                 </div>
@@ -59,12 +57,11 @@
                             <div class="form-group">
                                 <label for="cvCode">
                                     CVV </label>
-                                <input pattern="[0-9]{literal}{3}{/literal}" title="3 numeri" type="password" class="form-control" id="cvCode" placeholder="CVV" required />
+                                <input pattern="[0-9]{literal}{3}{/literal}" title="3 numeri" minlength="3" maxlength="3" type="password" class="form-control" id="cvCode" placeholder="CVV" required />
                             </div>
                         </div>
                     </div>
-                   
-                </div>
+
             </div>
             <ul class="nav nav-pills nav-stacked col-12" >
                 <li class="active col-12" style="padding: 0;"><a href="#"><span class="badge pull-right "><span class="glyphicon glyphicon-euro"></span>{$Totale}</span> Totale</a>
@@ -73,7 +70,7 @@
             <br/>
             <input class="btn btn-success btn-lg btn-block col-12" type="submit" value="Paga ora">
         </div>
-    </div> 
+    </div>
 </form>
 
 
