@@ -332,6 +332,8 @@ class COrdine
         $b = FOrdine::storeECompostoDa($_SESSION['ordine_parziale']->getProdottiOrdinati(), $_SESSION['lastIDOrdine']);
         if($a === true && $b === true)
         {
+            unset($_COOKIE['carrello']);
+            setcookie('carrello', null, -1, '/');
             print("Ordine effettuato con successo!! Grazie per aver scelto 'Il Ristorante'!!");
             header("Refresh:2; URL=/restaurant/Homepage");
         }

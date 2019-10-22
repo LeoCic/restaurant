@@ -10,14 +10,12 @@
 </head>
 
 <body>
-<div class = "row">
+<div class = "container">
 
-
-    <div class="col-lg-8 col-md-12 col-xs-12 col-sm-12" >
-        <div class="container">
+    <div class="row">
+    <div class="col-lg-8 col-md-8 col-xs-12 col-sm-12" >
 
             <div class="table-responsive">
-
                 <table class="table table-bordered">
                     <thead class="thead-dark">
 
@@ -41,18 +39,20 @@
                     <th>{$Ordine->getPrezzoTotale()}</th>
                     </tbody>
                 </table>
-
-                <div class="col-lg-4  col-md-12  col-xs-12 col-sm-12">
+            </div>
+    </div>
+                <div class="col-lg-4  col-md-8  col-xs-12 col-sm-12">
                     <div class="container">
-                        <form method="POST" action="/restaurant/Ordine/OrdineEffettuato">
+                        <form method="POST" action="/restaurant/Ordine/ConfermaOrdine">
 
                             <div class="form-group">
                                 <div class="col-md-12">
                                     <div class="row">
+
                                         <label for="usr" class="col-md-12 text-center">Data e ora di
                                             consegna:</label>
                                         <input type="txt" class="form-control col-md-6 "
-                                               placeholder="{$Ordine->getDataConsegna()->format('m-d')}"
+                                               placeholder="{$Ordine->getDataConsegna()->format('d-m-Y')}"
                                                readonly="readonly" id="usr" name="dataconsegna" required>
                                         <!--label for="usr">Ora Consegna:</label> -->
                                         <input type="text" class="form-control col-md-6" name="oraconsegna"
@@ -130,22 +130,7 @@
 
             </div>
 
-            {$Ordine->getDataConsegna()->format('Y-m-d H:i')}
-            <br>
-            {$Ordine->getLuogoConsegna()->getComune()}
-            <br>
-            {$Ordine->getLuogoConsegna()->getVia()}
-            <br>
-            {$Ordine->getLuogoConsegna()->getN_Civico()}
-            <br>
-            {$Ordine->getNota()}
-            <br>
-            {$Ordine->getTelefonoConsegna()}
-            <br>
-            {$Ordine->getPuntiUsati()}
 
-
-            <a href="/restaurant/Ordine/ConfermaOrdine">CONFERMA ORDINE</a>
 
         </div>
     </div>
