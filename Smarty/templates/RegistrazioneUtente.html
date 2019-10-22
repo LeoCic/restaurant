@@ -10,7 +10,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="" contenteditable="true"><strong>Inserisci i dati per la registrazione:</strong></h1>
+          <h1 class="" contenteditable="false"><strong>Inserisci i dati per la registrazione:</strong></h1>
 
           {if isset($error)}
           <p>{$error}</p>
@@ -43,7 +43,7 @@
                                    value="39" minlength="2"
                              maxlength="3" readonly="readonly">
                             <input type="tel" class="form-control col-md-9" title="Formato richiesto 10 numeri"
-                                   name="telefono" pattern="[0-9]{literal}{10}{/literal}" placeholder="Telefono" required>
+                                   name="telefono" minlength="10" maxlength="10" pattern="[0-9]{literal}{10}{/literal}" placeholder="Telefono" required>
                     </div>
                   </div>
                 </div>
