@@ -133,12 +133,12 @@ class CUtente
                                 {
                                     session_start();
                                     $_SESSION['username'] = $username;
-                                    $_SESSION['sconto'] =false;header('Location: /restaurant/Ordine/MostraListaProdotti');
+                                    $_SESSION['sconto'] =false;
+                                    header('Location: /restaurant/Ordine/MostraListaProdotti');
                                 }
                                 else
                                 {
-                                    if (FUtente::store($utente) === false) $error = 'store fallita';
-                                    //$error = "C'è stato un errore. Per favore reinserire i dati";
+                                    //if (FUtente::store($utente) === false) $error = 'store fallita';/$error = "C'è stato un errore. Per favore reinserire i dati";
                                     $view = new VUtente();
                                     $view->MostraFormConErrore($error);
                                 }
