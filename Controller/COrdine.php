@@ -84,7 +84,7 @@ class COrdine
             $_SESSION['prezzo_totale'] = $prezzo;
 
             $carrello = serialize($_SESSION['ordine_parziale']->getProdottiOrdinati());
-            setcookie("carrello","$carrello",time() + 60*60*24*30,"/");
+            setcookie("carrello","$carrello",time() + 60*60*24*30,"/","",TRUE);
 
             $view = new VOrdine();
             $smarty = self::InfoRistorante();
