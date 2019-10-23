@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="/restaurant/Smarty/css/theme.css" type="text/css">
     </head>
 
-<body>
+<body >
 
 	<div class="container-fluid">
 
@@ -20,7 +20,7 @@
                 {if (isset($user)) }
                 <b>Benvenuto {$user}</b>
                 {/if}
-                <div class="col-lg-11 col-md-10" style="text-align: center" ><b><a href="/restaurant/Homepage">{$nome_ristorante}</a></b></div>
+                <div class="col-lg-11 col-md-10" style="text-align: center" ><a  href="/restaurant/Homepage"><h2>{$nome_ristorante}</h2></a></div>
 
                 <div class="col-lg-1 col-md-1" >
                     <div class="container">
@@ -40,7 +40,7 @@
                     </div>    </div>
 
                 {else}
-                <div class="col-lg-10 col-md-9" style="text-align: center" ><b>{$nome_ristorante}</b></div>
+                <div class="col-lg-10 col-md-9" style="text-align: center" ><a  href="/restaurant/Homepage"><h2>{$nome_ristorante}</h2></a></div>
 
                 <div class="col-lg-2 col-md-2" >
                     <div class="container">
@@ -73,3 +73,4 @@
                 {/if}
             </div>
         </div>
+

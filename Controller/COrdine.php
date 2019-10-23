@@ -7,6 +7,13 @@ class COrdine
 
     static function EffettuaOrdine()
     {
+        if(!CUtente::isLogged())
+        {
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else
+        {
         $prodotti = array();
         $ordine_parziale = new EOrdine($prodotti);
 
@@ -94,6 +101,7 @@ class COrdine
             $view->RiepilogoOrdine($smarty, $punti);
         }
     }
+    }
 
     static function MostraListaProdotti()
     {
@@ -139,130 +147,166 @@ class COrdine
 
     static function SceltaTipoPagamento()
     {
-        session_start();
-        $data = $_POST['dataconsegna'].' '.$_POST['oraconsegna'].':'.'00';
-        $data_consegna = DateTime::createFromFormat('Y-m-d H:i:s', $data);
-
-        $differenza = $data_consegna->diff(new DateTime());
-        if($differenza->invert === 1)
+        if(!CUtente::isLogged())
         {
-            $_SESSION['ordine_parziale']->setDataConsegna($data_consegna);
-            $luogo = new ELuogo($_POST['Comune'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
-            $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
-            $_SESSION['ordine_parziale']->setTelefonoConsegna($_POST['telefono']);
-            $_SESSION['ordine_parziale']->setNota($_POST['note']);
-            $_SESSION['ordine_parziale']->setPuntiUsati($_POST['punti_usati']);
-
-            $view = new VOrdine();
-            $view->SceltaTipoPagamento();
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
         }
-        else
-        {
-            $view = new VOrdine();
-            $smarty = self::InfoRistorante();
-            if(!CUtente::isLogged()) {$smarty->assign('logged', false);}
-            else {$smarty->assign('logged', true);}
-            $punti = (FUtente::load($_SESSION['username']))->getPunti();
-            $error = "La data di consegna inserita è errata";
-            $view->RiepilogoOrdineErrore($smarty, $punti, $error);
-        }
-    }
+        else {
+            session_start();
+            $data = $_POST['dataconsegna'] . ' ' . $_POST['oraconsegna'] . ':' . '00';
+            $data_consegna = DateTime::createFromFormat('Y-m-d H:i:s', $data);
 
-    static function MostraDatiPagamento()
-    {
-        $view = new VOrdine();
-        $view->MostraDatiPagamento();
+            $differenza = $data_consegna->diff(new DateTime());
+            if ($differenza->invert === 1) {
+                $_SESSION['ordine_parziale']->setDataConsegna($data_consegna);
+                $luogo = new ELuogo($_POST['Comune'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
+                $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+                $_SESSION['ordine_parziale']->setTelefonoConsegna($_POST['telefono']);
+                $_SESSION['ordine_parziale']->setNota($_POST['note']);
+                $_SESSION['ordine_parziale']->setPuntiUsati($_POST['punti_usati']);
+
+                $view = new VOrdine();
+                $view->SceltaTipoPagamento();
+            } else {
+                $view = new VOrdine();
+                $smarty = self::InfoRistorante();
+                if (!CUtente::isLogged()) {
+                    $smarty->assign('logged', false);
+                } else {
+                    $smarty->assign('logged', true);
+                }
+                $punti = (FUtente::load($_SESSION['username']))->getPunti();
+                $error = "La data di consegna inserita è errata";
+                $view->RiepilogoOrdineErrore($smarty, $punti, $error);
+            }
+        }
     }
 
     static function PagamentoCarta()
     {
-        session_start();
-
-        $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
-        if($_SESSION['sconto'] == false)
+        if(!CUtente::isLogged())
         {
-            $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
-            $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
-            $_SESSION['sconto']= true;
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
         }
+        else {
+            session_start();
 
-        $view = new VOrdine();
-        $view->PagamentoCarta();
+            $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
+            if ($_SESSION['sconto'] == false) {
+                $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
+                $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+                $_SESSION['sconto'] = true;
+            }
+
+            $view = new VOrdine();
+            $view->PagamentoCarta();
+        }
     }
 
     static function PagamentoContanti()
     {
-        session_start();
-        $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
-        if($_SESSION['sconto'] == false)
+        if(!CUtente::isLogged())
         {
-            $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
-            $_SESSION['sconto']= true;
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
         }
+        else {
+            session_start();
+            $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
+            if ($_SESSION['sconto'] == false) {
+                $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+                $_SESSION['sconto'] = true;
+            }
 
-        header('Location: /restaurant/Ordine/RiepilogoFinale');
+            header('Location: /restaurant/Ordine/RiepilogoFinale');
+        }
     }
 
     static function RiepilogoFinale()
     {
-        session_start();
-        $view = new VOrdine();
-        $view->RiepilogoFinale();
+        if(!CUtente::isLogged())
+        {
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else {
+            session_start();
+            $view = new VOrdine();
+            $view->RiepilogoFinale();
+        }
     }
 
     static function ConfermaOrdine()
     {
-        session_start();
-        $dataOrd = new DateTime();
-        $_SESSION['ordine_parziale']->setDataOrdinazione($dataOrd);
-        $utente = FUtente::load($_SESSION['username']);
-        $utente->setPunti($utente->getPunti() - $_SESSION['ordine_parziale']->getPuntiUsati());
-        $utente->setDataUltimoOrdine($dataOrd->format('Y-m-d'));
-        if($_SESSION['ordine_parziale']->getPrezzoTotale() >= 10) {$utente->setPunti($utente->getPunti() + 1);}
-
-        $numero_ordini = $utente->getOrdiniCumulati();
-        $numero_ordini = $numero_ordini + 1;
-        $utente->setOrdiniCumulati($numero_ordini);
-        FUtente::update($utente);
-
-        $luogo_consegna = $_SESSION['ordine_parziale']->getLuogoConsegna();
-        $Comune = $luogo_consegna->getComune();
-        $Via = $luogo_consegna->getVia();
-        $N_Civico = $luogo_consegna->getN_Civico();
-        $Provincia = "AQ";
-        $luogo = new ELuogo($Comune, $Provincia, $Via, $N_Civico);
-        $controllo = FLuogo::exist2($Comune, $Via, $N_Civico);
-        if($controllo === false) {FLuogo::store($luogo);}
-
-        $IDL = FLuogo::id($Comune,$Via,$N_Civico);
-
-        $_SESSION['ordine_parziale']->setIDLuogo($IDL);
-        $luogo->setIDLuogo($IDL);
-        $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
-        $_SESSION['ordine_parziale']->setNomeUtente($_SESSION['username']);
-
-        $a = FOrdine::store($_SESSION['ordine_parziale']);
-        $b = FOrdine::storeECompostoDa($_SESSION['ordine_parziale']->getProdottiOrdinati(), $_SESSION['lastIDOrdine']);
-        if($a === true && $b === true)
+        if(!CUtente::isLogged())
         {
-            unset($_COOKIE['carrello']);
-            setcookie('carrello', null, -1, '/');
-            print("Ordine effettuato con successo!! Grazie per aver scelto 'Il Ristorante'!!");
-            header("Refresh:2; URL=/restaurant/Homepage");
-            $_SESSION['sconto']=false;
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
         }
         else
         {
-            print("Ordine non effettuato. Riprova.");
-            header("Refresh:2; URL=/restaurant/Ordine/SceltaTipoPagamento");
+            session_start();
+            $dataOrd = new DateTime();
+            $_SESSION['ordine_parziale']->setDataOrdinazione($dataOrd);
+            $utente = FUtente::load($_SESSION['username']);
+            $utente->setPunti($utente->getPunti() - $_SESSION['ordine_parziale']->getPuntiUsati());
+            $utente->setDataUltimoOrdine($dataOrd->format('Y-m-d'));
+            if ($_SESSION['ordine_parziale']->getPrezzoTotale() >= 10) {
+                $utente->setPunti($utente->getPunti() + 1);
+            }
+
+            $numero_ordini = $utente->getOrdiniCumulati();
+            $numero_ordini = $numero_ordini + 1;
+            $utente->setOrdiniCumulati($numero_ordini);
+            FUtente::update($utente);
+
+            $luogo_consegna = $_SESSION['ordine_parziale']->getLuogoConsegna();
+            $Comune = $luogo_consegna->getComune();
+            $Via = $luogo_consegna->getVia();
+            $N_Civico = $luogo_consegna->getN_Civico();
+            $Provincia = "AQ";
+            $luogo = new ELuogo($Comune, $Provincia, $Via, $N_Civico);
+            $controllo = FLuogo::exist2($Comune, $Via, $N_Civico);
+            if ($controllo === false) {
+                FLuogo::store($luogo);
+            }
+
+            $IDL = FLuogo::id($Comune, $Via, $N_Civico);
+
+            $_SESSION['ordine_parziale']->setIDLuogo($IDL);
+            $luogo->setIDLuogo($IDL);
+            $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
+            $_SESSION['ordine_parziale']->setNomeUtente($_SESSION['username']);
+
+            $a = FOrdine::store($_SESSION['ordine_parziale']);
+            $b = FOrdine::storeECompostoDa($_SESSION['ordine_parziale']->getProdottiOrdinati(), $_SESSION['lastIDOrdine']);
+            if ($a === true && $b === true) {
+                unset($_COOKIE['carrello']);
+                setcookie('carrello', null, -1, '/');
+                print("Ordine effettuato con successo!! Grazie per aver scelto 'Il Ristorante'!!");
+                header("Refresh:2; URL=/restaurant/Homepage");
+                $_SESSION['sconto'] = false;
+            } else {
+                print("Ordine non effettuato. Riprova.");
+                header("Refresh:2; URL=/restaurant/Ordine/SceltaTipoPagamento");
+            }
         }
     }
 
     static function SvuotaCarrello()
     {
-        session_start();
-        unset($_COOKIE['carrello']);
-        setcookie('carrello', null, -1, '/');
-        header('Location: /restaurant/Ordine/MostraListaProdotti');
+        if(!CUtente::isLogged())
+        {
+            print("Funzione non disponibile se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else {
+            session_start();
+            unset($_COOKIE['carrello']);
+            setcookie('carrello', null, -1, '/');
+            header('Location: /restaurant/Ordine/MostraListaProdotti');
+        }
     }
 }
