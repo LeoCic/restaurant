@@ -170,14 +170,14 @@ class EOrdine
             if($val[0]->getCategoria() === 'Bevande')
             {
                 $item = new EBevanda($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getGradoAlcolico(), $val[0]->getGassato(), $val[0]->getDisponibilita());
-                array_push($array1 , $item, $val[1]);
+                array_push($array1, $item, $val[1]);
                 array_push($contenitore, $array1);
                 array_pop($array1);
                 array_pop($array1);
             } else if ($val[0]->getCategoria() !== 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
-                array_push($array1 , $item, $val[1]);
+                array_push($array1, $item, $val[1]);
                 array_push($contenitore, $array1);
                 array_pop($array1);
                 array_pop($array1);            }
@@ -252,13 +252,11 @@ class EOrdine
 
     public function toString() : String
     {
-
         return $this->getID() . "\n" . $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getNomeUtente() . "\n" . $this->getLuogoConsegna()->getComune() . "\n" . $this->getLuogoConsegna()->getProvincia() . "\n" . $this->getLuogoConsegna()->getVia() . "\n" . $this->getLuogoConsegna()->getN_Civico() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna();
     }
 
     public function toString1() : String
     {
-
         return $this->getDataOrdinazione()->format("Y-m-d H:i:s") . "\n" . $this->getDataConsegna()->format("Y-m-d H:i:s") . "\n" . $this->getNota() . "\n" . $this->getPrezzoTotale() . "\n" . $this->getTipoPagamento() . "\n" . $this->getPuntiUsati() . "\n" . $this->getTelefonoConsegna() . "\n" . $this->getNomeUtente() . "\n" . $this->getIDLuogo();
     }
 
