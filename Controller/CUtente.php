@@ -149,8 +149,7 @@ class CUtente
                                 {
                                     if (FUtente::store($utente) === false)
                                     {
-                                        $error = $utente->getPasswordHash();
-                                        //$error = "C'è stato un errore. Per favore reinserire i dati";
+                                        $error = "C'è stato un errore. Per favore reinserire i dati";
                                         $view = new VUtente();
                                         $view->MostraFormConErrore($error);
                                     }
