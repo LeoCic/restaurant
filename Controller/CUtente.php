@@ -51,39 +51,47 @@ class CUtente
 
     static function EliminaProfilo()
     {
-        $view = new VUtente();
-        $view->EliminaProfilo();
+        if(!CUtente::isLogged())
+        {
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else {
+            $view = new VUtente();
+            $view->EliminaProfilo();
+        }
     }
 
     static function RimuoviProfilo()
     {
-        session_start();
-        if($_POST['password'] === $_POST['conferma_password'])
+        if(!CUtente::isLogged())
         {
-            $utente = FUtente::load($_SESSION['username']);
-            $password = $_POST['password'];
-            $password_cifrata = $utente->getPasswordHash();
-            if(password_verify("$password", "$password_cifrata") === true)
-            {
-                FUtente::delete($_SESSION['username']);
-                session_unset();
-                session_destroy();
-                $msg = "Profilo eliminato con successo";
-                print($msg);
-                header("Refresh:2; URL=/restaurant/Homepage");
-            }
-            else
-            {
-                $error = "Password errata";
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else {
+            session_start();
+            if ($_POST['password'] === $_POST['conferma_password']) {
+                $utente = FUtente::load($_SESSION['username']);
+                $password = $_POST['password'];
+                $password_cifrata = $utente->getPasswordHash();
+                if (password_verify("$password", "$password_cifrata") === true) {
+                    FUtente::delete($_SESSION['username']);
+                    session_unset();
+                    session_destroy();
+                    $msg = "Profilo eliminato con successo";
+                    print($msg);
+                    header("Refresh:2; URL=/restaurant/Homepage");
+                } else {
+                    $error = "Password errata";
+                    $view = new VUtente();
+                    $view->RimuoviProfiloErrore($error);
+                }
+            } else {
+                $error = "Le password non coincidono";
                 $view = new VUtente();
                 $view->RimuoviProfiloErrore($error);
             }
-        }
-        else
-        {
-            $error = "Le password non coincidono";
-            $view = new VUtente();
-            $view->RimuoviProfiloErrore($error);
         }
     }
 
@@ -161,67 +169,70 @@ class CUtente
 
     static function GestioneAccount()
     {
-        $view = new VUtente();
-        $view->GestioneAccount();
+        if(!CUtente::isLogged())
+        {
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else {
+            $view = new VUtente();
+            $view->GestioneAccount();
+        }
     }
 
     static function ModificaAccount()
     {
-        session_start();
-        $utente = FUtente::load($_SESSION['username']);
-        $password = $_POST['password'];
-        $password_cifrata = $utente->getPasswordHash();
-        if(password_verify("$password", "$password_cifrata") === true)
+        if(!CUtente::isLogged())
         {
-            if ($_POST['password'] === $_POST['conferma_password'])
-            {
-                $utente->setPassword(($_POST['password']));
-                if(FUtente::verificaEmail($_POST['email']) === false)
-                {
-                    if (!empty($_POST['email']))
-                    {
-                        $utente->setEmail($_POST['email']);
-                    }
-                    if (!empty($_POST['telefono']))
-                    {
-                        $utente->setTelefono($_POST['telefono']);
-                    }
-                    $nome = $utente->getNome();
-                    $cognome = $utente->getCognome();
-                    $email = $utente->getEmail();
-                    $telefono = $utente->getTelefono();
-                    $password = $utente->getPasswordHash();
-                    $punti = $utente->getPunti();
-                    $ordini_cumulati = $utente->getOrdiniCumulati();
-                    $data_ultimo_ordine = $utente->getDataUltimoOrdine();
-                    $risultato = $data_ultimo_ordine->format('Y-m-d');
+            print("Non puoi accedere alla pagina se non sei loggato, effettua il login");
+            header("Refresh:3; URL=/restaurant/Homepage");
+        }
+        else {
+            session_start();
+            $utente = FUtente::load($_SESSION['username']);
+            $password = $_POST['password'];
+            $password_cifrata = $utente->getPasswordHash();
+            if (password_verify("$password", "$password_cifrata") === true) {
+                if ($_POST['password'] === $_POST['conferma_password']) {
+                    $utente->setPassword(($_POST['password']));
+                    if (FUtente::verificaEmail($_POST['email']) === false) {
+                        if (!empty($_POST['email'])) {
+                            $utente->setEmail($_POST['email']);
+                        }
+                        if (!empty($_POST['telefono'])) {
+                            $utente->setTelefono($_POST['telefono']);
+                        }
+                        $nome = $utente->getNome();
+                        $cognome = $utente->getCognome();
+                        $email = $utente->getEmail();
+                        $telefono = $utente->getTelefono();
+                        $password = $utente->getPasswordHash();
+                        $punti = $utente->getPunti();
+                        $ordini_cumulati = $utente->getOrdiniCumulati();
+                        $data_ultimo_ordine = $utente->getDataUltimoOrdine();
+                        $risultato = $data_ultimo_ordine->format('Y-m-d');
 
-                    $utente_aggiornato = new EUtente($nome, $cognome, $_SESSION['username'], $email, $telefono, $password, $punti, $ordini_cumulati, $risultato);
-                    FUtente::update($utente_aggiornato);
+                        $utente_aggiornato = new EUtente($nome, $cognome, $_SESSION['username'], $email, $telefono, $password, $punti, $ordini_cumulati, $risultato);
+                        FUtente::update($utente_aggiornato);
 
-                    $msg = "Dati modificati con successo!";
-                    print("$msg");
-                    header("Refresh:2; URL=/restaurant/Homepage");
-                }
-                else
-                {
-                    $error = "Email già in uso";
+                        $msg = "Dati modificati con successo!";
+                        print("$msg");
+                        header("Refresh:2; URL=/restaurant/Homepage");
+                    } else {
+                        $error = "Email già in uso";
+                        $view = new VUtente();
+                        $view->GestioneAccountErrore($error);
+                    }
+                } else {
+                    $error = "Le password non coincidono";
                     $view = new VUtente();
                     $view->GestioneAccountErrore($error);
                 }
-            }
-            else
-            {
-                $error = "Le password non coincidono";
+            } else {
+                $error = "Password errata";
                 $view = new VUtente();
                 $view->GestioneAccountErrore($error);
             }
-        }
-        else
-        {
-            $error = "Password errata";
-            $view = new VUtente();
-            $view->GestioneAccountErrore($error);
         }
     }
 }
