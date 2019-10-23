@@ -31,7 +31,7 @@ class VUtente
         $this->smarty->assign('nome_utente', $_SESSION['username']);
         $this->smarty->assign('telefono', $utente->getTelefono());
         $this->smarty->assign('email', $utente->getEmail());
-        $this->smarty->display('GestioneAccount2.html');
+        $this->smarty->display('GestioneAccount.html');
     }
 
     public function GestioneAccountErrore($error)
@@ -43,7 +43,7 @@ class VUtente
         $this->smarty->assign('telefono', $utente->getTelefono());
         $this->smarty->assign('email', $utente->getEmail());
         $this->smarty->assign('error', $error);
-        $this->smarty->display('GestioneAccount2.html');
+        $this->smarty->display('GestioneAccount.html');
     }
 
     public function EliminaProfilo()
