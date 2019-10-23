@@ -9,12 +9,8 @@ require_once 'Indice.php';
     static private $Proprietario;
     static private $Nome;
     static private $GiudizioComplessivo;
-    static private $StatoApertura;
     static private $Giorni_Di_Apertura = array('lunedi' => false , 'martedi' => false , 'mercoledi' => false , 'giovedi' => false , 'venerdi' => false , 'sabato' => false , 'domenica' => false );
     static private $CatalogoProdotti = array(); // di prodotti
-    static private $AvvisiAttivi;
-    static private $ChiusoStraordinario;
-    static private $PromozioniAttive = array();
     static private $EntitaScontoBase;
     static private $EntitaScontoAPunti;
 
@@ -78,16 +74,6 @@ require_once 'Indice.php';
         self::$GiudizioComplessivo = $GiudizioComplessivo;
     }
 
-    public static function getStatoApertura() : bool
-    {
-        return self::$StatoApertura;
-    }
-
-    public static function setStatoApertura( bool $StatoApertura) :void
-    {
-        self::$StatoApertura = $StatoApertura;
-    }
-
     public static function getGiorniDiApertura() : array
     {
         /* VERSIONE CON DATETIME
@@ -112,17 +98,6 @@ require_once 'Indice.php';
 
     }
 
-    public static function setAttive(array $Attive) :void
-    {
-        self::$PromozioniAttive[0] = $Attive[0];
-        self::$PromozioniAttive[1] = $Attive[1];
-    }
-
-    public static function getAttive() : array // di bool
-    {
-        return self::$PromozioniAttive;
-    }
-
     public static function setEntitaScontoBase(float $EntitaScontoBase) : void
     {
         self::$EntitaScontoBase=$EntitaScontoBase;
@@ -141,36 +116,6 @@ require_once 'Indice.php';
     public static function getEntitaScontoAPunti() :float
     {
         return self::$EntitaScontoAPunti;
-    }
-
-    public static function getAvvisiAttivi() : bool
-    {
-        return self::$AvvisiAttivi;
-    }
-
-    public static function setAvvisiAttivi( bool $AvvisiAttivi): void
-    {
-        self::$AvvisiAttivi = $AvvisiAttivi;
-    }
-
-    public static function getChiusoStraordinario() : bool
-    {
-        return self::$ChiusoStraordinario;
-    }
-
-    public static function setChiusoStraordinario(bool $ChiusoStraordinario): void
-    {
-        self::$ChiusoStraordinario = $ChiusoStraordinario;
-    }
-
-    public static function getPromozioniAttive(): array // di bool
-    {
-        return self::$PromozioniAttive;
-    }
-
-    public static function setPromozioniAttive(array $PromozioniAttive): void
-    {
-        self::$PromozioniAttive = $PromozioniAttive;
     }
 
     public static function getCatalogoProdotti() : array //di prodotti
@@ -207,15 +152,6 @@ require_once 'Indice.php';
 
     }
 
-
-
-
-
-    public static function AvvisaUtentiAbituali() : void
-    {
-
-    }
-
     public static function toString() : String
     {
 
@@ -227,16 +163,10 @@ require_once 'Indice.php';
             print "nome = "."$value->getNome()"."\t";
    */
 
-        print ("Promozioni attive :");
-        print_r(self::$PromozioniAttive);
-        print"\n";
-
         return "sede : ".self::getSede()->getComune()."\t".self::getSede()->getProvincia()."\t".self::getSede()->getVia()
             ."\t".self::getSede()->getN_Civico()."\n"."cellulare : ".self::$Cellulare."\n"."TelefonoFisso : ".
             self::$TelefonoFisso."\n"."proprietario : ".self::$Proprietario."\n"."nome : ".self::$Nome.
-            "\n"."Giudizio Complessivo : ".self::$GiudizioComplessivo."\n"."Stato Apertura : "
-            .self::$StatoApertura."\n"."avvisi attivi : ".self::$AvvisiAttivi."\n"."chiuso straordinario : ".self::$ChiusoStraordinario
-            ."\n"."entita sconto base : ".self::$EntitaScontoBase."\n"."entita sconto a punti : ".self::$EntitaScontoAPunti;
+            "\n"."Giudizio Complessivo : ".self::$GiudizioComplessivo."\n"."entita sconto base : ".self::$EntitaScontoBase."\n"."entita sconto a punti : ".self::$EntitaScontoAPunti;
     }
 
 

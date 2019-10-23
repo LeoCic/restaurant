@@ -26,17 +26,12 @@ INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES
 
 CREATE TABLE `Ristorante`
 (
-    `Sede` text NOT NULL,
     `Nome` varchar(30) NOT NULL,
     `Cellulare` varchar(13) NOT NULL,
     `TelefonoFisso` varchar(13) NOT NULL,
     `Proprietario` varchar(80) NOT NULL,
     `GiudizioComplessivo` float NOT NULL,
-    `StatoApertura` bit(1) NOT NULL,
     `GiorniDiApertura` longtext NOT NULL,
-    `AvvisiAttivi` bit(1) NOT NULL,
-    `ChiusoStraordinario` bit(1) NOT NULL,
-    `PromozioniAttive` text NOT NULL,
     `EntitaScontoBase` float NOT NULL,
     `EntitaScontoAPunti` float NOT NULL,
     `IDLuogo` bigint NOT NULL

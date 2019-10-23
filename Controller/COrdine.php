@@ -134,13 +134,9 @@ class COrdine
          $telefono_fisso = ERistorante::getTelefonoFisso();
          $nome_proprietario = ERistorante::getProprietario();
          $giudizio_complessivo = ERistorante::getGiudizioComplessivo();
-         $stato_apertura = ERistorante::getStatoApertura();
          $array_giorni = array('Lunedì: 08:00-17:00', 'Martedì: 09:30-19:40', 'Mercoledì: 09:30-19:40', 'Giovedì: 09:30-19:40',  'Venerdì: 09:30-19:40', 'Sabato: 09:30-19:40',  'Domenica: Chiuso');
-
-         if($stato_apertura == true) {$stato_apertura = "SI";}
-         else {$stato_apertura = "NO";}
          $view = new VOrdine();
-         $smarty = $view->InfoRistorante($nome_ristorante, $sede, $cellulare, $telefono_fisso, $nome_proprietario, $giudizio_complessivo, $stato_apertura, $array_giorni);
+         $smarty = $view->InfoRistorante($nome_ristorante, $sede, $cellulare, $telefono_fisso, $nome_proprietario, $giudizio_complessivo, $array_giorni);
          return $smarty;
     }
 

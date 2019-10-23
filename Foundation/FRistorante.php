@@ -60,9 +60,6 @@ abstract class FRistorante
                ERistorante::setTelefonoFisso($ris[0]['TelefonoFisso']);
                ERistorante::setProprietario($ris[0]['Proprietario']);
                ERistorante::setGiudizioComplessivo($ris[0]['GiudizioComplessivo']);
-               ERistorante::setStatoApertura($ris[0]['StatoApertura']);
-               ERistorante::setAvvisiAttivi($ris[0]['AvvisiAttivi']);
-               ERistorante::setChiusoStraordinario($ris[0]['ChiusoStraordinario']);
                ERistorante::setEntitaScontoAPunti($ris[0]['EntitaScontoAPunti']);
                ERistorante::setEntitaScontoBase($ris[0]['EntitaScontoBase']);
                $giorni = explode("=", $ris[0]['GiorniDiApertura']);
@@ -70,10 +67,6 @@ abstract class FRistorante
                    $giorniDiApertura[$giorni[$i]] = $giorni[$i+1]; //crea l'array in un formato predefinito sul db
                }
                ERistorante::setGiorniDiApertura($giorniDiApertura);
-               $promozioni = explode("=", $ris[0]['PromozioniAttive']);
-               $promozioniAttive[0] = $promozioni[1];
-               $promozioniAttive[1] = $promozioni[3];
-               ERistorante::setPromozioniAttive($promozioniAttive);
 
            }
        }
