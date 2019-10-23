@@ -70,7 +70,7 @@ class CUtente
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+          //  session_start();
             if ($_POST['password'] === $_POST['conferma_password']) {
                 $utente = FUtente::load($_SESSION['username']);
                 $password = $_POST['password'];
@@ -140,7 +140,7 @@ class CUtente
 
                                 if (FUtente::store($utente) === true)
                                 {
-                                    session_start();
+                                   // session_start();
                                     $_SESSION['username'] = $username;
                                     $_SESSION['sconto'] =false;
                                     header('Location: /restaurant/Ordine/MostraListaProdotti');
@@ -188,7 +188,7 @@ class CUtente
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+            //session_start();
             $utente = FUtente::load($_SESSION['username']);
             $password = $_POST['password'];
             $password_cifrata = $utente->getPasswordHash();

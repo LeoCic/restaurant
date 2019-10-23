@@ -24,7 +24,7 @@ class VUtente
 
     public function GestioneAccount()
     {
-        session_start();
+       // session_start();
         $utente = FUtente::load($_SESSION['username']);
         $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
         $this->smarty->assign('TELEFONO', $utente->getTelefono());
@@ -44,7 +44,7 @@ class VUtente
 
     public function EliminaProfilo()
     {
-        session_start();
+        //session_start();
         $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
         $this->smarty->display('EliminaProfilo.html');
     }

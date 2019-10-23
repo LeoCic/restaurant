@@ -84,7 +84,6 @@ class COrdine
             }
 
             $prezzo = $ordine_parziale->CalcolaPrezzoTotale();
-            session_start();
 
             $_SESSION['ordine_parziale'] = $ordine_parziale;
             $_SESSION['ordine_parziale']->setPrezzoTotale($prezzo);
@@ -153,7 +152,7 @@ class COrdine
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+            //session_start();
             $data = $_POST['dataconsegna'] . ' ' . $_POST['oraconsegna'] . ':' . '00';
             $data_consegna = DateTime::createFromFormat('Y-m-d H:i:s', $data);
 
@@ -191,7 +190,7 @@ class COrdine
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+           // session_start();
 
             $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
             if ($_SESSION['sconto'] == false) {
@@ -213,7 +212,7 @@ class COrdine
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+        //    session_start();
             $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
             if ($_SESSION['sconto'] == false) {
                 $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
@@ -232,7 +231,7 @@ class COrdine
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+           // session_start();
             $view = new VOrdine();
             $view->RiepilogoFinale();
         }
@@ -247,7 +246,7 @@ class COrdine
         }
         else
         {
-            session_start();
+         //   session_start();
             $dataOrd = new DateTime();
             $_SESSION['ordine_parziale']->setDataOrdinazione($dataOrd);
             $utente = FUtente::load($_SESSION['username']);
@@ -303,7 +302,7 @@ class COrdine
             header("Refresh:3; URL=/restaurant/Homepage");
         }
         else {
-            session_start();
+           // session_start();
             unset($_COOKIE['carrello']);
             setcookie('carrello', null, -1, '/');
             header('Location: /restaurant/Ordine/MostraListaProdotti');
