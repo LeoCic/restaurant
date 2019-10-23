@@ -14,9 +14,9 @@ require_once 'Indice.php';
     static private $CatalogoProdotti = array(); // di prodotti
     static private $AvvisiAttivi;
     static private $ChiusoStraordinario;
-    static private $PromozioniAttive = array(); //di bool
-     static private $EntitaScontoBase = 10;
-     static private $EntitaScontoAPunti = 1;
+    static private $PromozioniAttive = array();
+    static private $EntitaScontoBase;
+    static private $EntitaScontoAPunti;
 
     public static function getSede(): ELuogo
     {

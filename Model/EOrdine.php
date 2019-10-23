@@ -264,11 +264,13 @@ class EOrdine
 
     public function CalcolaPrezzoScontato($punti) : float
     {
+        FRistorante::loadRistorante();
         return $this->PrezzoTotale - $punti * ERistorante::getEntitaScontoAPunti();
     }
 
     public function CalcolaPrezzoConCarta() : float
     {
+        FRistorante::loadRistorante();
         return $this->PrezzoTotale - (ERistorante::getEntitaScontoBase() * $this->PrezzoTotale) / 100;
     }
 }
