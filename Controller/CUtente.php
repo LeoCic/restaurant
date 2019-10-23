@@ -190,17 +190,21 @@ class CUtente
         else {
             //session_start();
             $utente = FUtente::load($_SESSION['username']);
-            $password = $_POST['password'];
+            $password_precedente = $_POST['password_precedente'];
             $password_cifrata = $utente->getPasswordHash();
-            if (password_verify("$password", "$password_cifrata") === true) {
-                if ($_POST['password'] === $_POST['conferma_password']) {
-                    $utente->setPassword(($_POST['password']));
+            if (password_verify("$password_precedente", "$password_cifrata") === true) {
+                if ($_POST['nuova_password'] === $_POST['conferma_nuova_password']) {
+                    $utente->setPassword(($_POST['nuova_password']));
                     if (FUtente::verificaEmail($_POST['email']) === false) {
-                        if (!empty($_POST['email'])) {
-                            $utente->setEmail($_POST['email']);
-                        }
+                        if (!empty($_POST['nome'])) {
+                            $utente->setNome($_POST['nome']); }
+                        if (!empty($_POST['cognome'])) {
+                            $utente->setCognome($_POST['cognome']); }
                         if (!empty($_POST['telefono'])) {
                             $utente->setTelefono($_POST['telefono']);
+                        }
+                        if (!empty($_POST['email'])) {
+                            $utente->setEmail($_POST['email']);
                         }
                         $nome = $utente->getNome();
                         $cognome = $utente->getCognome();
@@ -229,7 +233,7 @@ class CUtente
                     $view->GestioneAccountErrore($error);
                 }
             } else {
-                $error = "Password errata";
+                $error = "La password precedente è errata";
                 $view = new VUtente();
                 $view->GestioneAccountErrore($error);
             }

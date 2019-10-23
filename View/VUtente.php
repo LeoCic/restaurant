@@ -26,33 +26,37 @@ class VUtente
     {
        // session_start();
         $utente = FUtente::load($_SESSION['username']);
-        $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
-        $this->smarty->assign('TELEFONO', $utente->getTelefono());
-        $this->smarty->assign('EMAIL', $utente->getEmail());
-        $this->smarty->display('GestioneAccount.html');
+        $this->smarty->assign('nome', $utente->getNome());
+        $this->smarty->assign('cognome', $utente->getCognome());
+        $this->smarty->assign('nome_utente', $_SESSION['username']);
+        $this->smarty->assign('telefono', $utente->getTelefono());
+        $this->smarty->assign('email', $utente->getEmail());
+        $this->smarty->display('GestioneAccount2.html');
     }
 
     public function GestioneAccountErrore($error)
     {
         $utente = FUtente::load($_SESSION['username']);
-        $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
-        $this->smarty->assign('TELEFONO', $utente->getTelefono());
-        $this->smarty->assign('EMAIL', $utente->getEmail());
+        $this->smarty->assign('nome', $utente->getNome());
+        $this->smarty->assign('cognome', $utente->getCognome());
+        $this->smarty->assign('nome_utente', $_SESSION['username']);
+        $this->smarty->assign('telefono', $utente->getTelefono());
+        $this->smarty->assign('email', $utente->getEmail());
         $this->smarty->assign('error', $error);
-        $this->smarty->display('GestioneAccount.html');
+        $this->smarty->display('GestioneAccount2.html');
     }
 
     public function EliminaProfilo()
     {
         //session_start();
-        $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
+        $this->smarty->assign('nome_utente', $_SESSION['username']);
         $this->smarty->display('EliminaProfilo.html');
     }
 
     public function RimuoviProfiloErrore($error)
     {
         $this->smarty->assign('error', $error);
-        $this->smarty->assign('NOME_UTENTE', $_SESSION['username']);
+        $this->smarty->assign('nome_utente', $_SESSION['username']);
         $this->smarty->display('EliminaProfilo.html');
     }
 }
