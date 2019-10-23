@@ -26,7 +26,8 @@ class CUtente
                     $_SESSION['sconto'] =false;
                     header("Location: /restaurant/Ordine/MostraListaProdotti");
                 }
-                else {
+                else
+                {
                     $msg="user o pass errati";
                     print ("$msg");
                     header("Refresh:2; URL=/restaurant/Homepage");
@@ -138,9 +139,12 @@ class CUtente
                                 }
                                 else
                                 {
-                                    //if (FUtente::store($utente) === false) $error = 'store fallita';/$error = "C'è stato un errore. Per favore reinserire i dati";
-                                    $view = new VUtente();
-                                    $view->MostraFormConErrore($error);
+                                    if (FUtente::store($utente) === false)
+                                    {
+                                        $error = "C'è stato un errore. Per favore reinserire i dati";
+                                        $view = new VUtente();
+                                        $view->MostraFormConErrore($error);
+                                    }
                                 }
                             }
                             else
@@ -197,7 +201,7 @@ class CUtente
 
                     $msg = "Dati modificati con successo!";
                     print("$msg");
-                  //  header("Refresh:2; URL=/restaurant/Homepage");
+                    header("Refresh:2; URL=/restaurant/Homepage");
                 }
                 else
                 {
@@ -219,6 +223,5 @@ class CUtente
             $view = new VUtente();
             $view->GestioneAccountErrore($error);
         }
-
     }
 }

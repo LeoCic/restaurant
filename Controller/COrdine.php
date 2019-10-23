@@ -84,7 +84,7 @@ class COrdine
             $_SESSION['prezzo_totale'] = $prezzo;
 
             $carrello = serialize($_SESSION['ordine_parziale']->getProdottiOrdinati());
-            setcookie("carrello","$carrello",time() + 3*60,"/");
+            setcookie("carrello","$carrello",time() + 60*60*24*30,"/");
 
             $view = new VOrdine();
             $smarty = self::InfoRistorante();
@@ -120,6 +120,7 @@ class COrdine
     static function InfoRistorante()
     {
          FRistorante::loadRistorante();
+         $nome_ristorante = ERistorante::getNome();
          $luogo = ERistorante::getSede();
          $sede = $luogo->getComune().","."Via"." ".$luogo->getVia()." ".$luogo->getN_Civico();
          $cellulare = ERistorante::getCellulare();
@@ -132,7 +133,7 @@ class COrdine
          if($stato_apertura == true) {$stato_apertura = "SI";}
          else {$stato_apertura = "NO";}
          $view = new VOrdine();
-         $smarty = $view->InfoRistorante($sede, $cellulare, $telefono_fisso, $nome_proprietario, $giudizio_complessivo, $stato_apertura, $array_giorni);
+         $smarty = $view->InfoRistorante($nome_ristorante, $sede, $cellulare, $telefono_fisso, $nome_proprietario, $giudizio_complessivo, $stato_apertura, $array_giorni);
          return $smarty;
     }
 
