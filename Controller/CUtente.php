@@ -140,7 +140,7 @@ class CUtente
 
                                 if (FUtente::store($utente) === true)
                                 {
-                                   // session_start();
+                                    session_start();
                                     $_SESSION['username'] = $username;
                                     $_SESSION['sconto'] =false;
                                     header('Location: /restaurant/Ordine/MostraListaProdotti');
