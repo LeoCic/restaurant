@@ -48,7 +48,7 @@ class VOrdine
 
     }
 
-    public function InfoRistorante($nome_ristorante, $sede, $cellulare ,$telefono_fisso ,$nome_proprietario , $giudizio_complessivo,$array_giorni)
+    public function InfoRistorante($nome_ristorante, $sede, $cellulare ,$telefono_fisso ,$nome_proprietario, $array_giorni)
     {
         $this->smarty->assign('sede',$sede);
         $this->smarty->assign('nome_ristorante',$nome_ristorante);
@@ -56,7 +56,6 @@ class VOrdine
         $this->smarty->assign('cellulare',$cellulare);
         $this->smarty->assign('telefono_fisso',$telefono_fisso);
         $this->smarty->assign('nome_proprietario',$nome_proprietario);
-        $this->smarty->assign('giudizio_complessivo',$giudizio_complessivo);
 
         return $this->smarty;
 

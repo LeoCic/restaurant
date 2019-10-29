@@ -30,7 +30,6 @@ CREATE TABLE `Ristorante`
     `Cellulare` varchar(13) NOT NULL,
     `TelefonoFisso` varchar(13) NOT NULL,
     `Proprietario` varchar(80) NOT NULL,
-    `GiudizioComplessivo` float NOT NULL,
     `GiorniDiApertura` longtext NOT NULL,
     `EntitaScontoBase` float NOT NULL,
     `EntitaScontoAPunti` float NOT NULL,
@@ -67,17 +66,6 @@ CREATE TABLE `Ordine`
     `TelefonoConsegna` varchar(13),
     `NomeUtente`       varchar(20) NOT NULL,
     `IDLuogo`          bigint   NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Struttura della tabella `Giudizio`
-
-CREATE TABLE `Giudizio`
-(
-    `Commento` text NOT NULL,
-    `Punteggio` tinyint NOT NULL,
-    `Data` datetime NOT NULL,
-    `IDGiudizio` bigint PRIMARY KEY AUTO_INCREMENT,
-    `IDOrdine` bigint NOT NULL UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Struttura della tabella `Prodotto`
@@ -131,16 +119,6 @@ ALTER TABLE `Ordine`
 ALTER TABLE `Ordine`
     ADD CONSTRAINT `ha effettuato` FOREIGN KEY (`NomeUtente`) REFERENCES `Utente` (`NomeUtente`) ON DELETE CASCADE ON UPDATE CASCADE,
     ADD CONSTRAINT `va consegnato in` FOREIGN KEY (`IDLuogo`) REFERENCES `Luogo` (`IDLuogo`) ON DELETE CASCADE ON UPDATE CASCADE;
-
--- Indici per la tabella `Giudizio`
-
-ALTER TABLE `Giudizio`
-    ADD KEY `ha associato` (`IDOrdine`);
-
--- Limiti per la tabella `Giudizio`
-
-ALTER TABLE `Giudizio`
-    ADD CONSTRAINT `ha associato` FOREIGN KEY (`IDOrdine`) REFERENCES `Ordine` (`IDOrdine`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- Indici per la tabella `É_composto_da`
 

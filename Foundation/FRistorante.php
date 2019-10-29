@@ -59,7 +59,6 @@ abstract class FRistorante
                ERistorante::setNome($ris[0]['Nome']);
                ERistorante::setTelefonoFisso($ris[0]['TelefonoFisso']);
                ERistorante::setProprietario($ris[0]['Proprietario']);
-               ERistorante::setGiudizioComplessivo($ris[0]['GiudizioComplessivo']);
                ERistorante::setEntitaScontoAPunti($ris[0]['EntitaScontoAPunti']);
                ERistorante::setEntitaScontoBase($ris[0]['EntitaScontoBase']);
                $giorni = explode("=", $ris[0]['GiorniDiApertura']);
@@ -71,28 +70,6 @@ abstract class FRistorante
            }
        }
 
-       public static function calcolaGiudizioComplessivo() : float
-       {
-           $conn = FDataBase::Connect();
-           $sql = "SELECT AVG(Punteggio) FROM `Giudizio` ";
-           $riss = $conn->query($sql);
-           if ($riss->rowCount() == 1) {
-               $ris = $riss->fetchAll();
-               return $ris[0][0];
-           }
-
-       }
-       public static function storeGiudizioComplessivo() : bool
-       {
-           $giudizio = FRistorante::calcolaGiudizioComplessivo();
-           $conn = FDataBase::Connect();
-           $sql ="UPDATE Ristorante SET GiudizioComplessivo = '$giudizio' ";
-           $riss = $conn->query($sql);
-           if (is_bool($riss) )
-               return 0;
-           else if(is_object($riss))
-               return 1;
-       }
     public static function loadProdottiByCategoria(String $cat) : array
     {
         $conn = FDataBase::Connect();

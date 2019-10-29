@@ -15,7 +15,6 @@ class EOrdine
     private $LuogoConsegna;
     private $PuntiUsati;
     private $TelefonoConsegna;
-    private $Giudizio;
     private $IDLuogo;
 
 
@@ -62,7 +61,7 @@ class EOrdine
     }
 
 
-    public function __construct_13(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna, EGiudizio $Giudizio)
+    public function __construct_13(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna)
     {
         $this->ID = $ID;
         $this->DataOrdinazione = DateTime::createFromformat('Y-m-d H:i:s',"$DataOrdinazione");
@@ -75,7 +74,6 @@ class EOrdine
         $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getIDLuogo(), $LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
         $this->PuntiUsati = $PuntiUsati;
         $this->TelefonoConsegna = $TelefonoConsegna;
-        $this->Giudizio = new EGiudizio ($Giudizio->getCommento(), $Giudizio->getPunteggio(), $Giudizio->getIDOrdine());
     }
 
 
@@ -231,10 +229,6 @@ class EOrdine
     public function getTelefonoConsegna() : String {return $this->TelefonoConsegna;}
 
     public function setTelefonoConsegna(String $TelefonoConsegna) : void {$this->TelefonoConsegna = $TelefonoConsegna;}
-
-    public function getGiudizio() : EGiudizio {return $this->Giudizio;}
-
-    public function setGiudizio(EGiudizio $Giudizio) : void {$this->Giudizio = $Giudizio;}
 
     public function getIDLuogo() : float {return $this->IDLuogo;}
 

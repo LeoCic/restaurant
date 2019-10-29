@@ -8,7 +8,6 @@ require_once 'Indice.php';
     static private $TelefonoFisso;
     static private $Proprietario;
     static private $Nome;
-    static private $GiudizioComplessivo;
     static private $Giorni_Di_Apertura = array('lunedi' => false , 'martedi' => false , 'mercoledi' => false , 'giovedi' => false , 'venerdi' => false , 'sabato' => false , 'domenica' => false );
     static private $CatalogoProdotti = array(); // di prodotti
     static private $EntitaScontoBase;
@@ -62,16 +61,6 @@ require_once 'Indice.php';
     public static function setNome(String $Nome) : void
     {
         self::$Nome = $Nome;
-    }
-
-    public static function getGiudizioComplessivo() : float
-    {
-        return self::$GiudizioComplessivo;
-    }
-
-    public static function setGiudizioComplessivo( float $GiudizioComplessivo) : void
-    {
-        self::$GiudizioComplessivo = $GiudizioComplessivo;
     }
 
     public static function getGiorniDiApertura() : array
@@ -166,7 +155,7 @@ require_once 'Indice.php';
         return "sede : ".self::getSede()->getComune()."\t".self::getSede()->getProvincia()."\t".self::getSede()->getVia()
             ."\t".self::getSede()->getN_Civico()."\n"."cellulare : ".self::$Cellulare."\n"."TelefonoFisso : ".
             self::$TelefonoFisso."\n"."proprietario : ".self::$Proprietario."\n"."nome : ".self::$Nome.
-            "\n"."Giudizio Complessivo : ".self::$GiudizioComplessivo."\n"."entita sconto base : ".self::$EntitaScontoBase."\n"."entita sconto a punti : ".self::$EntitaScontoAPunti;
+            "\n"."entita sconto base : ".self::$EntitaScontoBase."\n"."entita sconto a punti : ".self::$EntitaScontoAPunti;
     }
 
 
