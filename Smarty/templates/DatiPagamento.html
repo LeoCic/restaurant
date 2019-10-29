@@ -22,19 +22,25 @@
                 </div>
                 <form role="form" action="/restaurant/Ordine/RiepilogoFinale">
                     <div class="form-group">
-                        <label for="cardNumber"> NUMERO CARTA</label>
+                        <label for="cardHolder"> Nome e cognome del titolare</label>
                         <div class="input-group">
-                            <input type="text" title="da 13 a 16 numeri" class="form-control" id="cardNumber" minlength="13" maxlength="16" pattern="[0-9]{literal}{13,16}{/literal}" placeholder="Numero di carta valido" required autofocus />
+                            <input type="text" class="form-control" id="cardHolder" name="ccname" placeholder="Inserire nome e cognome del titolare della carta" size="100%" autocomplete="cc-name" required/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNumber"> Numero carta</label>
+                        <div class="input-group">
+                            <input type="text" title="da 13 a 16 numeri" class="form-control" id="cardNumber" name="cardnumber" minlength="13" maxlength="16" pattern="[0-9]{literal}{13,16}{/literal}" placeholder="Inserire il numero della carta" autocomplete="cc-number" required autofocus />
                             <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-xs-12 col-md-7 ">
                             <div class="form-group">
-                                <label for="expityMonth">
-                                    DATA SCADENZA</label>
+                                <label for="expiryMonth">
+                                    Data di scadenza</label>
                                 <div class="col-xs-12 col-lg-6 pl-ziro col-sm-5">
-                                    <select  class="form-control" id="expityMonth" placeholder="MM" required />
+                                    <select  class="form-control" id="expiryMonth" placeholder="MM" required />
                                     <option selected disabled>AA</option>
                                     {for $qt=19 to 99}
                                     <option>{$qt}</option>
@@ -57,7 +63,7 @@
                             <div class="form-group">
                                 <label for="cvCode">
                                     CVV </label>
-                                <input pattern="[0-9]{literal}{3}{/literal}" title="3 numeri" minlength="3" maxlength="3" type="password" class="form-control" id="cvCode" placeholder="CVV" required />
+                                <input pattern="[0-9]{literal}{3}{/literal}" title="3 numeri" minlength="3" maxlength="3" type="password" class="form-control" id="cvCode" name="cvc" placeholder="CVV" autocomplete="cc-csc" required />
                             </div>
                         </div>
                     </div>
