@@ -187,8 +187,8 @@ class COrdine
             $_SESSION['ordine_parziale']->setTipoPagamento("Carta");
             if ($_SESSION['sconto'] == false)
             {
-                $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta());
-                $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+                $_SESSION['ordine_parziale']->setPrezzoTotale(round($_SESSION['ordine_parziale']->CalcolaPrezzoConCarta(),2));
+                $_SESSION['ordine_parziale']->setPrezzoTotale(round($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()),2));
                 $_SESSION['sconto'] = true;
             }
 
@@ -209,7 +209,7 @@ class COrdine
             $_SESSION['ordine_parziale']->setTipoPagamento("Contanti");
             if ($_SESSION['sconto'] == false)
             {
-                $_SESSION['ordine_parziale']->setPrezzoTotale($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()));
+                $_SESSION['ordine_parziale']->setPrezzoTotale(round($_SESSION['ordine_parziale']->CalcolaPrezzoScontato($_SESSION['ordine_parziale']->getPuntiUsati()),2));
                 $_SESSION['sconto'] = true;
             }
             header('Location: /restaurant/Ordine/RiepilogoFinale');
