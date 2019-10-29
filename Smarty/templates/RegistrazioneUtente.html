@@ -24,9 +24,9 @@
       <div class="col-md-12">
         <form method="post" action="/restaurant/Utente/Registrazione">
           <div class="form-group"><label>Nome</label> <input placeholder="Inserisci nome" maxlength="40"
-                                                             class="form-control" type="text" name="nome" required>
+                                                             class="form-control" type="text" name="fname" required>
             <div class="form-group"><label>Cognome</label><input type="text" class="form-control" maxlength="40"
-                                                                 placeholder="Inserisci cognome" name="cognome"
+                                                                 placeholder="Inserisci cognome" name="lname"
                                                                  required>
               <div class="form-group"><label>Username</label><input type="text" maxlength="40" class="form-control"
                                                                     placeholder="Inserisci username" name="username"
@@ -49,7 +49,7 @@
                 </div>
               </div>
               <div class="form-group"><label>Email</label><input type="email" maxlength="255" class="form-control"
-                                                                 placeholder="Inserisci email" name="email" required>
+                                                                 placeholder="Inserisci email" name="email" required autocomplete="email">
               </div>
             </div>
               <small class="form-text text-muted">Non condivideremo mai la vostra email con nessuno.</small>

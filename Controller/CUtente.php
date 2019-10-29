@@ -108,8 +108,8 @@ class CUtente
             if(CUtente::isLogged()) header('Location: /restaurant/Ordine/MostraListaProdotti');
             else
                 {
-                    $nome = $_POST['nome'];
-                    $cognome = $_POST['cognome'];
+                    $nome = $_POST['fname'];
+                    $cognome = $_POST['lname'];
                     $username = $_POST['username'];
                     $telefono = $_POST['telefono'];
                     $email = $_POST['email'];

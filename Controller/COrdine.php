@@ -154,7 +154,7 @@ class COrdine
             $differenza = $data_consegna->diff(new DateTime());
             if ($differenza->invert === 1) {
                 $_SESSION['ordine_parziale']->setDataConsegna($data_consegna);
-                $luogo = new ELuogo($_POST['Comune'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
+                $luogo = new ELuogo($_POST['city'], "L'Aquila", $_POST['Via'], $_POST['N_Civico']);
                 $_SESSION['ordine_parziale']->setLuogoConsegna($luogo);
                 $_SESSION['ordine_parziale']->setTelefonoConsegna($_POST['telefono']);
                 $_SESSION['ordine_parziale']->setNota($_POST['note']);
