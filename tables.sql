@@ -13,15 +13,6 @@ CREATE TABLE `Luogo`
   `N_Civico` varchar(8) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dump dei dati per la tabella `Luogo`
-
-INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES
-("L'Aquila", 'AQ', 'Germania', '4'),
-('Pescara', 'PE', 'Rome', '14/a'),
-('Matera', 'MA', 'Potenza', '15');
-
--- --------------------------------------------------------
-
 -- Struttura della tabella `Ristorante`
 
 CREATE TABLE `Ristorante`

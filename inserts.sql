@@ -1,5 +1,5 @@
 --
--- Dump dei dati per la tabella Prodotto
+-- Dump dei dati per la tabella `Prodotto`
 --
 
 INSERT INTO `Prodotto` (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `Congelato`, `Vegano`, `Glutine`, `Integrale`, `GradoAlcolico`, `Gassato`, `Disponibilita`) VALUES
@@ -38,3 +38,15 @@ INSERT INTO `Prodotto` (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologi
 ('Acqua minerale naturale',1.5,'Bottiglia da 1l','Acqua, sali minerali',NULL,'Bevande',NULL,NULL,NULL,NULL,0,1,1),
 ('Birra alla spina da 0.75 cl',3,'Produzione artigianale',"Malto, luppoli, cereali non maltati, spezie, mosto d'uva",0,'Bevande',NULL,NULL,NULL,NULL,13.5,0,1),
 ('Succo di frutta alla pera Yoga',2,'Bottiglietta da 0.5l','Acido ascorbico, sciroppo di glucosio, sciroppo di fruttosio, zucchero, pera (purea, succo e succo concentrato), aromi',1,'Bevande',NULL,NULL,NULL,NULL,0,0,1);
+
+--
+-- Dump dei dati per la tabella `Luogo`
+--
+
+INSERT INTO `Luogo` (`Comune`, `Provincia`, `Via`, `N_Civico`) VALUES ("L'Aquila", 'AQ', 'Germania', '4');
+
+--
+-- Dump dei dati per la tabella `Ristorante`
+--
+
+INSERT INTO `Ristorante` (`Nome`, `Cellulare`, `TelefonoFisso`, `Proprietario`, `GiorniDiApertura`, `EntitaScontoBase`, `EntitaScontoAPunti`, `IDLuogo`) VALUES ('IL RISTORANTE', '3431938211', '0862782133', 'Giacomo Palla', 'lunedi=si=martedi=no=mercoledi=si=giovedi=no=venerdi=si=sabato=no=domenica=si', '10', '1', '1');
