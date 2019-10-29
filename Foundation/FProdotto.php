@@ -9,36 +9,40 @@ abstract class FProdotto
         $conn = FDataBase::Connect();
         $sql = " SELECT * FROM Prodotto WHERE (IDProdotto='$id') ";
         $riss = $conn->query($sql);
-        if ($riss->rowCount() === 1) {
+        if ($riss->rowCount() === 1)
+        {
             $ris = $riss->fetchAll();
             if ($ris[0][6] === 'Bevande')
             {
                 if($ris[0][3] === NULL)
                 {
-                    if($ris[0][5] === NULL){$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], 0, $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
-                    else {$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
+                    if($ris[0][5] === NULL) { $prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], 0, $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]); }
+                    else { $prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]); }
                 }
                 else
                 {
-                    if($ris[0][5] === NULL){$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], 0, $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
-                    else {$prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]);}
-                }
-                return $prodotto;
-            } else if ($ris[0][6] !== 'Bevande')
-            {
-                if($ris[0][3] === NULL)
-                {
-                    if($ris[0][5] === NULL){$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], 0, $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
-                    else {$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
-                }
-                else
-                {
-                    if($ris[0][5] === NULL){$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], 0, $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
-                    else {$prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]);}
+                    if($ris[0][5] === NULL) { $prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], 0, $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]); }
+                    else { $prodotto = new EBevanda($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][11], $ris[0][12], $ris[0][13]); }
                 }
                 return $prodotto;
             }
+            else if ($ris[0][6] !== 'Bevande')
+            {
+                if($ris[0][3] === NULL)
+                {
+                    if($ris[0][5] === NULL) { $prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], 0, $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]); }
+                    else { $prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], 'NULL', $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]); }
+                }
+                else
+                {
+                    if($ris[0][5] === NULL) { $prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], 0, $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]); }
+                    else { $prodotto = new ECibo($ris[0][0], $ris[0][1], $ris[0][2], $ris[0][3], $ris[0][4], $ris[0][5], $ris[0][6], $ris[0][7], $ris[0][8], $ris[0][9], $ris[0][10]); }
+                }
+                return $prodotto;
+            }
+            else return null;
         }
+        else return null;
     }
 
     public static function exists(int $id) : bool
@@ -66,11 +70,8 @@ abstract class FProdotto
         $conn = FDataBase::Connect();
         $sql = "INSERT INTO Prodotto (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `GradoAlcolico`, `Gassato`, `Disponibilita`) VALUES('" . addslashes("$Nome") . "' , '$Prezzo' , '" . addslashes("$Descrizione") . "' , '" . addslashes("$Ingredienti") . "' , '$Biologico' , '" . addslashes("$Categoria") . "' , '$GradoAlcolico'  , '$Gassato' , '$Disponibilita')";
         $riss = $conn->query($sql);
-        if (is_bool($riss))
-            return 0;
-        else if (is_object($riss))
-            return 1;
-
+        if (is_bool($riss)) return 0;
+        else return 1;
     }
 
     public static function storeCibo(ECibo $prodotto) : bool
@@ -89,16 +90,12 @@ abstract class FProdotto
         $conn = FDataBase::Connect();
         $sql = "INSERT INTO Prodotto (`Nome`, `Prezzo`, `Descrizione`, `Ingredienti`, `Biologico`, `Categoria`, `Congelato`, `Vegano`, `Glutine`, `Integrale`) VALUES('" . addslashes("$Nome") . "' , '$Prezzo' , '" . addslashes("$Descrizione") . "' , '" . addslashes("$Ingredienti") . "' , '$Biologico' , '" . addslashes("$Categoria") . "' , '$Congelato' , '$Vegano' , '$Glutine' , '$Integrale')";
         $riss = $conn->query($sql);
-        if (is_bool($riss))
-            return 0;
-        else if (is_object($riss))
-            return 1;
-
+        if (is_bool($riss)) return 0;
+        else return 1;
     }
 
     public static function updateBevanda(EBevanda $prodotto) : bool
     {
-
         $Nome = $prodotto->getNome();
         $IDProdotto = $prodotto->getIDProdotto();
         $Prezzo = $prodotto->getPrezzo();
@@ -113,16 +110,12 @@ abstract class FProdotto
         $conn = FDataBase::Connect();
         $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '$Prezzo' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '$Biologico' , Categoria = '" . addslashes($Categoria) . "' , GradoAlcolico = '$GradoAlcolico' , Gassato = '$Gassato' , Disponibilita = '$Disponibilita' WHERE IDProdotto = '$IDProdotto' " ;
         $riss = $conn->query($sql);
-        if (is_bool($riss) )
-            return 0;
-        else if(is_object($riss))
-            return 1;
-
+        if (is_bool($riss) ) return 0;
+        else return 1;
     }
 
     public static function updateCibo(ECibo $prodotto) : bool
     {
-
         $Nome = $prodotto->getNome();
         $IDProdotto = $prodotto->getIDProdotto();
         $Prezzo = $prodotto->getPrezzo();
@@ -138,11 +131,8 @@ abstract class FProdotto
         $conn = FDataBase::Connect();
         $sql =" UPDATE Prodotto SET Nome = '" . addslashes($Nome) . "' , Prezzo = '$Prezzo' , Descrizione = '" . addslashes($Descrizione) . "' , Ingredienti = '" . addslashes($Ingredienti) . "' , Biologico = '$Biologico' , Categoria = '" . addslashes($Categoria) . "' , Congelato = '$Congelato' , Vegano = '$Vegano' , Glutine = '$Glutine' , Integrale = '$Integrale' WHERE IDProdotto = '$IDProdotto' " ;
         $riss = $conn->query($sql);
-        if (is_bool($riss) )
-            return 0;
-        else if(is_object($riss))
-            return 1;
-
+        if (is_bool($riss) ) return 0;
+        else return 1;
     }
 
     public static function delete(int $id) : bool
@@ -150,9 +140,7 @@ abstract class FProdotto
         $conn = FDataBase::Connect();
         $sql ="DELETE FROM Prodotto WHERE IDProdotto = '$id'";
         $riss = $conn->query($sql);
-        if (is_bool($riss) )
-            return 0;
-        else if(is_object($riss))
-            return 1;
+        if (is_bool($riss) ) return 0;
+        else return 1;
     }
 }

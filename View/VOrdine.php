@@ -1,5 +1,7 @@
 <?php
+
 require_once 'Indice.php';
+
 /**
  * Classe che si occupa dell'input-output dei contenuti riguardanti gli utenti. In particolare della "validazione" dei dati inseriti
  * nelle form richiamando metodi di livello entity e del passaggio degli appositi parametri a Smarty per la costruzione dei template.
@@ -11,10 +13,7 @@ class VOrdine
 {
     private $smarty;
 
-    public function __construct()
-    {
-        $this->smarty = ConfSmarty::configuration();
-    }
+    public function __construct() { $this->smarty = ConfSmarty::configuration(); }
 
     public function MostraListaProdotti($smarty ,$antipasti, $primi, $secondi, $contorni, $pizze, $dolci, $bevande, $cate)
     {
@@ -36,7 +35,7 @@ class VOrdine
         $this->smarty->assign('lista_categoria',$cate);
 
         if (isset($_SESSION['username']))
-        $this->smarty->assign('user',$_SESSION['username']);
+            $this->smarty->assign('user',$_SESSION['username']);
         $this->smarty->assign('elementi_totali_carrello',0);
         $this->smarty->display('EffettuaOrdine.html');
     }
@@ -45,7 +44,6 @@ class VOrdine
     {
         $this->smarty->assign('nome_proprietario', $prova);
         $this->smarty->display('EffettuaOrdine.html');
-
     }
 
     public function InfoRistorante($nome_ristorante, $sede, $cellulare ,$telefono_fisso ,$nome_proprietario, $array_giorni)
@@ -56,9 +54,7 @@ class VOrdine
         $this->smarty->assign('cellulare',$cellulare);
         $this->smarty->assign('telefono_fisso',$telefono_fisso);
         $this->smarty->assign('nome_proprietario',$nome_proprietario);
-
         return $this->smarty;
-
     }
 
     public function RiepilogoOrdine($smarty, $punti)
@@ -80,10 +76,7 @@ class VOrdine
         $this->smarty->display("riepilogo_ordine.html");
     }
 
-    public function SceltaTipoPagamento()
-    {
-        $this->smarty->display("SceltaTipoPagamento.html");
-    }
+    public function SceltaTipoPagamento() { $this->smarty->display("SceltaTipoPagamento.html"); }
 
     public function PagamentoCarta()
     {

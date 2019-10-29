@@ -7,7 +7,7 @@
  */
 
 /**
- * Inclusione del file che permette  la configurazione di Smarty
+ * Inclusione del file che permette la configurazione di Smarty
  */
 require_once 'ConfSmarty.php';
 

@@ -17,14 +17,10 @@ class VUtente
         $this->smarty->display('RegistrazioneUtente.html');
     }
 
-    public function MostraFormRegistrazione()
-    {
-        $this->smarty->display('RegistrazioneUtente.html');
-    }
+    public function MostraFormRegistrazione() { $this->smarty->display('RegistrazioneUtente.html'); }
 
     public function GestioneAccount()
     {
-       // session_start();
         $utente = FUtente::load($_SESSION['username']);
         $this->smarty->assign('nome', $utente->getNome());
         $this->smarty->assign('cognome', $utente->getCognome());
@@ -48,7 +44,6 @@ class VUtente
 
     public function EliminaProfilo()
     {
-        //session_start();
         $this->smarty->assign('nome_utente', $_SESSION['username']);
         $this->smarty->display('EliminaProfilo.html');
     }
@@ -60,4 +55,3 @@ class VUtente
         $this->smarty->display('EliminaProfilo.html');
     }
 }
-

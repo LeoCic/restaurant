@@ -1,24 +1,23 @@
-	    <!DOCTYPE html>
-	    <html>
-	        <head><title>Dati Pagamento</title>
-	        		      <meta charset="utf-8">
-	      <meta name="viewport" content="width=device-width, initial-scale=1">
-	      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-	      <link rel="stylesheet" href="../css/theme.css" type="text/css">
-	      <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	    </head>
-	<body>
-		<div class="container-fluid">
-<div class="row margin10" >
-        <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-xs-12 ">
+<!DOCTYPE html>
+<html>
+<head><title>Dati Pagamento</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="../css/theme.css" type="text/css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row margin10" >
+        <div class="col-lg-4 offset-lg-4 col-md-4 offset-md-4 col-xs-12">
             <div class="panel panel-default">
                 <div class="panel-heading text-center" >
                     <h3 class="panel-title ">
                         Dettagli pagamento
                     </h3>
-
                 </div>
                 <form role="form" action="/restaurant/Ordine/RiepilogoFinale">
                     <div class="form-group">
@@ -35,7 +34,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12 col-md-7 ">
+                        <div class="col-xs-12 col-md-7">
                             <div class="form-group">
                                 <label for="expiryMonth">
                                     Data di scadenza</label>
@@ -54,8 +53,6 @@
                                     <option>{$qt}</option>
                                     {/for}
                                     </select>
-
-
                                 </div>
                             </div>
                         </div>
@@ -67,9 +64,8 @@
                             </div>
                         </div>
                     </div>
-
             </div>
-            <ul class="nav nav-pills nav-stacked col-12" >
+            <ul class="nav nav-pills nav-stacked col-12">
                 <li class="active col-12" style="padding: 0;"><a href="#"><span class="badge pull-right "><span class="glyphicon glyphicon-euro"></span>{$Totale}</span> Totale</a>
                 </li>
             </ul>
@@ -77,14 +73,7 @@
             <input class="btn btn-success btn-lg btn-block col-12" type="submit" value="Paga ora">
         </div>
     </div>
-</form>
-
-
-
+    </form>
 </div>
-
-
-
-
-	</body>
-	</html>
+</body>
+</html>

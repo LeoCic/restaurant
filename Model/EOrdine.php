@@ -25,12 +25,7 @@ class EOrdine
         call_user_func_array(array(&$this, '__construct_'. $num_args), $args);
     }
 
-
-    public function __construct_1(array $ProdottiOrdinati)
-    {
-        $this->ProdottiOrdinati = $ProdottiOrdinati;
-    }
-
+    public function __construct_1(array $ProdottiOrdinati) { $this->ProdottiOrdinati = $ProdottiOrdinati; }
 
     public function __construct_9(DateTime $DataOrdinazione, DateTime $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, int $PuntiUsati, String $TelefonoConsegna, String $NomeUtente, float $IDLuogo)
     {
@@ -45,7 +40,6 @@ class EOrdine
         $this->IDLuogo = $IDLuogo;
     }
 
-
     public function __construct_11(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, String $TipoPagamento, int $PuntiUsati, String $TelefonoConsegna, String $NomeUtente, float $IDLuogo)
     {
         $this->ID = $ID;
@@ -59,7 +53,6 @@ class EOrdine
         $this->NomeUtente = $NomeUtente;
         $this->IDLuogo = $IDLuogo;
     }
-
 
     public function __construct_13(float $ID, String $DataOrdinazione, String $DataConsegna, String $Nota, float $PrezzoTotale, array $ProdottiOrdinati, String $TipoPagamento, String $NomeUtente, ELuogo $LuogoConsegna, int $PuntiUsati, String $TelefonoConsegna)
     {
@@ -76,14 +69,13 @@ class EOrdine
         $this->TelefonoConsegna = $TelefonoConsegna;
     }
 
+    public function getID() : float { return $this->ID; }
 
-    public function getID() : float {return $this->ID;}
-
-    public function setID(float $ID) : void {$this->ID = $ID;}
+    public function setID(float $ID) : void { $this->ID = $ID; }
 
     public function getDataOrdinazione() : DateTime
     {
-        try {return new DateTime ($this->DataOrdinazione->format('Y-m-d H:i:s'));}
+        try { return new DateTime ($this->DataOrdinazione->format('Y-m-d H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -93,18 +85,13 @@ class EOrdine
 
     public function setDataOrdinazione(DateTime $DataOrdinazione) : void
     {
-        try {$this->DataOrdinazione = new DateTime ($DataOrdinazione->format('Y-m-d H:i:s'));}
-        catch (Exception $e)
-        {
-            echo $e->getMessage();
-        }
+        try { $this->DataOrdinazione = new DateTime ($DataOrdinazione->format('Y-m-d H:i:s')); }
+        catch (Exception $e) { echo $e->getMessage(); }
     }
 
     public function getDataConsegna() : DateTime
     {
-        try {
-            return new DateTime ($this->DataConsegna->format('Y-m-d H:i:s'));
-        }
+        try { return new DateTime ($this->DataConsegna->format('Y-m-d H:i:s')); }
         catch (Exception $e)
         {
             echo $e->getMessage();
@@ -114,25 +101,17 @@ class EOrdine
 
     public function setDataConsegna(DateTime $DataConsegna) : void
     {
-        try {
-            $this->DataConsegna = new DateTime ($DataConsegna->format('Y-m-d H:i:s'));
-        }
-        catch (Exception $e)
-        {
-            echo $e->getMessage();
-        }
+        try { $this->DataConsegna = new DateTime ($DataConsegna->format('Y-m-d H:i:s')); }
+        catch (Exception $e) { echo $e->getMessage(); }
     }
 
-    public function getNota() : String {return $this->Nota;}
+    public function getNota() : String { return $this->Nota; }
 
-    public function setNota(String $Nota) : void {$this->Nota = $Nota;}
+    public function setNota(String $Nota) : void { $this->Nota = $Nota; }
 
-    public function getPrezzoTotale() : float
-    {
-        return $this->PrezzoTotale;
-    }
+    public function getPrezzoTotale() : float { return $this->PrezzoTotale; }
 
-    public function setPrezzoTotale(float $PrezzoTotale) : void {$this->PrezzoTotale = $PrezzoTotale; }
+    public function setPrezzoTotale(float $PrezzoTotale) : void { $this->PrezzoTotale = $PrezzoTotale; }
 
     public function getProdottiOrdinati() : array
     {
@@ -147,7 +126,8 @@ class EOrdine
                 array_push($array2, $array1);
                 array_pop($array1);
                 array_pop($array1);
-            } else if ($val[0]->getCategoria() !== 'Bevande')
+            }
+            else if ($val[0]->getCategoria() !== 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
                 array_push($array1, $item, $val[1]);
@@ -172,13 +152,15 @@ class EOrdine
                 array_push($contenitore, $array1);
                 array_pop($array1);
                 array_pop($array1);
-            } else if ($val[0]->getCategoria() !== 'Bevande')
+            }
+            else if ($val[0]->getCategoria() !== 'Bevande')
             {
                 $item = new ECibo($val[0]->getNome(), $val[0]->getIDProdotto(), $val[0]->getPrezzo(), $val[0]->getDescrizione(), $val[0]->getIngredienti(), $val[0]->getBiologico(), $val[0]->getCategoria(), $val[0]->getCongelato(), $val[0]->getVegano(), $val[0]->getGlutine(), $val[0]->getIntegrale());
                 array_push($array1, $item, $val[1]);
                 array_push($contenitore, $array1);
                 array_pop($array1);
-                array_pop($array1);            }
+                array_pop($array1);
+            }
         }
         $this->ProdottiOrdinati = $contenitore;
     }
@@ -194,7 +176,7 @@ class EOrdine
             array_pop($array1);
             array_pop($array1);
         }
-        if ($prodotto->getCategoria() !== 'Bevande')
+        elseif ($prodotto->getCategoria() !== 'Bevande')
         {
             $item = new ECibo($prodotto->getNome(), $prodotto->getIDProdotto(), $prodotto->getPrezzo(), $prodotto->getDescrizione(), $prodotto->getIngredienti(), $prodotto->getBiologico(), $prodotto->getCategoria(), $prodotto->getCongelato(), $prodotto->getVegano(), $prodotto->getGlutine(), $prodotto->getIntegrale());
             array_push($array1, $item, $quantita);
@@ -204,13 +186,13 @@ class EOrdine
         }
     }
 
-    public function getTipoPagamento() : String {return $this->TipoPagamento;}
+    public function getTipoPagamento() : String { return $this->TipoPagamento; }
 
-    public function setTipoPagamento(String $TipoPagamento) : void {$this->TipoPagamento = $TipoPagamento;}
+    public function setTipoPagamento(String $TipoPagamento) : void { $this->TipoPagamento = $TipoPagamento; }
 
-    public function getNomeUtente() : String {return $this->NomeUtente;}
+    public function getNomeUtente() : String { return $this->NomeUtente; }
 
-    public function setNomeUtente(String $NomeUtente) : void {$this->NomeUtente = $NomeUtente;}
+    public function setNomeUtente(String $NomeUtente) : void { $this->NomeUtente = $NomeUtente; }
 
     public function getLuogoConsegna() : ELuogo
     {
@@ -222,17 +204,17 @@ class EOrdine
         $this->LuogoConsegna = new ELuogo ($LuogoConsegna->getIDLuogo(), $LuogoConsegna->getComune(), $LuogoConsegna->getProvincia(), $LuogoConsegna->getVia(), $LuogoConsegna->getN_Civico() );
     }
 
-    public function getPuntiUsati() : int {return $this->PuntiUsati;}
+    public function getPuntiUsati() : int { return $this->PuntiUsati; }
 
-    public function setPuntiUsati(int $PuntiUsati) : void {$this->PuntiUsati = $PuntiUsati;}
+    public function setPuntiUsati(int $PuntiUsati) : void { $this->PuntiUsati = $PuntiUsati; }
 
-    public function getTelefonoConsegna() : String {return $this->TelefonoConsegna;}
+    public function getTelefonoConsegna() : String { return $this->TelefonoConsegna; }
 
-    public function setTelefonoConsegna(String $TelefonoConsegna) : void {$this->TelefonoConsegna = $TelefonoConsegna;}
+    public function setTelefonoConsegna(String $TelefonoConsegna) : void { $this->TelefonoConsegna = $TelefonoConsegna; }
 
-    public function getIDLuogo() : float {return $this->IDLuogo;}
+    public function getIDLuogo() : float { return $this->IDLuogo; }
 
-    public function setIDLuogo(int $IDLuogo) : void {$this->IDLuogo = $IDLuogo;}
+    public function setIDLuogo(int $IDLuogo) : void { $this->IDLuogo = $IDLuogo; }
 
     public function CalcolaPrezzoTotale() : float
     {

@@ -14,15 +14,12 @@ class EUtente
     private $OrdiniCumulati;
     private $DataUltimoOrdine;
 
-
     public function __construct()
     {
         $num_args = func_num_args();
         $args = func_get_args();
         call_user_func_array(array(&$this, '__construct_'. $num_args), $args);
     }
-
-
 
     public function __construct_7(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $punti)
     {
@@ -36,7 +33,6 @@ class EUtente
         $this->OrdiniCumulati = 0 ;
         $this->DataUltimoOrdine = null;
     }
-
 
     public function __construct_9(String $Nome, String $Cognome, String $NomeUtente, String $Email, String $Telefono, String $Password, int $Punti, int $OrdiniCumulati, string $DataUltimoOrdine)
     {
@@ -73,10 +69,7 @@ class EUtente
 
     public function getPasswordHash(): String { return $this->Password; } //non deve mai essere possibile estrarre delle password in chiaro
 
-    public function setPassword(String $Password): void
-    {
-        $this->Password = password_hash("$Password", PASSWORD_DEFAULT);
-    }
+    public function setPassword(String $Password): void { $this->Password = password_hash("$Password", PASSWORD_DEFAULT); }
 
     public function getPunti(): int { return $this->Punti; }
 
@@ -90,7 +83,7 @@ class EUtente
     {
         try
         {
-            if (is_null($this->DataUltimoOrdine) == FALSE) return new DateTime ($this->DataUltimoOrdine->format('Y-m-d'));
+            if (is_null($this->DataUltimoOrdine) === FALSE) return new DateTime ($this->DataUltimoOrdine->format('Y-m-d'));
         }
         catch (Exception $e)
         {
@@ -113,6 +106,3 @@ class EUtente
         else return $this->getNome() . "\n" . $this->getCognome() . "\n" . $this->getNomeUtente() . "\n" . $this->getEmail() . "\n" . $this->getTelefono() . "\n" . $this->getPasswordHash() . "\n" . $this->getPunti() . "\n" . $this->getOrdiniCumulati() . "\n" . $this->getDataUltimoOrdine()->format('Y-m-d');
     }
 }
-
-//$prova = new EUtente('Giacomo', 'Palla', 'giacpall', 'giacpall@gmail.com','+527492847263','palla');
-//echo $prova->toString();
