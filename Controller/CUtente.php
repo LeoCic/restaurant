@@ -20,7 +20,6 @@ class CUtente
             {
                 session_start();
                 $_SESSION['username'] = $_POST['username'];
-                $_SESSION['password'] = $_POST['password'];
                 $_SESSION['sconto'] =false;
                 header("Location: /restaurant/Ordine/MostraListaProdotti");
             }
